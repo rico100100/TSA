@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación de Riesgo en Estenosis Carotídea Asintomática</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --blood-red: #8B0000;
+            --crimson: #DC143C;
+            --light-red: #B22222;
+            --dark-red: #660000;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --gray: #6C757D;
+            --dark-gray: #343A40;
+            --green: #28A745;
+            --yellow: #FFC107;
+            --red: #DC3545;
+            --shadow: 0 4px 6px rgba(139, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(139, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--blood-red) 0%, var(--crimson) 100%);
+            color: var(--white);
+            padding: 2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header h1 {
+            font-family: 'Crimson Text', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header .subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+
+        .nav {
+            background: var(--white);
+            border-bottom: 3px solid var(--blood-red);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-item {
+            padding: 1rem 0;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: var(--blood-red);
+            color: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--blood-red);
+        }
+
+        .section-title {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--blood-red);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .calculator-card {
+            background: linear-gradient(135deg, var(--white) 0%, #f8f9fa 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .calculator-card:hover {
+            border-color: var(--blood-red);
+            transform: translateY(-2px);
+        }
+
+        .calculator-title {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--blood-red);
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark-gray);
+        }
+
+        .checkbox-group {
+            display: grid;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .checkbox-item:hover {
+            border-color: var(--blood-red);
+            background: #fff5f5;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--blood-red);
+        }
+
+        .checkbox-item.checked {
+            border-color: var(--blood-red);
+            background: #fff5f5;
+        }
+
+        .select-group {
+            display: grid;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .select-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .select-item:hover {
+            border-color: var(--blood-red);
+            background: #fff5f5;
+        }
+
+        .select-item input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--blood-red);
+        }
+
+        .select-item.selected {
+            border-color: var(--blood-red);
+            background: #fff5f5;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, var(--white) 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            border-left: 6px solid var(--blood-red);
+            box-shadow: var(--shadow);
+        }
+
+        .result-score {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .result-interpretation {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .result-recommendation {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border-left: 4px solid var(--blood-red);
+        }
+
+        .risk-low { color: var(--green); }
+        .risk-moderate { color: var(--yellow); }
+        .risk-high { color: var(--red); }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--blood-red);
+        }
+
+        .info-card h3 {
+            font-family: 'Crimson Text', serif;
+            color: var(--blood-red);
+            margin-bottom: 1rem;
+        }
+
+        .expandable {
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .expandable-header {
+            background: #f8f9fa;
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--blood-red);
+            transition: background 0.3s ease;
+        }
+
+        .expandable-header:hover {
+            background: #e9ecef;
+        }
+
+        .expandable-content {
+            padding: 1.5rem;
+            display: none;
+        }
+
+        .expandable.active .expandable-content {
+            display: block;
+        }
+
+        .expandable.active .expandable-header {
+            background: var(--blood-red);
+            color: var(--white);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--blood-red) 0%, var(--crimson) 100%);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--blood-red);
+            border: 2px solid var(--blood-red);
+        }
+
+        .btn-secondary:hover {
+            background: var(--blood-red);
+            color: var(--white);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--blood-red);
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .reference-list {
+            list-style: none;
+            counter-reset: ref-counter;
+        }
+
+        .reference-list li {
+            counter-increment: ref-counter;
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .reference-list li::before {
+            content: counter(ref-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: var(--blood-red);
+            color: var(--white);
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div>
+                <h1>
+                    <i class="fas fa-stethoscope"></i>
+                    Evaluación de Riesgo en Estenosis Carotídea Asintomática
+                </h1>
+                <div class="subtitle">Herramienta Clínica para Cirujanos Vasculares</div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="nav-content">
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#inicio" class="nav-link active" data-section="inicio">
+                        <i class="fas fa-home"></i> Inicio
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#calculadoras" class="nav-link" data-section="calculadoras">
+                        <i class="fas fa-calculator"></i> Calculadoras
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#guias" class="nav-link" data-section="guias">
+                        <i class="fas fa-file-medical"></i> Guías Clínicas
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#referencias" class="nav-link" data-section="referencias">
+                        <i class="fas fa-book"></i> Referencias
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Sección Inicio -->
+        <section id="inicio" class="section">
+            <h2 class="section-title">
+                <i class="fas fa-info-circle"></i>
+                Introducción
+            </h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3><i class="fas fa-brain"></i> Importancia Clínica</h3>
+                    <p>La decisión de intervenir quirúrgicamente en pacientes con estenosis carotídea asintomática del 70-99% requiere una evaluación precisa del riesgo perioperatorio (&lt;3%) y la esperanza de vida (≥3-5 años), según las recomendaciones actuales de las sociedades científicas internacionales. Esta evaluación se basa en scores dinámicos validados que permiten estratificar el riesgo de manera objetiva y reproducible.</p>
+                </div>
+                <div class="info-card">
+                    <h3><i class="fas fa-chart-line"></i> Scores de Evaluación</h3>
+                    <p>Esta herramienta integra tres sistemas de puntuación validados:</p>
+                    <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                        <li><strong>CEA-8:</strong> Riesgo perioperatorio a 30 días</li>
+                        <li><strong>CARAT:</strong> Mortalidad a 2 años</li>
+                        <li><strong>Score Italiano:</strong> Supervivencia a 5 años</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3><i class="fas fa-user-md"></i> Aplicación Clínica</h3>
+                    <p>Los resultados de estas calculadoras deben interpretarse en el contexto clínico individual de cada paciente, considerando factores adicionales como comorbilidades, estado funcional y preferencias del paciente para tomar decisiones terapéuticas informadas.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Calculadoras -->
+        <section id="calculadoras" class="section hidden">
+            <h2 class="section-title">
+                <i class="fas fa-calculator"></i>
+                Calculadoras de Riesgo
+            </h2>
+
+            <!-- Calculadora CEA-8 -->
+            <div class="calculator-card">
+                <h3 class="calculator-title">
+                    <i class="fas fa-heartbeat"></i>
+                    Score CEA-8 - Riesgo Perioperatorio
+                </h3>
+                <p style="margin-bottom: 1.5rem; color: var(--gray);">
+                    El Score CEA-8 desarrollado por Calvillo-King et al. constituye el sistema de puntuación más validado para predecir el riesgo de muerte o accidente cerebrovascular dentro de los 30 días posteriores a la endarterectomía carotídea en pacientes asintomáticos.
+                </p>
+                
+                <form id="cea8-form">
+                    <div class="form-group">
+                        <label class="form-label">Seleccione los factores de riesgo presentes:</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="cea8-sexo" name="cea8" value="1" data-factor="Sexo femenino">
+                                <label for="cea8-sexo">Sexo femenino (OR: 1.47, CI: 1.11-1.94) - 1 punto</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="cea8-raza" name="cea8" value="1" data-factor="Raza no blanca">
+                                <label for="cea8-raza">Raza no blanca (OR: 1.82, CI: 1.14-2.93) - 1 punto</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="cea8-acv" name="cea8" value="1" data-factor="Antecedente de ACV/AIT lejano">
+                                <label for="cea8-acv">Antecedente de ACV/AIT lejano (OR: 1.48, CI: 1.08-2.03) - 1 punto</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="cea8-contralateral" name="cea8" value="1" data-factor="Estenosis contralateral ≥50%">
+                                <label for="cea8-contralateral">Estenosis contralateral ≥50% (OR: 1.76, CI: 1.32-2.34) - 1 punto</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="cea8-coronaria" name="cea8" value="1" data-factor="Enfermedad cardíaca coronaria">
+                                <label for="cea8-coronaria">Enfermedad cardíaca coronaria (OR: 1.59, CI: 1.15-2.19) - 1 punto</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="cea8-icc" name="cea8" value="1" data-factor="Insuficiencia cardíaca congestiva">
+                                <label for="cea8-icc">Insuficiencia cardíaca congestiva (OR: 1.63, CI: 1.09-2.43) - 1 punto</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="cea8-valvular" name="cea8" value="1" data-factor="Enfermedad valvular cardíaca">
+                                <label for="cea8-valvular">Enfermedad valvular cardíaca (OR: 1.54, CI: 1.04-2.27) - 1 punto</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="cea8-rankin" name="cea8" value="2" data-factor="Discapacidad severa (Rankin 4-5)">
+                                <label for="cea8-rankin">Discapacidad severa (Rankin 4-5) (OR: 3.71, CI: 1.78-7.74) - 2 puntos</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div id="cea8-result" class="result-card" style="display: none;">
+                    <div id="cea8-score" class="result-score">0</div>
+                    <div id="cea8-interpretation" class="result-interpretation"></div>
+                    <div id="cea8-recommendation" class="result-recommendation"></div>
+                </div>
+            </div>
+
+            <!-- Calculadora CARAT -->
+            <div class="calculator-card">
+                <h3 class="calculator-title">
+                    <i class="fas fa-clock"></i>
+                    Score CARAT - Mortalidad a 2 Años
+                </h3>
+                <p style="margin-bottom: 1.5rem; color: var(--gray);">
+                    El Score CARAT es una herramienta validada que predice la mortalidad a 2 años post-revascularización carotídea, desarrollada específicamente para la evaluación de pacientes con estenosis carotídea asintomática.
+                </p>
+                
+                <form id="carat-form">
+                    <div class="form-group">
+                        <label class="form-label">Edad:</label>
+                        <div class="select-group">
+                            <div class="select-item">
+                                <input type="radio" id="carat-edad-70" name="carat-edad" value="0">
+                                <label for="carat-edad-70">Edad &lt;70 años - 0 puntos</label>
+                            </div>
+                            <div class="select-item">
+                                <input type="radio" id="carat-edad-70-79" name="carat-edad" value="2">
+                                <label for="carat-edad-70-79">Edad 70-79 años - 2 puntos</label>
+                            </div>
+                            <div class="select-item">
+                                <input type="radio" id="carat-edad-80" name="carat-edad" value="4">
+                                <label for="carat-edad-80">Edad ≥80 años - 4 puntos</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Diabetes:</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="carat-diabetes" name="carat-diabetes" value="2">
+                                <label for="carat-diabetes">Diabetes dependiente de insulina - 2 puntos</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Insuficiencia Cardíaca:</label>
+                        <div class="select-group">
+                            <div class="select-item">
+                                <input type="radio" id="carat-icc-no" name="carat-icc" value="0">
+                                <label for="carat-icc-no">Sin ICC - 0 puntos</label>
+                            </div>
+                            <div class="select-item">
+                                <input type="radio" id="carat-icc-asint" name="carat-icc" value="2">
+                                <label for="carat-icc-asint">ICC asintomática - 2 puntos</label>
+                            </div>
+                            <div class="select-item">
+                                <input type="radio" id="carat-icc-sint" name="carat-icc" value="4">
+                                <label for="carat-icc-sint">ICC sintomática - 4 puntos</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">EPOC:</label>
+                        <div class="select-group">
+                            <div class="select-item">
+                                <input type="radio" id="carat-epoc-no" name="carat-epoc" value="0">
+                                <label for="carat-epoc-no">Sin EPOC - 0 puntos</label>
+                            </div>
+                            <div class="select-item">
+                                <input type="radio" id="carat-epoc-leve" name="carat-epoc" value="2">
+                                <label for="carat-epoc-leve">EPOC leve/moderada - 2 puntos</label>
+                            </div>
+                            <div class="select-item">
+                                <input type="radio" id="carat-epoc-severa" name="carat-epoc" value="4">
+                                <label for="carat-epoc-severa">EPOC dependiente de oxígeno - 4 puntos</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Tabaquismo:</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="carat-tabaco" name="carat-tabaco" value="1">
+                                <label for="carat-tabaco">Fumador (pasado o actual) - 1 punto</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Función Renal:</label>
+                        <div class="select-group">
+                            <div class="select-item">
+                                <input type="radio" id="carat-renal-normal" name="carat-renal" value="0">
+                                <label for="carat-renal-normal">TFGe ≥60 mL/min/1.73m² - 0 puntos</label>
+                            </div>
+                            <div class="select-item">
+                                <input type="radio" id="carat-renal-reducida" name="carat-renal" value="3">
+                                <label for="carat-renal-reducida">TFGe &lt;60 mL/min/1.73m² - 3 puntos</label>
+                            </div>
+                            <div class="select-item">
+                                <input type="radio" id="carat-renal-dialisis" name="carat-renal" value="4">
+                                <label for="carat-renal-dialisis">Dependiente de diálisis - 4 puntos</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Estenosis Contralateral:</label>
+                        <div class="select-group">
+                            <div class="select-item">
+                                <input type="radio" id="carat-cont-no" name="carat-contralateral" value="0">
+                                <label for="carat-cont-no">Estenosis contralateral &lt;50% - 0 puntos</label>
+                            </div>
+                            <div class="select-item">
+                                <input type="radio" id="carat-cont-50" name="carat-contralateral" value="1">
+                                <label for="carat-cont-50">Estenosis contralateral 50-79% - 1 punto</label>
+                            </div>
+                            <div class="select-item">
+                                <input type="radio" id="carat-cont-80" name="carat-contralateral" value="1.5">
+                                <label for="carat-cont-80">Estenosis contralateral 80-99% - 1.5 puntos</label>
+                            </div>
+                            <div class="select-item">
+                                <input type="radio" id="carat-cont-ocl" name="carat-contralateral" value="3">
+                                <label for="carat-cont-ocl">Oclusión contralateral - 3 puntos</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Tratamiento:</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="carat-estatinas" name="carat-estatinas" value="1">
+                                <label for="carat-estatinas">No utilización de estatinas - 1 punto</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div id="carat-result" class="result-card" style="display: none;">
+                    <div id="carat-score" class="result-score">0</div>
+                    <div id="carat-interpretation" class="result-interpretation"></div>
+                    <div id="carat-recommendation" class="result-recommendation"></div>
+                </div>
+            </div>
+
+            <!-- Calculadora Score Italiano -->
+            <div class="calculator-card">
+                <h3 class="calculator-title">
+                    <i class="fas fa-calendar-alt"></i>
+                    Score Italiano - Supervivencia a 5 Años
+                </h3>
+                <p style="margin-bottom: 1.5rem; color: var(--gray);">
+                    Sistema de puntuación desarrollado para predecir la supervivencia a 5 años en pacientes sometidos a endarterectomía carotídea por estenosis asintomática.
+                </p>
+                
+                <form id="italian-form">
+                    <div class="form-group">
+                        <label class="form-label">Seleccione los factores de riesgo presentes:</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="italian-epoc" name="italian" value="1">
+                                <label for="italian-epoc">EPOC - 1 punto</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="italian-diabetes" name="italian" value="1">
+                                <label for="italian-diabetes">Diabetes mellitus - 1 punto</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="italian-coronaria" name="italian" value="1">
+                                <label for="italian-coronaria">Enfermedad cardíaca coronaria - 1 punto</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="italian-estatinas" name="italian" value="1">
+                                <label for="italian-estatinas">Falta de tratamiento con estatinas - 1 punto</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="italian-edad70" name="italian" value="4">
+                                <label for="italian-edad70">Edad 70-79 años - 4 puntos</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="italian-creatinina" name="italian" value="4">
+                                <label for="italian-creatinina">Creatinina ≥1.5 mg/dL - 4 puntos</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="italian-edad80" name="italian" value="8">
+                                <label for="italian-edad80">Edad ≥80 años - 8 puntos</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="italian-dialisis" name="italian" value="8">
+                                <label for="italian-dialisis">Diálisis - 8 puntos</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div id="italian-result" class="result-card" style="display: none;">
+                    <div id="italian-score" class="result-score">0</div>
+                    <div id="italian-interpretation" class="result-interpretation"></div>
+                    <div id="italian-recommendation" class="result-recommendation"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Guías Clínicas -->
+        <section id="guias" class="section hidden">
+            <h2 class="section-title">
+                <i class="fas fa-file-medical"></i>
+                Guías Clínicas y Recomendaciones
+            </h2>
+
+            <div class="expandable">
+                <div class="expandable-header">
+                    <span><i class="fas fa-globe-europe"></i> Guías ESVS 2023</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="expandable-content">
+                    <h4>European Society for Vascular Surgery (ESVS) 2023</h4>
+                    <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; border-left: 4px solid var(--blood-red);">
+                        <p><strong>Recomendación Clase IIa:</strong> CEA o CAS debe considerarse en pacientes con estenosis carotídea asintomática del 60-99%</p>
+                        <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                            <li><strong>Esperanza de vida:</strong> Debe superar los 5 años</li>
+                            <li><strong>Riesgo perioperatorio:</strong> ACV/muerte a 30 días ≤3%</li>
+                        </ul>
+                    </div>
+                    <p>Las guías ESVS 2023 enfatizan la importancia de la selección cuidadosa de pacientes basada en la evaluación del riesgo individual y la esperanza de vida proyectada.</p>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expandable-header">
+                    <span><i class="fas fa-flag-usa"></i> Guías SVS 2022</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="expandable-content">
+                    <h4>Society for Vascular Surgery (SVS) 2022</h4>
+                    <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; border-left: 4px solid var(--blood-red);">
+                        <p><strong>Recomendación Grado 1B:</strong> CEA con terapia médica óptima sobre terapia médica sola en pacientes de bajo riesgo quirúrgico</p>
+                        <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                            <li><strong>Esperanza de vida:</strong> 3-5 años mínimo</li>
+                            <li><strong>Riesgo perioperatorio:</strong> &lt;3% para ACV/muerte</li>
+                        </ul>
+                    </div>
+                    <p>Las guías SVS 2022 proporcionan recomendaciones específicas para la selección de pacientes y enfatizan la importancia del manejo médico óptimo concomitante.</p>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expandable-header">
+                    <span><i class="fas fa-heart"></i> Guías AHA/ASA 2021</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="expandable-content">
+                    <h4>American Heart Association/American Stroke Association 2021</h4>
+                    <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; border-left: 4px solid var(--blood-red);">
+                        <ul style="padding-left: 1.5rem;">
+                            <li>Evaluación individualizada del riesgo perioperatorio</li>
+                            <li>Consideración de factores de riesgo específicos del paciente</li>
+                            <li>Importancia del cálculo del riesgo cardiovascular global</li>
+                        </ul>
+                    </div>
+                    <p>Las guías AHA/ASA 2021 enfatizan la evaluación individualizada y la consideración de múltiples factores de riesgo en la toma de decisiones terapéuticas.</p>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expandable-header">
+                    <span><i class="fas fa-shield-alt"></i> Factores Modificadores del Riesgo</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="expandable-content">
+                    <h4>Características de Placa Vulnerable</h4>
+                    <div style="background: #fff5f5; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; border: 2px solid var(--light-red);">
+                        <ul style="padding-left: 1.5rem; line-height: 1.8;">
+                            <li><strong>Infarto cerebral silente</strong> en CT/RM</li>
+                            <li><strong>Progresión de la estenosis</strong></li>
+                            <li><strong>Área de placa extensa</strong></li>
+                            <li><strong>Ecogenicidad reducida</strong> de la placa</li>
+                            <li><strong>Hemorragia intraplaca</strong> en RM</li>
+                            <li><strong>Reserva cerebrovascular comprometida</strong></li>
+                            <li><strong>Embolización espontánea</strong> en Doppler transcraneal</li>
+                        </ul>
+                    </div>
+                    <p>Estos factores pueden modificar la indicación quirúrgica incluso en pacientes con riesgo quirúrgico elevado, requiriendo evaluación individualizada del balance riesgo-beneficio.</p>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expandable-header">
+                    <span><i class="fas fa-exclamation-triangle"></i> Consideraciones Especiales</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="expandable-content">
+                    <h4>Factores Adicionales en la Evaluación</h4>
+                    <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                        <h5 style="color: var(--blood-red); margin-bottom: 1rem;">Evaluación Preoperatoria Integral</h5>
+                        <ul style="padding-left: 1.5rem; line-height: 1.8;">
+                            <li><strong>Estado funcional:</strong> Escala de Rankin modificada</li>
+                            <li><strong>Comorbilidades:</strong> Evaluación cardiovascular completa</li>
+                            <li><strong>Función renal:</strong> TFGe y necesidad de diálisis</li>
+                            <li><strong>Estado pulmonar:</strong> Severidad de EPOC</li>
+                            <li><strong>Control metabólico:</strong> Diabetes y uso de estatinas</li>
+                        </ul>
+                        
+                        <h5 style="color: var(--blood-red); margin: 1.5rem 0 1rem 0;">Optimización Preoperatoria</h5>
+                        <ul style="padding-left: 1.5rem; line-height: 1.8;">
+                            <li><strong>Terapia antiplaquetaria:</strong> Aspirina y/o clopidogrel</li>
+                            <li><strong>Control de factores de riesgo:</strong> Hipertensión, diabetes, dislipidemia</li>
+                            <li><strong>Estatinas:</strong> Inicio o intensificación del tratamiento</li>
+                            <li><strong>Cesación tabáquica:</strong> Al menos 4 semanas antes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Referencias -->
+        <section id="referencias" class="section hidden">
+            <h2 class="section-title">
+                <i class="fas fa-book"></i>
+                Referencias Científicas
+            </h2>
+            
+            <div style="background: var(--white); padding: 2rem; border-radius: 12px; box-shadow: var(--shadow);">
+                <ol class="reference-list">
+                    <li>Calvillo-King L, et al. Predicting Risk of Perioperative Death and Stroke After Carotid Endarterectomy in Asymptomatic Patients. <em>Stroke</em>. 2010;41(12):2786-2794.</li>
+                    
+                    <li>AbuRahma AF, et al. Society for Vascular Surgery Clinical Practice Guidelines for Management of Extracranial Cerebrovascular Disease. <em>J Vasc Surg</em>. 2022;75(1S):4S-22S.</li>
+                    
+                    <li>Naylor AR, et al. European Society for Vascular Surgery (ESVS) 2023 Clinical Practice Guidelines on the Management of Atherosclerotic Carotid and Vertebral Artery Disease. <em>Eur J Vasc Endovasc Surg</em>. 2023;65(1):7-111.</li>
+                    
+                    <li>Executive Committee for the Asymptomatic Carotid Atherosclerosis Study. Endarterectomy for asymptomatic carotid artery stenosis. <em>JAMA</em>. 1995;273(18):1421-1428.</li>
+                    
+                    <li>Halliday A, et al. Prevention of disabling and fatal strokes by successful carotid endarterectomy in patients without recent neurological symptoms. <em>Lancet</em>. 2004;363(9420):1491-1502.</li>
+                    
+                    <li>Society for Vascular Surgery Vascular Quality Initiative Risk Calculators. Available at: <a href="https://www.vqi.org/risk-calculators/" target="_blank" style="color: var(--blood-red);">https://www.vqi.org/risk-calculators/</a></li>
+                    
+                    <li>Faerber AE, et al. Development and pilot feasibility study of a health information technology tool to calculate mortality risk for patients with asymptomatic carotid stenosis: the Carotid Risk Assessment Tool (CARAT). <em>BMC Med Inform Decis Mak</em>. 2015;15:20.</li>
+                    
+                    <li>Bissacco D, et al. Development and validation of a score to predict life expectancy in patients undergoing carotid endarterectomy for asymptomatic stenosis. <em>J Vasc Surg</em>. 2018;67(1):121-129.</li>
+                    
+                    <li>Kleindorfer DO, et al. 2021 Guideline for the Prevention of Stroke in Patients With Stroke and Transient Ischemic Attack. <em>Stroke</em>. 2021;52(7):e364-e467.</li>
+                    
+                    <li>Visseren FLJ, et al. 2021 ESC Guidelines on cardiovascular disease prevention in clinical practice. <em>Eur Heart J</em>. 2021;42(34):3227-3337.</li>
+                </ol>
+            </div>
+            
+            <div style="margin-top: 2rem; text-align: center;">
+                <button class="btn" onclick="window.print()">
+                    <i class="fas fa-print"></i> Imprimir Referencias
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Datos de las calculadoras
+        const cea8Data = {
+            interpretation: {
+                "0-2": { risk: "Bajo (<3%)", recommendation: "Cirugía segura", color: "green" },
+                "3": { risk: "Moderado (4.7%)", recommendation: "Considerar cuidadosamente", color: "yellow" },
+                "4+": { risk: "Alto (≥7.5%)", recommendation: "Riesgo supera beneficio", color: "red" }
+            }
+        };
+
+        const caratData = {
+            interpretation: {
+                "0-10": { mortality: "2-13%", recommendation: "Seguro para cirugía", color: "green" },
+                "11-14": { mortality: "21-34%", recommendation: "Considerar cirugía cuidadosamente", color: "yellow" },
+                "15+": { mortality: "51-99%", recommendation: "Cirugía no indicada por expectativa de vida limitada", color: "red" }
+            }
+        };
+
+        const italianData = {
+            interpretation: {
+                "0-3": { survival: "97%", group: "Grupo 1", color: "green" },
+                "4-7": { survival: "88.4%", group: "Grupo 2", color: "yellow" },
+                "8-11": { survival: "69.6%", group: "Grupo 3", color: "orange" },
+                "12+": { survival: "48.1%", group: "Grupo 4", color: "red" }
+            }
+        };
+
+        // Navegación
+        function initNavigation() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.section');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetSection = link.getAttribute('data-section');
+                    
+                    // Actualizar estado activo de navegación
+                    navLinks.forEach(nl => nl.classList.remove('active'));
+                    link.classList.add('active');
+                    
+                    // Mostrar/ocultar secciones
+                    sections.forEach(section => {
+                        if (section.id === targetSection) {
+                            section.classList.remove('hidden');
+                        } else {
+                            section.classList.add('hidden');
+                        }
+                    });
+                    
+                    // Scroll suave al top
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+        }
+
+        // Calculadora CEA-8
+        function initCEA8Calculator() {
+            const checkboxes = document.querySelectorAll('input[name="cea8"]');
+            const resultDiv = document.getElementById('cea8-result');
+            const scoreDiv = document.getElementById('cea8-score');
+            const interpretationDiv = document.getElementById('cea8-interpretation');
+            const recommendationDiv = document.getElementById('cea8-recommendation');
+
+            function updateCEA8Score() {
+                let totalScore = 0;
+                checkboxes.forEach(cb => {
+                    if (cb.checked) {
+                        totalScore += parseInt(cb.value);
+                    }
+                });
+
+                scoreDiv.textContent = totalScore;
+                
+                let interpretation;
+                if (totalScore <= 2) {
+                    interpretation = cea8Data.interpretation["0-2"];
+                } else if (totalScore === 3) {
+                    interpretation = cea8Data.interpretation["3"];
+                } else {
+                    interpretation = cea8Data.interpretation["4+"];
+                }
+
+                interpretationDiv.textContent = `Riesgo ${interpretation.risk}`;
+                interpretationDiv.className = `result-interpretation risk-${interpretation.color === 'yellow' ? 'moderate' : interpretation.color === 'green' ? 'low' : 'high'}`;
+                
+                recommendationDiv.innerHTML = `
+                    <h4><i class="fas fa-stethoscope"></i> Recomendación Clínica</h4>
+                    <p>${interpretation.recommendation}</p>
+                `;
+
+                resultDiv.style.display = 'block';
+            }
+
+            checkboxes.forEach(cb => {
+                cb.addEventListener('change', () => {
+                    // Actualizar estilo visual
+                    const item = cb.closest('.checkbox-item');
+                    if (cb.checked) {
+                        item.classList.add('checked');
+                    } else {
+                        item.classList.remove('checked');
+                    }
+                    
+                    updateCEA8Score();
+                });
+            });
+        }
+
+        // Calculadora CARAT
+        function initCARATCalculator() {
+            const form = document.getElementById('carat-form');
+            const resultDiv = document.getElementById('carat-result');
+            const scoreDiv = document.getElementById('carat-score');
+            const interpretationDiv = document.getElementById('carat-interpretation');
+            const recommendationDiv = document.getElementById('carat-recommendation');
+
+            function updateCARATScore() {
+                let totalScore = 0;
+                
+                // Edad
+                const edad = form.querySelector('input[name="carat-edad"]:checked');
+                if (edad) totalScore += parseFloat(edad.value);
+                
+                // Diabetes
+                const diabetes = form.querySelector('input[name="carat-diabetes"]:checked');
+                if (diabetes) totalScore += parseFloat(diabetes.value);
+                
+                // ICC
+                const icc = form.querySelector('input[name="carat-icc"]:checked');
+                if (icc) totalScore += parseFloat(icc.value);
+                
+                // EPOC
+                const epoc = form.querySelector('input[name="carat-epoc"]:checked');
+                if (epoc) totalScore += parseFloat(epoc.value);
+                
+                // Tabaco
+                const tabaco = form.querySelector('input[name="carat-tabaco"]:checked');
+                if (tabaco) totalScore += parseFloat(tabaco.value);
+                
+                // Renal
+                const renal = form.querySelector('input[name="carat-renal"]:checked');
+                if (renal) totalScore += parseFloat(renal.value);
+                
+                // Contralateral
+                const contralateral = form.querySelector('input[name="carat-contralateral"]:checked');
+                if (contralateral) totalScore += parseFloat(contralateral.value);
+                
+                // Estatinas
+                const estatinas = form.querySelector('input[name="carat-estatinas"]:checked');
+                if (estatinas) totalScore += parseFloat(estatinas.value);
+
+                scoreDiv.textContent = totalScore.toFixed(1);
+                
+                let interpretation;
+                if (totalScore <= 10) {
+                    interpretation = caratData.interpretation["0-10"];
+                } else if (totalScore <= 14) {
+                    interpretation = caratData.interpretation["11-14"];
+                } else {
+                    interpretation = caratData.interpretation["15+"];
+                }
+
+                interpretationDiv.textContent = `Mortalidad a 2 años: ${interpretation.mortality}`;
+                interpretationDiv.className = `result-interpretation risk-${interpretation.color === 'yellow' ? 'moderate' : interpretation.color === 'green' ? 'low' : 'high'}`;
+                
+                recommendationDiv.innerHTML = `
+                    <h4><i class="fas fa-stethoscope"></i> Recomendación Clínica</h4>
+                    <p>${interpretation.recommendation}</p>
+                `;
+
+                resultDiv.style.display = 'block';
+            }
+
+            // Event listeners para todos los inputs
+            const allInputs = form.querySelectorAll('input');
+            allInputs.forEach(input => {
+                input.addEventListener('change', () => {
+                    // Actualizar estilo visual
+                    const item = input.closest('.checkbox-item, .select-item');
+                    if (input.type === 'checkbox') {
+                        if (input.checked) {
+                            item.classList.add('checked');
+                        } else {
+                            item.classList.remove('checked');
+                        }
+                    } else if (input.type === 'radio') {
+                        // Limpiar selección previa en el grupo
+                        const groupName = input.name;
+                        const groupItems = form.querySelectorAll(`input[name="${groupName}"]`);
+                        groupItems.forEach(gi => {
+                            gi.closest('.select-item').classList.remove('selected');
+                        });
+                        
+                        if (input.checked) {
+                            item.classList.add('selected');
+                        }
+                    }
+                    
+                    updateCARATScore();
+                });
+            });
+        }
+
+        // Calculadora Score Italiano
+        function initItalianCalculator() {
+            const checkboxes = document.querySelectorAll('input[name="italian"]');
+            const resultDiv = document.getElementById('italian-result');
+            const scoreDiv = document.getElementById('italian-score');
+            const interpretationDiv = document.getElementById('italian-interpretation');
+            const recommendationDiv = document.getElementById('italian-recommendation');
+
+            function updateItalianScore() {
+                let totalScore = 0;
+                checkboxes.forEach(cb => {
+                    if (cb.checked) {
+                        totalScore += parseInt(cb.value);
+                    }
+                });
+
+                scoreDiv.textContent = totalScore;
+                
+                let interpretation;
+                if (totalScore <= 3) {
+                    interpretation = italianData.interpretation["0-3"];
+                } else if (totalScore <= 7) {
+                    interpretation = italianData.interpretation["4-7"];
+                } else if (totalScore <= 11) {
+                    interpretation = italianData.interpretation["8-11"];
+                } else {
+                    interpretation = italianData.interpretation["12+"];
+                }
+
+                interpretationDiv.textContent = `Supervivencia a 5 años: ${interpretation.survival} (${interpretation.group})`;
+                interpretationDiv.className = `result-interpretation risk-${interpretation.color === 'yellow' ? 'moderate' : interpretation.color === 'orange' ? 'moderate' : interpretation.color === 'green' ? 'low' : 'high'}`;
+                
+                recommendationDiv.innerHTML = `
+                    <h4><i class="fas fa-chart-line"></i> Interpretación</h4>
+                    <p>El paciente se clasifica en el <strong>${interpretation.group}</strong> con una supervivencia estimada a 5 años del <strong>${interpretation.survival}</strong>.</p>
+                `;
+
+                resultDiv.style.display = 'block';
+            }
+
+            checkboxes.forEach(cb => {
+                cb.addEventListener('change', () => {
+                    // Actualizar estilo visual
+                    const item = cb.closest('.checkbox-item');
+                    if (cb.checked) {
+                        item.classList.add('checked');
+                    } else {
+                        item.classList.remove('checked');
+                    }
+                    
+                    updateItalianScore();
+                });
+            });
+        }
+
+        // Secciones expandibles
+        function initExpandables() {
+            const expandables = document.querySelectorAll('.expandable');
+            
+            expandables.forEach(expandable => {
+                const header = expandable.querySelector('.expandable-header');
+                const icon = header.querySelector('.fa-chevron-down, .fa-chevron-up');
+                
+                header.addEventListener('click', () => {
+                    const isActive = expandable.classList.toggle('active');
+                    
+                    if (isActive) {
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                    } else {
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    }
+                });
+            });
+        }
+
+        // Botón volver arriba
+        function initBackToTop() {
+            const backToTopBtn = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.style.display = 'flex';
+                } else {
+                    backToTopBtn.style.display = 'none';
+                }
+            });
+            
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', () => {
+            initNavigation();
+            initCEA8Calculator();
+            initCARATCalculator();
+            initItalianCalculator();
+            initExpandables();
+            initBackToTop();
+        });
+    </script>
+</body>
+</html>

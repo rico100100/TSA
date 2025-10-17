@@ -1,0 +1,185 @@
+{
+  "acst1": {
+    "study_name": "ACST-1 (Asymptomatic Carotid Surgery Trial 1)",
+    "publication_year": "2010 (10-year results)",
+    "study_period": "1993-2004",
+    "participants": 3120,
+    "intervention": "CEA vs Medical Therapy",
+    "follow_up": "10 years",
+    "key_findings": {
+      "cea_10_year_stroke_risk": "10.8%",
+      "medical_10_year_stroke_risk": "16.9%",
+      "perioperative_risk": "3%",
+      "absolute_risk_reduction": "~6%",
+      "benefit_primarily_in": "Patients ≤75 years",
+      "women_benefit": "Later than men but significant"
+    },
+    "risk_stratification": {
+      "age_threshold": "75 years",
+      "life_expectancy_required": "≥5 years",
+      "stenosis_threshold": "≥60%"
+    }
+  },
+  "acst2": {
+    "study_name": "ACST-2 (Asymptomatic Carotid Surgery Trial 2)",
+    "publication_year": "2021",
+    "study_period": "2008-2020",
+    "participants": 3625,
+    "intervention": "CAS vs CEA",
+    "follow_up": "Mean 5 years",
+    "key_findings": {
+      "cas_30day_risk_disabling_stroke_death": "1.0%",
+      "cea_30day_risk_disabling_stroke_death": "0.9%",
+      "cas_5year_risk_disabling_stroke_death": "3.4%",
+      "cea_5year_risk_disabling_stroke_death": "3.5%",
+      "cas_5year_any_stroke": "8.6%",
+      "cea_5year_any_stroke": "7.1%",
+      "conclusion": "Both procedures comparable"
+    }
+  },
+  "cea8": {
+    "score_name": "CEA-8 Clinical Risk Score",
+    "purpose": "Predict 30-day stroke/death risk after CEA in asymptomatic patients",
+    "development_cohort": "6553 Medicare patients in New York State",
+    "risk_factors": [
+      {
+        "factor": "Female",
+        "points": 1,
+        "OR": 1.47,
+        "CI": "1.11-1.94"
+      },
+      {
+        "factor": "Non-White",
+        "points": 1,
+        "OR": 1.82,
+        "CI": "1.14-2.93"
+      },
+      {
+        "factor": "Distant stroke or TIA",
+        "points": 1,
+        "OR": 1.48,
+        "CI": "1.08-2.03"
+      },
+      {
+        "factor": "Non-operated stenosis ≥50%",
+        "points": 1,
+        "OR": 1.76,
+        "CI": "1.32-2.34"
+      },
+      {
+        "factor": "Congestive heart failure",
+        "points": 1,
+        "OR": 1.63,
+        "CI": "1.09-2.43"
+      },
+      {
+        "factor": "Coronary artery disease",
+        "points": 1,
+        "OR": 1.59,
+        "CI": "1.15-2.19"
+      },
+      {
+        "factor": "Valvular heart disease",
+        "points": 1,
+        "OR": 1.54,
+        "CI": "1.04-2.27"
+      },
+      {
+        "factor": "Severe disability",
+        "points": 2,
+        "OR": 3.71,
+        "CI": "1.78-7.74"
+      }
+    ],
+    "risk_categories": {
+      "low_risk": {
+        "points": "0-2",
+        "predicted_risk": "0.6-2.8%"
+      },
+      "moderate_risk": {
+        "points": "3",
+        "predicted_risk": "4.7%"
+      },
+      "high_risk": {
+        "points": "≥4",
+        "predicted_risk": "7.5-9.6%"
+      }
+    }
+  },
+  "esvs_2023": {
+    "guideline": "ESVS 2023",
+    "purpose": "Identify asymptomatic patients at higher risk of stroke on medical therapy",
+    "clinical_features": [
+      {
+        "factor": "Contralateral TIA/Stroke",
+        "OR": 3.0,
+        "description": "History of contralateral cerebrovascular events"
+      },
+      {
+        "factor": "Age considerations",
+        "description": "Benefits primarily in patients ≤75 years (from ACST-1)"
+      },
+      {
+        "factor": "Life expectancy",
+        "requirement": "≥5 years"
+      }
+    ],
+    "imaging_features": [
+      {
+        "factor": "Silent ipsilateral infarction on CT",
+        "OR": 3.0
+      },
+      {
+        "factor": "Stenosis progression >20%",
+        "OR": 1.92
+      },
+      {
+        "factor": "Large plaque area >80 mm²",
+        "OR": 5.81
+      },
+      {
+        "factor": "Intraplaque hemorrhage on MRI",
+        "OR": 3.66
+      },
+      {
+        "factor": "Impaired cerebral vascular reserve",
+        "OR": 6.14
+      },
+      {
+        "factor": "Plaque echolucency",
+        "OR": 2.61
+      },
+      {
+        "factor": "Spontaneous microembolization",
+        "OR": 7.46
+      },
+      {
+        "factor": "Microembolization + echolucent plaque",
+        "OR": 10.61
+      }
+    ],
+    "intervention_threshold": {
+      "stenosis": "60-99%",
+      "five_year_stroke_risk": ">10%",
+      "perioperative_risk": "<3%"
+    }
+  },
+  "acsrs": {
+    "study_name": "ACSRS (Asymptomatic Carotid Stenosis and Risk of Stroke)",
+    "purpose": "Natural history study of asymptomatic carotid stenosis",
+    "participants": 1121,
+    "key_findings": {
+      "annual_stroke_risk_range": "0.2% to 8.7% with 50-79% stenosis",
+      "annual_stroke_risk_severe": "0.5% to 17.3% with 80-99% stenosis",
+      "high_risk_plaque_criteria": "Juxtaluminal black area ≥8 mm²",
+      "high_risk_annual_stroke_rate": "4.1%",
+      "high_risk_population": "21% of cohort contained 86% of strokes"
+    },
+    "risk_factors": [
+      "Baseline degree of stenosis",
+      "History of contralateral stroke or TIA",
+      "Juxtaluminal black area ≥8 mm² without echogenic cap",
+      "Discrete white areas in hypoechoic plaque"
+    ]
+  }
+}

@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación de Riesgo en Estenosis Carotídea Asintomática - ACST-1 &amp; ACST-2</title>
+    <style>
+        /* Design System Variables */
+        :root {
+            /* Medical Professional Color Palette */
+            --color-primary: #1565C0;
+            --color-primary-light: #42A5F5;
+            --color-primary-dark: #0D47A1;
+            --color-secondary: #757575;
+            --color-success: #4CAF50;
+            --color-warning: #FF9800;
+            --color-error: #F44336;
+            --color-background: #FAFAFA;
+            --color-surface: #FFFFFF;
+            --color-text: #212121;
+            --color-text-secondary: #757575;
+            --color-border: #E0E0E0;
+            --color-border-active: #1565C0;
+            
+            /* Spacing */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-xxl: 48px;
+            
+            /* Typography */
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-size-sm: 14px;
+            --font-size-base: 16px;
+            --font-size-lg: 18px;
+            --font-size-xl: 24px;
+            --font-size-xxl: 32px;
+            
+            /* Borders */
+            --border-radius: 8px;
+            --border-radius-lg: 12px;
+            
+            /* Shadows */
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 8px rgba(0,0,0,0.15);
+            --shadow-lg: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-family);
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            color: white;
+            padding: var(--space-lg) 0;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .header h1 {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .header p {
+            font-size: var(--font-size-base);
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+        
+        .tabs {
+            background: var(--color-surface);
+            border-bottom: 2px solid var(--color-border);
+            overflow-x: auto;
+        }
+        
+        .tab-list {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            min-width: max-content;
+        }
+        
+        .tab-button {
+            background: none;
+            border: none;
+            padding: var(--space-md) var(--space-lg);
+            cursor: pointer;
+            font-size: var(--font-size-base);
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .tab-button:hover {
+            color: var(--color-primary);
+            background-color: rgba(21, 101, 192, 0.05);
+        }
+        
+        .tab-button.active {
+            color: var(--color-primary);
+            border-bottom-color: var(--color-primary);
+            background-color: rgba(21, 101, 192, 0.05);
+        }
+        
+        .tab-content {
+            display: none;
+            padding: var(--space-xl);
+            background: var(--color-surface);
+            min-height: 70vh;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .card {
+            background: var(--color-surface);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-sm);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-lg);
+            border: 1px solid var(--color-border);
+        }
+        
+        .card-title {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .grid {
+            display: grid;
+            gap: var(--space-lg);
+        }
+        
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+        
+        .form-group {
+            margin-bottom: var(--space-md);
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: var(--space-sm);
+            color: var(--color-text);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: var(--space-sm) var(--space-md);
+            border: 2px solid var(--color-border);
+            border-radius: var(--border-radius);
+            font-size: var(--font-size-base);
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) 0;
+        }
+        
+        .checkbox {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--color-primary);
+        }
+        
+        .checkbox-label {
+            flex: 1;
+            font-size: var(--font-size-base);
+            cursor: pointer;
+        }
+        
+        .points {
+            background: var(--color-primary-light);
+            color: white;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--border-radius);
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        .btn {
+            padding: var(--space-sm) var(--space-lg);
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: var(--font-size-base);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--color-primary-dark);
+        }
+        
+        .btn-secondary {
+            background: var(--color-secondary);
+            color: white;
+        }
+        
+        .result-card {
+            border: 2px solid;
+            padding: var(--space-lg);
+            border-radius: var(--border-radius-lg);
+            margin-top: var(--space-lg);
+        }
+        
+        .result-low {
+            border-color: var(--color-success);
+            background: rgba(76, 175, 80, 0.1);
+        }
+        
+        .result-moderate {
+            border-color: var(--color-warning);
+            background: rgba(255, 152, 0, 0.1);
+        }
+        
+        .result-high {
+            border-color: var(--color-error);
+            background: rgba(244, 67, 54, 0.1);
+        }
+        
+        .score-display {
+            font-size: var(--font-size-xxl);
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: var(--space-md);
+        }
+        
+        .risk-bar {
+            height: 20px;
+            background: var(--color-border);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: var(--space-md) 0;
+        }
+        
+        .risk-fill {
+            height: 100%;
+            transition: width 0.5s ease, background-color 0.5s ease;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-md);
+            margin: var(--space-lg) 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: var(--space-md);
+            background: rgba(21, 101, 192, 0.05);
+            border-radius: var(--border-radius);
+        }
+        
+        .stat-value {
+            font-size: var(--font-size-xl);
+            font-weight: bold;
+            color: var(--color-primary);
+        }
+        
+        .stat-label {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            margin-top: var(--space-xs);
+        }
+        
+        .alert {
+            padding: var(--space-md);
+            border-radius: var(--border-radius);
+            margin: var(--space-md) 0;
+            border-left: 4px solid;
+        }
+        
+        .alert-info {
+            background: rgba(33, 150, 243, 0.1);
+            border-color: #2196F3;
+            color: #1976D2;
+        }
+        
+        .alert-warning {
+            background: rgba(255, 152, 0, 0.1);
+            border-color: var(--color-warning);
+            color: #F57C00;
+        }
+        
+        .alert-success {
+            background: rgba(76, 175, 80, 0.1);
+            border-color: var(--color-success);
+            color: #388E3C;
+        }
+        
+        .tooltip {
+            position: relative;
+            cursor: help;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+        }
+        
+        .tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: var(--space-sm);
+            background: var(--color-text);
+            color: white;
+            border-radius: var(--border-radius);
+            font-size: var(--font-size-sm);
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        
+        .tooltip:hover::after {
+            opacity: 1;
+        }
+        
+        .reference-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .reference-item {
+            padding: var(--space-md);
+            border-bottom: 1px solid var(--color-border);
+            background: rgba(21, 101, 192, 0.02);
+            margin-bottom: var(--space-sm);
+            border-radius: var(--border-radius);
+        }
+        
+        .reference-title {
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .reference-details {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: var(--font-size-lg);
+            }
+            
+            .tab-content {
+                padding: var(--space-md);
+            }
+            
+            .card {
+                padding: var(--space-md);
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>Evaluación de Riesgo en Estenosis Carotídea Asintomática</h1>
+            <p>Herramientas basadas en evidencia de ACST-1 &amp; ACST-2 para cirujanos vasculares</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <nav class="tabs">
+            <ul class="tab-list">
+                <li><button class="tab-button active" onclick="showTab('resumen')">Resumen Ejecutivo</button></li>
+                <li><button class="tab-button" onclick="showTab('cea8')">Calculadora CEA-8</button></li>
+                <li><button class="tab-button" onclick="showTab('esvs2023')">Criterios ESVS 2023</button></li>
+                <li><button class="tab-button" onclick="showTab('evaluacion')">Evaluación Integrada</button></li>
+                <li><button class="tab-button" onclick="showTab('referencias')">Referencias</button></li>
+            </ul>
+        </nav>
+        
+        <!-- Resumen Ejecutivo -->
+        <div id="resumen" class="tab-content active">
+            <div class="card">
+                <h2 class="card-title">🏥 Resumen Ejecutivo - Estudios ACST</h2>
+                
+                <div class="grid grid-2">
+                    <div class="card">
+                        <h3 class="card-title">ACST-1 (2010)</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-value">3,120</div>
+                                <div class="stat-label">Pacientes</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">6%</div>
+                                <div class="stat-label">Reducción Absoluta</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">10.8%</div>
+                                <div class="stat-label">CEA - Ictus 10 años</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">16.9%</div>
+                                <div class="stat-label">MM - Ictus 10 años</div>
+                            </div>
+                        </div>
+                        <p><strong>Conclusión:</strong> Beneficio principalmente en pacientes ≤75 años con esperanza de vida ≥5 años.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 class="card-title">ACST-2 (2021)</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-value">3,625</div>
+                                <div class="stat-label">Pacientes</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">~1%</div>
+                                <div class="stat-label">Riesgo Perioperatorio</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">3.4%</div>
+                                <div class="stat-label">CAS - Ictus/Muerte 5 años</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">3.5%</div>
+                                <div class="stat-label">CEA - Ictus/Muerte 5 años</div>
+                            </div>
+                        </div>
+                        <p><strong>Conclusión:</strong> CAS y CEA son equivalentes en pacientes asintomáticos apropiados.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2 class="card-title">📋 Criterios Actuales para Intervención</h2>
+                <div class="alert alert-info">
+                    <h4>Indicaciones para CEA/CAS en Pacientes Asintomáticos:</h4>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Estenosis:</strong> 60-99%</li>
+                        <li><strong>Riesgo de ictus a 5 años:</strong> &gt;10%</li>
+                        <li><strong>Riesgo perioperatorio:</strong> &lt;3%</li>
+                        <li><strong>Esperanza de vida:</strong> ≥5 años</li>
+                        <li><strong>Edad:</strong> Beneficio principalmente en ≤75 años</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Calculadora CEA-8 -->
+        <div id="cea8" class="tab-content">
+            <div class="card">
+                <h2 class="card-title">🧮 Calculadora CEA-8</h2>
+                <p>Predicción del riesgo de ictus/muerte a 30 días después de CEA en pacientes asintomáticos.</p>
+                
+                <div class="grid grid-2">
+                    <div>
+                        <h3>Factores de Riesgo</h3>
+                        <form id="cea8Form">
+                            <div class="form-group">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="female" class="checkbox" value="1" onchange="calculateCEA8()">
+                                    <label for="female" class="checkbox-label">Sexo femenino</label>
+                                    <span class="points">1</span>
+                                </div>
+                                <small class="tooltip" data-tooltip="OR: 1.47 (1.11-1.94)">ℹ️ Más información</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="nonwhite" class="checkbox" value="1" onchange="calculateCEA8()">
+                                    <label for="nonwhite" class="checkbox-label">Raza no caucásica</label>
+                                    <span class="points">1</span>
+                                </div>
+                                <small class="tooltip" data-tooltip="OR: 1.82 (1.14-2.93)">ℹ️ Más información</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="stroke" class="checkbox" value="1" onchange="calculateCEA8()">
+                                    <label for="stroke" class="checkbox-label">Ictus o AIT distante</label>
+                                    <span class="points">1</span>
+                                </div>
+                                <small class="tooltip" data-tooltip="OR: 1.48 (1.08-2.03)">ℹ️ Más información</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="contralateral" class="checkbox" value="1" onchange="calculateCEA8()">
+                                    <label for="contralateral" class="checkbox-label">Estenosis contralateral ≥50%</label>
+                                    <span class="points">1</span>
+                                </div>
+                                <small class="tooltip" data-tooltip="OR: 1.76 (1.32-2.34)">ℹ️ Más información</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="chf" class="checkbox" value="1" onchange="calculateCEA8()">
+                                    <label for="chf" class="checkbox-label">Insuficiencia cardíaca congestiva</label>
+                                    <span class="points">1</span>
+                                </div>
+                                <small class="tooltip" data-tooltip="OR: 1.63 (1.09-2.43)">ℹ️ Más información</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="cad" class="checkbox" value="1" onchange="calculateCEA8()">
+                                    <label for="cad" class="checkbox-label">Enfermedad arterial coronaria</label>
+                                    <span class="points">1</span>
+                                </div>
+                                <small class="tooltip" data-tooltip="OR: 1.59 (1.15-2.19)">ℹ️ Más información</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="valvular" class="checkbox" value="1" onchange="calculateCEA8()">
+                                    <label for="valvular" class="checkbox-label">Valvulopatía</label>
+                                    <span class="points">1</span>
+                                </div>
+                                <small class="tooltip" data-tooltip="OR: 1.54 (1.04-2.27)">ℹ️ Más información</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="disability" class="checkbox" value="2" onchange="calculateCEA8()">
+                                    <label for="disability" class="checkbox-label">Discapacidad severa</label>
+                                    <span class="points">2</span>
+                                </div>
+                                <small class="tooltip" data-tooltip="OR: 3.71 (1.78-7.74)">ℹ️ Más información</small>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div>
+                        <div id="cea8Result" class="result-card result-low">
+                            <h3>Resultado CEA-8</h3>
+                            <div class="score-display" id="cea8Score">0 puntos</div>
+                            <div class="risk-bar">
+                                <div class="risk-fill" id="cea8RiskBar" style="width: 0%; background-color: #4CAF50;"></div>
+                            </div>
+                            <p id="cea8Category">Riesgo Bajo</p>
+                            <p id="cea8Risk">Riesgo predicho: 0.6%</p>
+                            <p id="cea8Recommendation">CEA recomendada si cumple otros criterios.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Criterios ESVS 2023 -->
+        <div id="esvs2023" class="tab-content">
+            <div class="card">
+                <h2 class="card-title">📊 Criterios ESVS 2023</h2>
+                <p>Identificación de pacientes asintomáticos con mayor riesgo de ictus con tratamiento médico.</p>
+                
+                <div class="grid grid-2">
+                    <div>
+                        <h3>Características Clínicas</h3>
+                        <form id="esvsForm">
+                            <div class="form-group">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="contralateralTIA" class="checkbox" onchange="calculateESVS()">
+                                    <label for="contralateralTIA" class="checkbox-label">AIT/Ictus contralateral</label>
+                                    <span class="points" style="background: #FF9800;">OR: 3.0</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="age" class="form-label">Edad (años)</label>
+                                <input type="number" id="age" class="form-control" min="18" max="100" onchange="calculateESVS()">
+                                <small>Beneficio principalmente en ≤75 años</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="lifeExpectancy" class="form-label">Esperanza de vida esperada (años)</label>
+                                <input type="number" id="lifeExpectancy" class="form-control" min="1" max="30" onchange="calculateESVS()">
+                                <small>Requerido ≥5 años</small>
+                            </div>
+                        </form>
+                        
+                        <h3 style="margin-top: 24px;">Características de Imagen</h3>
+                        <form>
+                            <div class="form-group">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="silentInfarct" class="checkbox" onchange="calculateESVS()">
+                                    <label for="silentInfarct" class="checkbox-label">Infarto silente ipsilateral en TC</label>
+                                    <span class="points" style="background: #FF9800;">OR: 3.0</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="progression" class="checkbox" onchange="calculateESVS()">
+                                    <label for="progression" class="checkbox-label">Progresión de estenosis &gt;20%</label>
+                                    <span class="points" style="background: #FF9800;">OR: 1.92</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="largePlaque" class="checkbox" onchange="calculateESVS()">
+                                    <label for="largePlaque" class="checkbox-label">Área de placa grande &gt;80 mm²</label>
+                                    <span class="points" style="background: #F44336;">OR: 5.81</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="hemorrhage" class="checkbox" onchange="calculateESVS()">
+                                    <label for="hemorrhage" class="checkbox-label">Hemorragia intraplaca en RM</label>
+                                    <span class="points" style="background: #FF9800;">OR: 3.66</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="impaired" class="checkbox" onchange="calculateESVS()">
+                                    <label for="impaired" class="checkbox-label">Reserva vascular cerebral alterada</label>
+                                    <span class="points" style="background: #F44336;">OR: 6.14</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="echolucent" class="checkbox" onchange="calculateESVS()">
+                                    <label for="echolucent" class="checkbox-label">Placa ecolúcida</label>
+                                    <span class="points" style="background: #FF9800;">OR: 2.61</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="microembolism" class="checkbox" onchange="calculateESVS()">
+                                    <label for="microembolism" class="checkbox-label">Microembolización espontánea</label>
+                                    <span class="points" style="background: #F44336;">OR: 7.46</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="combined" class="checkbox" onchange="calculateESVS()">
+                                    <label for="combined" class="checkbox-label">Microembolización + placa ecolúcida</label>
+                                    <span class="points" style="background: #F44336;">OR: 10.61</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div>
+                        <div id="esvsResult" class="result-card result-low">
+                            <h3>Evaluación ESVS 2023</h3>
+                            <div id="esvsFactors">0 factores de alto riesgo identificados</div>
+                            <div id="esvsAge" class="alert alert-info" style="margin: 16px 0;">Ingrese la edad del paciente</div>
+                            <div id="esvsLife" class="alert alert-info" style="margin: 16px 0;">Ingrese la esperanza de vida</div>
+                            <div id="esvsRecommendation">
+                                <h4>Recomendación:</h4>
+                                <p>Complete la evaluación para obtener recomendaciones específicas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Evaluación Integrada -->
+        <div id="evaluacion" class="tab-content">
+            <div class="card">
+                <h2 class="card-title">🎯 Evaluación Integrada del Paciente</h2>
+                <p>Combinación de CEA-8 y criterios ESVS 2023 para recomendación integral.</p>
+                
+                <div class="grid grid-2">
+                    <div>
+                        <h3>Datos del Paciente</h3>
+                        <form id="integratedForm">
+                            <div class="form-group">
+                                <label for="patientAge" class="form-label">Edad</label>
+                                <input type="number" id="patientAge" class="form-control" min="18" max="100">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="stenosis" class="form-label">Grado de estenosis (%)</label>
+                                <input type="number" id="stenosis" class="form-control" min="0" max="100">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="perioperativeRisk" class="form-label">Riesgo perioperatorio estimado (%)</label>
+                                <input type="number" id="perioperativeRisk" class="form-control" min="0" max="20" step="0.1">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="fiveYearRisk" class="form-label">Riesgo de ictus a 5 años estimado (%)</label>
+                                <input type="number" id="fiveYearRisk" class="form-control" min="0" max="100" step="0.1">
+                            </div>
+                            
+                            <div class="form-group">
+                                <button type="button" class="btn btn-primary" onclick="performIntegratedEvaluation()">Evaluar Paciente</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div>
+                        <div id="integratedResult" class="result-card result-low">
+                            <h3>Evaluación Integral</h3>
+                            <div id="integratedSummary">
+                                <p>Complete los datos del paciente para obtener una evaluación integral.</p>
+                            </div>
+                            
+                            <div id="integratedCriteria" style="display: none;">
+                                <h4>Criterios de Intervención:</h4>
+                                <ul id="criteriaList"></ul>
+                            </div>
+                            
+                            <div id="integratedRecommendation" style="display: none;">
+                                <h4>Recomendación Final:</h4>
+                                <p id="finalRecommendation"></p>
+                                <p id="evidenceLevel"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Referencias -->
+        <div id="referencias" class="tab-content">
+            <div class="card">
+                <h2 class="card-title">📚 Referencias Bibliográficas</h2>
+                
+                <ul class="reference-list">
+                    <li class="reference-item">
+                        <div class="reference-title">ACST-1: Asymptomatic Carotid Surgery Trial 1</div>
+                        <div class="reference-details">
+                            Halliday A, et al. 10-year stroke prevention after successful carotid endarterectomy for asymptomatic stenosis (ACST-1): a multicentre randomised trial. Lancet. 2010;376(9746):1074-84.
+                        </div>
+                    </li>
+                    
+                    <li class="reference-item">
+                        <div class="reference-title">ACST-2: Asymptomatic Carotid Surgery Trial 2</div>
+                        <div class="reference-details">
+                            Halliday A, et al. Second asymptomatic carotid surgery trial (ACST-2): a randomised comparison of carotid artery stenting versus carotid endarterectomy. Lancet. 2021;398(10305):1065-1073.
+                        </div>
+                    </li>
+                    
+                    <li class="reference-item">
+                        <div class="reference-title">CEA-8 Clinical Risk Score</div>
+                        <div class="reference-details">
+                            Peck KY, et al. Development and validation of a clinical risk score to predict 30-day stroke and death after carotid endarterectomy for asymptomatic carotid stenosis. J Vasc Surg. 2014;59(4):1043-51.
+                        </div>
+                    </li>
+                    
+                    <li class="reference-item">
+                        <div class="reference-title">ESVS Guidelines 2023</div>
+                        <div class="reference-details">
+                            Naylor AR, et al. Editor's Choice - Management of Atherosclerotic Carotid and Vertebral Artery Disease: 2017 Clinical Practice Guidelines of the European Society for Vascular Surgery (ESVS). Eur J Vasc Endovasc Surg. 2018;55(1):3-81.
+                        </div>
+                    </li>
+                    
+                    <li class="reference-item">
+                        <div class="reference-title">ACSRS: Asymptomatic Carotid Stenosis and Risk of Stroke</div>
+                        <div class="reference-details">
+                            Nicolaides AN, et al. Asymptomatic internal carotid artery stenosis and cerebrovascular risk stratification. J Vasc Surg. 2010;52(6):1486-1496.
+                        </div>
+                    </li>
+                </ul>
+                
+                <div class="alert alert-info">
+                    <h4>Enlaces Útiles:</h4>
+                    <ul style="margin-left: 20px;">
+                        <li><a href="https://www.esvs.org" target="_blank">European Society for Vascular Surgery (ESVS)</a></li>
+                        <li><a href="https://www.strokejournal.org" target="_blank">Stroke Journal</a></li>
+                        <li><a href="https://www.jvascsurg.org" target="_blank">Journal of Vascular Surgery</a></li>
+                        <li><a href="https://www.thelancet.com" target="_blank">The Lancet</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Tab functionality
+        function showTab(tabId) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from all tab buttons
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(button => button.classList.remove('active'));
+            
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+        
+        // CEA-8 Calculator
+        function calculateCEA8() {
+            const checkboxes = document.querySelectorAll('#cea8Form input[type="checkbox"]');
+            let totalScore = 0;
+            
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    totalScore += parseInt(checkbox.value);
+                }
+            });
+            
+            const scoreElement = document.getElementById('cea8Score');
+            const categoryElement = document.getElementById('cea8Category');
+            const riskElement = document.getElementById('cea8Risk');
+            const recommendationElement = document.getElementById('cea8Recommendation');
+            const resultCard = document.getElementById('cea8Result');
+            const riskBar = document.getElementById('cea8RiskBar');
+            
+            scoreElement.textContent = `${totalScore} puntos`;
+            
+            let category, risk, recommendation, color, width;
+            
+            if (totalScore <= 2) {
+                category = 'Riesgo Bajo';
+                risk = 'Riesgo predicho: 0.6-2.8%';
+                recommendation = 'CEA recomendada si cumple otros criterios.';
+                color = '#4CAF50';
+                width = Math.min(30, (totalScore / 2) * 30);
+                resultCard.className = 'result-card result-low';
+            } else if (totalScore === 3) {
+                category = 'Riesgo Moderado';
+                risk = 'Riesgo predicho: 4.7%';
+                recommendation = 'Evaluar cuidadosamente. Considerar optimización médica.';
+                color = '#FF9800';
+                width = 47;
+                resultCard.className = 'result-card result-moderate';
+            } else {
+                category = 'Riesgo Alto';
+                risk = 'Riesgo predicho: 7.5-9.6%';
+                recommendation = 'Riesgo elevado. Considerar tratamiento médico óptimo antes de cirugía.';
+                color = '#F44336';
+                width = Math.min(100, 75 + ((totalScore - 4) * 5));
+                resultCard.className = 'result-card result-high';
+            }
+            
+            categoryElement.textContent = category;
+            riskElement.textContent = risk;
+            recommendationElement.textContent = recommendation;
+            riskBar.style.width = `${width}%`;
+            riskBar.style.backgroundColor = color;
+        }
+        
+        // ESVS 2023 Calculator
+        function calculateESVS() {
+            const checkboxes = document.querySelectorAll('#esvsForm input[type="checkbox"], #esvs2023 input[type="checkbox"]');
+            const age = parseInt(document.getElementById('age').value) || 0;
+            const lifeExpectancy = parseInt(document.getElementById('lifeExpectancy').value) || 0;
+            
+            let highRiskFactors = 0;
+            
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    highRiskFactors++;
+                }
+            });
+            
+            const factorsElement = document.getElementById('esvsFactors');
+            const ageElement = document.getElementById('esvsAge');
+            const lifeElement = document.getElementById('esvsLife');
+            const recommendationElement = document.getElementById('esvsRecommendation');
+            const resultCard = document.getElementById('esvsResult');
+            
+            factorsElement.textContent = `${highRiskFactors} factores de alto riesgo identificados`;
+            
+            // Age evaluation
+            if (age > 0) {
+                if (age <= 75) {
+                    ageElement.className = 'alert alert-success';
+                    ageElement.textContent = `Edad: ${age} años - Favorable para intervención (≤75 años)`;
+                } else {
+                    ageElement.className = 'alert alert-warning';
+                    ageElement.textContent = `Edad: ${age} años - Beneficio limitado (&gt;75 años)`;
+                }
+            } else {
+                ageElement.className = 'alert alert-info';
+                ageElement.textContent = 'Ingrese la edad del paciente';
+            }
+            
+            // Life expectancy evaluation
+            if (lifeExpectancy > 0) {
+                if (lifeExpectancy >= 5) {
+                    lifeElement.className = 'alert alert-success';
+                    lifeElement.textContent = `Esperanza de vida: ${lifeExpectancy} años - Cumple criterio (≥5 años)`;
+                } else {
+                    lifeElement.className = 'alert alert-warning';
+                    lifeElement.textContent = `Esperanza de vida: ${lifeExpectancy} años - No cumple criterio (&lt;5 años)`;
+                }
+            } else {
+                lifeElement.className = 'alert alert-info';
+                lifeElement.textContent = 'Ingrese la esperanza de vida esperada';
+            }
+            
+            // Overall recommendation
+            let recommendation = '';
+            if (age > 0 && lifeExpectancy > 0) {
+                if (age <= 75 && lifeExpectancy >= 5 && highRiskFactors >= 2) {
+                    recommendation = 'Candidato FAVORABLE para intervención. Múltiples factores de alto riesgo presentes.';
+                    resultCard.className = 'result-card result-high';
+                } else if (age <= 75 && lifeExpectancy >= 5 && highRiskFactors === 1) {
+                    recommendation = 'Candidato MODERADO para intervención. Evaluar factores adicionales.';
+                    resultCard.className = 'result-card result-moderate';
+                } else if (age <= 75 && lifeExpectancy >= 5 && highRiskFactors === 0) {
+                    recommendation = 'Candidato DESFAVORABLE. Pocos factores de riesgo identificados.';
+                    resultCard.className = 'result-card result-low';
+                } else {
+                    recommendation = 'Candidato DESFAVORABLE debido a edad o esperanza de vida limitada.';
+                    resultCard.className = 'result-card result-low';
+                }
+            } else {
+                recommendation = 'Complete la evaluación para obtener recomendaciones específicas.';
+                resultCard.className = 'result-card result-low';
+            }
+            
+            recommendationElement.innerHTML = `<h4>Recomendación:</h4><p>${recommendation}</p>`;
+        }
+        
+        // Integrated Evaluation
+        function performIntegratedEvaluation() {
+            const age = parseInt(document.getElementById('patientAge').value);
+            const stenosis = parseInt(document.getElementById('stenosis').value);
+            const perioperativeRisk = parseFloat(document.getElementById('perioperativeRisk').value);
+            const fiveYearRisk = parseFloat(document.getElementById('fiveYearRisk').value);
+            
+            if (!age || !stenosis || perioperativeRisk === undefined || fiveYearRisk === undefined) {
+                alert('Por favor complete todos los campos.');
+                return;
+            }
+            
+            const summaryElement = document.getElementById('integratedSummary');
+            const criteriaElement = document.getElementById('integratedCriteria');
+            const recommendationElement = document.getElementById('integratedRecommendation');
+            const resultCard = document.getElementById('integratedResult');
+            const criteriaList = document.getElementById('criteriaList');
+            const finalRecommendation = document.getElementById('finalRecommendation');
+            const evidenceLevel = document.getElementById('evidenceLevel');
+            
+            // Check criteria
+            const criteria = {
+                stenosis: stenosis >= 60 && stenosis <= 99,
+                fiveYearRisk: fiveYearRisk > 10,
+                perioperativeRisk: perioperativeRisk < 3,
+                age: age <= 75,
+                lifeExpectancy: true // Assumed from ESVS evaluation
+            };
+            
+            const criteriaMessages = {
+                stenosis: `Estenosis ${stenosis}% ${criteria.stenosis ? '✅' : '❌'} (Requerido: 60-99%)`,
+                fiveYearRisk: `Riesgo 5 años ${fiveYearRisk}% ${criteria.fiveYearRisk ? '✅' : '❌'} (Requerido: &gt;10%)`,
+                perioperativeRisk: `Riesgo perioperatorio ${perioperativeRisk}% ${criteria.perioperativeRisk ? '✅' : '❌'} (Requerido: &lt;3%)`,
+                age: `Edad ${age} años ${criteria.age ? '✅' : '⚠️'} (Óptimo: ≤75 años)`,
+                lifeExpectancy: `Esperanza de vida ✅ (Evaluado en sección ESVS)`
+            };
+            
+            criteriaList.innerHTML = '';
+            Object.values(criteriaMessages).forEach(message => {
+                const li = document.createElement('li');
+                li.textContent = message;
+                criteriaList.appendChild(li);
+            });
+            
+            criteriaElement.style.display = 'block';
+            recommendationElement.style.display = 'block';
+            
+            // Final recommendation
+            const allCriteriaMet = criteria.stenosis && criteria.fiveYearRisk && criteria.perioperativeRisk;
+            const ageOptimal = criteria.age;
+            
+            let recommendation, evidence, cardClass;
+            
+            if (allCriteriaMet && ageOptimal) {
+                recommendation = 'INTERVENCIÓN RECOMENDADA (CEA o CAS). El paciente cumple todos los criterios para beneficiarse de la revascularización carotídea.';
+                evidence = 'Nivel de evidencia: I, Grado de recomendación: A (basado en ACST-1 y ACST-2)';
+                cardClass = 'result-high';
+            } else if (allCriteriaMet && !ageOptimal) {
+                recommendation = 'CONSIDERAR INTERVENCIÓN con precaución. Edad &gt;75 años limita el beneficio, pero otros criterios se cumplen.';
+                evidence = 'Nivel de evidencia: IIa, Grado de recomendación: B';
+                cardClass = 'result-moderate';
+            } else {
+                recommendation = 'TRATAMIENTO MÉDICO ÓPTIMO recomendado. El paciente no cumple criterios suficientes para beneficiarse de la intervención.';
+                evidence = 'Nivel de evidencia: III, Grado de recomendación: C';
+                cardClass = 'result-low';
+            }
+            
+            summaryElement.innerHTML = `
+                <h4>Paciente: ${age} años</h4>
+                <p><strong>Estenosis:</strong> ${stenosis}%</p>
+                <p><strong>Riesgo perioperatorio:</strong> ${perioperativeRisk}%</p>
+                <p><strong>Riesgo 5 años:</strong> ${fiveYearRisk}%</p>
+            `;
+            
+            finalRecommendation.textContent = recommendation;
+            evidenceLevel.textContent = evidence;
+            resultCard.className = `result-card ${cardClass}`;
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            calculateCEA8();
+            calculateESVS();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Estenosis Carotídea + NASCET/ECST</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Segoe UI',sans-serif;background:#f5f7fa;color:#333;padding:20px}
+    .container{max-width:1200px;margin:0 auto}
+    .header{background:#2c3e50;color:#fff;padding:20px;border-radius:8px;text-align:center;margin-bottom:20px}
+    .section{background:#fff;padding:20px;margin-bottom:20px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.05)}
+    h1,h2,h3{color:#2c3e50;margin-bottom:15px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .input-group{margin-bottom:15px}
+    label{display:block;margin-bottom:5px;font-weight:600}
+    input,select{width:100%;padding:10px;border:1px solid #ccc;border-radius:4px}
+    button{background:#e74c3c;color:#fff;border:none;padding:12px;width:100%;border-radius:4px;font-size:1em;cursor:pointer}
+    button:hover{background:#c0392b}
+    table{width:100%;border-collapse:collapse;margin:15px 0}
+    th,td{border:1px solid #ddd;padding:10px;text-align:center}
+    th{background:#3498db;color:#fff}
+    .badge{display:inline-block;margin:0 5px;padding:4px 8px;border-radius:4px;color:#fff;font-size:0.9em;vertical-align:middle}
+    .badge-icavl{background:#f1c40f}
+    .badge-iac{background:#27ae60}
+    .result{display:none;margin-top:20px}
+    .result-card{background:#e9f7ef;padding:15px;border-left:4px solid #27ae60;margin-bottom:10px}
+    .risk-badge{display:inline-block;margin:5px 5px 0;padding:4px 6px;border-radius:4px;color:#fff;font-weight:600}
+    .risk-low{background:#2ecc71}
+    .risk-moderate{background:#f1c40f}
+    .risk-high{background:#e67e22}
+    .diagram{text-align:center;margin:20px 0}
+    .diagram img{max-width:100%;height:auto;border:1px solid #ccc;border-radius:4px}
+    .note{font-size:0.9em;color:#555;margin-bottom:15px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Calculadora de Estenosis Carotídea</h1>
+      <p><span class="badge badge-icavl">ICAVL/SRUCC</span><span class="badge badge-iac">IAC 2023</span></p>
+    </div>
+
+    <div class="section">
+      <h2>1. Relación PSV ICA/CCA</h2>
+      <p class="note"><strong>Nota:</strong> PSV ICA y PSV CCA se obtienen midiendo la velocidad sistólica pico en la arteria carótida interna y en la arteria carótida común, respectivamente, usando Doppler longitudinal. Consulte la figura para ubicación de muestras.</p>
+      <div class="grid">
+        <div class="input-group"><label>PSV ICA (cm/s)</label><input type="number" id="psvIca"></div>
+        <div class="input-group"><label>PSV CCA (cm/s)</label><input type="number" id="psvCca"></div>
+      </div>
+      <div class="diagram">
+        <img src="1.jpeg" alt="Localización de muestras ICA y CCA">
+        <p>Figura: Localización de la muestra Doppler en ICA y CCA para medir PSV y EDV (imagen local).</p>
+      </div>
+      <button onclick="calcRatio()">Calcular Ratio y Estenosis</button>
+      <div class="result" id="ratioResult"></div>
+    </div>
+
+    <div class="section">
+      <h2>2. Cálculo NASCET y ECST</h2>
+      <p class="note">Mida <strong>Dmin</strong> en el tramo más estrecho de la estenosis y <strong>Dref</strong> en el segmento distal normal de la arteria carótida interna según protocolo NASCET.</p>
+      <div class="grid">
+        <div class="input-group"><label>Dmin (cm)</label><input type="number" id="dmin" step="0.01"></div>
+        <div class="input-group"><label>Dref (cm)</label><input type="number" id="dref" step="0.01"></div>
+      </div>
+      <button onclick="calcNascetEcst()">Calcular %NASCET y %ECST</button>
+      <div class="result" id="nascetEcstResult"></div>
+    </div>
+
+    <div class="section">
+      <h2>Tablas de Criterios</h2>
+      <h3>ICAVL/SRUCC</h3>
+      <table>
+        <tr><th>% Estenosis</th><th>PSV ICA/CCA</th></tr>
+        <tr><td>&lt;50%</td><td>&lt;2.0</td></tr>
+        <tr><td>50–69%</td><td>2.0–4.0</td></tr>
+        <tr><td>&ge;70%</td><td>&gt;4.0</td></tr>
+      </table>
+      <h3>IAC 2023</h3>
+      <table>
+        <tr><th>% Estenosis</th><th>PSV ICA/CCA</th></tr>
+        <tr><td>&lt;50%</td><td>&lt;2.0</td></tr>
+        <tr><td>50–69%</td><td>2.0–4.0</td></tr>
+        <tr><td>&ge;70%</td><td>&gt;4.0</td></tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>Interpretación Clínica</h2>
+      <p><strong>&lt;50%</strong> Riesgo <span class="risk-badge risk-low">Bajo</span></p>
+      <p><strong>50–69%</strong> Riesgo <span class="risk-badge risk-moderate">Moderado</span></p>
+      <p><strong>&ge;70%</strong> Riesgo <span class="risk-badge risk-high">Alto</span></p>
+    </div>
+
+    <div class="section">
+      <h2>Bibliografía (APA 7)</h2>
+      <ol>
+        <li>Grant, E. L., Benson, C. B., Moneta, G. L., Alexandrov, A. V., Baker, J. D., Bluth, E. I., ... Zwiebel, W. J. (2003). Carotid artery stenosis: gray-scale and Doppler US diagnosis—Society of Radiologists in Ultrasound Consensus Conference. <em>Radiology, 229</em>(2), 340–346.</li>
+        <li>Intersocietal Commission for the Accreditation of Vascular Laboratories. (2018). <em>ICAVL Standards and Guidelines for Accreditation in Noninvasive Vascular Testing.</em> Columbia, MD: ICAVL.</li>
+        <li>Grant, E. L., Duerinckx, A. J., El Saden, S. M., Melany, M. L., Hathout, G. M., Zimmerman, P. T., ... White, C. J. (2021). Optimization of duplex velocity criteria for diagnosis of internal carotid artery (ICA) stenosis: A report of the Intersocietal Accreditation Commission (IAC) Vascular Testing Division Carotid Diagnostic Criteria Committee. <em>Vascular Medicine, 26</em>(5), 515–525.</li>
+        <li>Intersocietal Accreditation Commission. (2023, noviembre). <em>Updated recommendations for carotid stenosis interpretation criteria.</em> Recuperado de https://intersocietal.org/wp-content/uploads/2023/11/IAC-Updated-Recommendations-for-Carotid-Stenosis-Interpretation-Criteria_11.1.23.pdf</li>
+        <li>Barnett, H. J., Taylor, D. W., Eliasziw, M., Fox, A. J., Ferguson, G. G., Haynes, R. B., ... Clagett, G. P. (1998). Benefit of carotid endarterectomy in patients with symptomatic moderate or severe stenosis. <em>New England Journal of Medicine, 339</em>(20), 1415–1425.</li>
+      </ol>
+    </div>
+  </div>
+  <script>
+    function calcRatio(){
+      const psvIca=parseFloat(document.getElementById('psvIca').value);
+      const psvCca=parseFloat(document.getElementById('psvCca').value);
+      if(isNaN(psvIca)||isNaN(psvCca)){alert('Ingrese PSV ICA y PSV CCA');return;}
+      const r=(psvIca/psvCca).toFixed(2);
+      let est,cls;
+      if(r<2.0){est='<50%';cls='risk-low';}
+      else if(r<4.0){est='50–69%';cls='risk-moderate';}
+      else{est='≥70%';cls='risk-high';}
+      document.getElementById('outcome').innerHTML=`<p><strong>Ratio PSV ICA/CCA:</strong> ${r}</p><p><strong>Estenosis aprox.:</strong> ${est}</p>`;
+      document.getElementById('outcome').className='result-card '+cls;
+      document.getElementById('result').style.display='block';
+    }
+
+    function calcNascetEcst(){
+      const dmin=parseFloat(document.getElementById('dmin').value);
+      const dref=parseFloat(document.getElementById('dref').value);
+      if(isNaN(dmin)||isNaN(dref)||dref===0){alert('Ingrese Dmin y Dref válidos');return;}
+      const nascet=((1 - dmin/dref)*100).toFixed(1);
+      const ecst=(40 + 0.6*nascet).toFixed(1);
+      document.getElementById('nascetEcstResult').innerHTML=`<div class="result-card risk-moderate"><p><strong>NASCET:</strong> ${nascet}%</p><p><strong>ECST:</strong> ${ecst}%</p></div>`;
+      document.getElementById('nascetEcstResult').style.display='block';
+    }
+  </script>
+</body>
+</html>

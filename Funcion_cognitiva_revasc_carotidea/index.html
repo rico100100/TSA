@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Mejoría Cognitiva en Estenosis Carotídea - Tablas, MoCA y Reporte<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Mejoría Cognitiva en Estenosis Carotídea - Tablas, MoCA y Reporte Científico</title><div class="predictors-note" style="font-size:0.9em;opacity:.9;margin-top:6px">Matiz: el porcentaje de estenosis por sí solo es un predictor menos consistente que el compromiso hemodinámico (p. ej., reactividad vascular cerebral reducida/hipoperfusión).</div>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        body {
+            background: linear-gradient(120deg, #22223b 0%, #614385 100%);
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #22223b;
+        }
+        .container {
+            width: 98%;
+            max-width: 920px;
+            margin: 30px auto;
+            background: rgba(250,250,250, 0.97);
+            border-radius: 17px;
+            box-shadow: 0 12px 32px 4px rgba(90,80,230,0.11), 0 1.5px 7.5px 0px rgba(80,36,170,0.05);
+            padding: 32px 28px 26px 28px;
+            position: relative;
+            overflow-wrap: break-word;
+        }
+        .navbar {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .nav-btn {
+            background: linear-gradient(90deg, #614385 0%, #22223b 100%);
+            color: #fff;
+            border: none;
+            border-radius: 9px;
+            font-size: 1rem;
+            padding: 11px 20px;
+            margin: 0 2px 8px 2px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 14px 0 rgba(31, 37, 86, 0.16);
+            white-space: nowrap;
+        }
+        .nav-btn.active, .nav-btn:hover {
+            background: linear-gradient(90deg, #ac78f9 0%, #614385 100%);
+            color: #fff;
+            transform: translateY(-2px) scale(1.04);
+        }
+        h2 {
+            margin-top: 5px;
+            color: #4527a0;
+            margin-bottom: 18px;
+        }
+        .table-responsive {
+            overflow-x: auto;
+            animation: fadeIn 0.7s;
+            padding-bottom: 6px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background: #f5ecfc;
+            border-radius: 10px 10px 0 0;
+        }
+        th, td {
+            text-align: left;
+            padding: 15px 12px;
+            font-size: 1.07rem;
+            vertical-align: middle;
+        }
+        th {
+            background: #614385;
+            color: #fff;
+            letter-spacing: 0.03em;
+        }
+        tr {
+            transition: background 0.3s;
+        }
+        tr:hover {
+            background: #f9f7fd;
+        }
+        td a {
+            color: #512da8;
+            font-weight: 600;
+            text-decoration: underline;
+            transition: color 0.3s;
+            word-break: break-word;
+        }
+        td a:hover {
+            color: #ac78f9;
+            text-shadow: 0 1px 9px #61438588;
+        }
+        .text-report, .text-moca {
+            background: #fff;
+            border-radius: 12px;
+            padding: 24px 30px;
+            box-shadow: 0 4px 12px #6c54b0cc;
+            white-space: normal;
+            max-height: 600px;
+            overflow-y: auto;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #22223b;
+            text-align: justify;
+            margin-top: 12px;
+        }
+        .moca-content {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+        form#mocaForm {
+            flex: 1 1 280px;
+            min-width: 280px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        label {
+            font-weight: 600;
+            margin: 0;
+            color: #4527a0;
+            max-width: 65%;
+        }
+        input[type="number"] {
+            width: 70px;
+            padding: 6px 10px;
+            font-size: 1rem;
+            border-radius: 6px;
+            border: 2px solid #614385;
+            text-align: center;
+            box-shadow: inset 0 2px 6px #bdbcf3;
+            transition: border-color 0.3s;
+        }
+        input[type="number"]:focus {
+            border-color: #ac78f9;
+            outline: none;
+        }
+        select {
+            width: 70px;
+            font-size: 1rem;
+            border-radius: 6px;
+            border: 2px solid #614385;
+            padding: 5px 8px;
+            color: #22223b;
+            transition: border-color 0.3s;
+        }
+        select:focus {
+            border-color: #ac78f9;
+            outline: none;
+        }
+        .result-box {
+            margin-top: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #422075;
+            background: #cdb4db;
+            border-radius: 7px;
+            padding: 12px 18px;
+            box-shadow: inset 0 3px 10px #6a5acd66;
+            max-width: 250px;
+            user-select: text;
+        }
+        .moca-explanation {
+            flex: 2 1 350px;
+            min-width: 300px;
+            overflow-y: auto;
+        }
+        .moca-explanation h3, .moca-explanation h4 {
+            color: #614385;
+            margin-top: 12px;
+            margin-bottom: 6px;
+        }
+        .moca-explanation p, .moca-explanation ul {
+            margin-bottom: 12px;
+        }
+        .moca-explanation ul {
+            padding-left: 20px;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(25px); }
+            100% { opacity: 1; transform: none; }
+        }
+        .floating-btn {
+            background: #22223b;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            outline: none;
+            position: fixed;
+            bottom: 22px;
+            right: 32px;
+            width: 59px;
+            height: 59px;
+            font-size: 2.1rem;
+            line-height: 1.2;
+            box-shadow: 0px 8px 24px #3e1e6899;
+            cursor: pointer;
+            z-index: 1000;
+            animation: floatBtn 2.4s ease-in-out infinite;
+        }
+        @keyframes floatBtn {
+            0%, 100% { transform: translateY(0); }
+            51% { transform: translateY(-11px); }
+        }
+        /* Responsive */
+        @media (max-width: 850px) {
+            .moca-content {
+                flex-direction: column;
+            }
+            form#mocaForm, .moca-explanation {
+                min-width: 100%;
+                flex: none;
+            }
+        }
+        @media (max-width: 600px) {
+            body, .container {
+                padding: 0 !important;
+                border-radius: 0;
+            }
+            th, td {
+                padding: 11px 5px;
+                font-size: 0.95rem;
+            }
+            input[type="number"], select {
+                width: 60px;
+            }
+            .result-box {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <button class="nav-btn active" onclick="showPanel('tabla1')">Dominios Cognitivos</button>
+            <button class="nav-btn" onclick="showPanel('tabla2')">Variables Preoperatorias</button>
+            <button class="nav-btn" onclick="showPanel('report')">Informe Científico</button>
+            <button class="nav-btn" onclick="showPanel('moca')">Parámetros MoCA</button>
+        </div>
+
+        <div id="tabla1" class="table-responsive">
+            <h2>Dominios Cognitivos Mejorados tras Revascularización</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Dominio cognitivo mejorado</th>
+                        <th>Estudios asociados</th>
+                        <th>Tiempo de recuperación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Memoria retardada, codificación</td>
+                        <td><a href="https://www.frontiersin.org/journals/neurology/articles/10.3389/fneur.2025.1452495/pdf" target="_blank">Impact of carotid artery revascularization on cognitive function (2025)</a></td>
+                        <td>3-6 meses<br>12 semanas</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Orientación visuoespacial</td>
+                        <td><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5174991/" target="_blank">Neurocognitive Improvement in Patients Undergoing Carotid Endarterectomy or Stenting (2016)</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/33461024/" target="_blank">Carotid Revascularization Improves Cognition in Patients With Impaired Cerebral Hemodynamics (2021)</a></td>
+                        <td>3-6 meses</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Atención sostenida</td>
+                        <td><a href="https://pubmed.ncbi.nlm.nih.gov/33461024/" target="_blank">Carotid Revascularization Improves Cognition in Patients With Impaired Cerebral Hemodynamics (2021)</a>; <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5174991/" target="_blank">Neurocognitive Improvement in Patients Undergoing Carotid Endarterectomy or Stenting (2016)</a></td>
+                        <td>3-6 meses</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Función ejecutiva</td>
+                        <td><a href="https://pubmed.ncbi.nlm.nih.gov/33461024/" target="_blank">Carotid Revascularization Improves Cognition in Patients With Impaired Cerebral Hemodynamics (2021)</a>; <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5174991/" target="_blank">Neurocognitive Improvement in Patients Undergoing Carotid Endarterectomy or Stenting (2016)</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/31487558/" target="_blank">Predictors of cognitive functioning after carotid revascularization (2019)</a></td>
+                        <td>3-6 meses</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Fluencia verbal</td>
+                        <td><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5174991/" target="_blank">Neurocognitive Improvement in Patients Undergoing Carotid Endarterectomy or Stenting (2016)</a></td>
+                        <td>3-6 meses</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Memoria de trabajo</td>
+                        <td><a href="https://pubmed.ncbi.nlm.nih.gov/26211378/" target="_blank">Comparison of domain-specific cognitive function after carotid endarterectomy vs stenting (2015)</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/36905664/" target="_blank">Effects of carotid revascularization on cognitive function and brain connectivity (2023)</a></td>
+                        <td>3 meses</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Conectividad funcional cerebral</td>
+                        <td><a href="https://pubmed.ncbi.nlm.nih.gov/36905664/" target="_blank">Effects of carotid revascularization on cognitive function and brain connectivity (2023)</a></td>
+                        <td>3-6 meses</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Velocidad de procesamiento</td>
+                        <td><a href="https://pubmed.ncbi.nlm.nih.gov/26211378/" target="_blank">Comparison of domain-specific cognitive function after carotid endarterectomy vs stenting (2015)</a></td>
+                        <td>3-6 meses</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="tabla2" class="table-responsive" style="display:none;">
+            <h2>Variables Preoperatorias Asociadas a Mayor Beneficio Cognitivo</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Variable preoperatoria</th>
+                        <th>Asociación con mejoría cognitiva</th>
+                        <th>Estudios asociados</th>
+                    </tr>
+                </thead>
+                <tbody><tr>
+                        <td>2</td>
+                        <td>Reactividad vascular cerebral comprometida</td>
+                        <td>Indicativa de hipoperfusión cerebral, asociada a mayor mejoría cognitiva relacionada con restauración del flujo.</td>
+                        <td><a href="https://pubmed.ncbi.nlm.nih.gov/31487558/" target="_blank">Predictors of cognitive functioning (2019)</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/36905664/" target="_blank">Effects of carotid revascularization (2023)</a></td>
+                    </tr><tr>
+                        <td>1</td>
+                        <td>Deterioro cognitivo preexistente</td>
+                        <td>Mayor probabilidad de mejoría y mayor margen de recuperación cognitiva tras revascularización.</td>
+                        <td><a href="https://pubmed.ncbi.nlm.nih.gov/33461024/" target="_blank">Carotid Revascularization Improves Cognition (2021)</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/31487558/" target="_blank">Predictors of cognitive functioning (2019)</a></td>
+                    </tr><tr>
+                        <td>3</td>
+                        <td>Edad menor</td>
+                        <td>Más capacidad de recuperación neural y mejor tolerancia a la cirugía, facilitando mejorías cognitivas.</td>
+                        <td><a href="https://pubmed.ncbi.nlm.nih.gov/31487558/" target="_blank">Predictors of cognitive functioning (2019)</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/33461024/" target="_blank">Carotid Revascularization Improves Cognition (2021)</a></td>
+                    </tr><tr>
+                        <td>4</td>
+                        <td>Grado de estenosis carotídea ≥70%</td>
+                        <td>Corresponde a compromiso hemodinámico significativo, vinculado a mayor mejoría cognitiva tras intervención.</td>
+                        <td><a href="https://pubmed.ncbi.nlm.nih.gov/33461024/" target="_blank">Carotid Revascularization Improves Cognition (2021)</a>; <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5174991/" target="_blank">Neurocognitive Improvement (2016)</a></td>
+                    </tr><tr>
+                        <td>5</td>
+                        <td>Bajo puntaje preoperatorio MoCA</td>
+                        <td>Indica déficit cognitivo leve a moderado, con buen potencial para mejoría tras revascularización.</td>
+                        <td><a href="https://pubmed.ncbi.nlm.nih.gov/33461024/" target="_blank">Carotid Revascularization Improves Cognition (2021)</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/20055242/" target="_blank">Assessment of subtle cognitive impairment (2009)</a></td>
+                    </tr></tbody>
+            </table>
+        </div>
+
+        <div id="report" class="table-responsive" style="display:none;">
+            <h2>Mejoría Cognitiva en Estenosis Carotídea: Informe Científico Integral</h2>
+            <div class="text-report" tabindex="0">
+                <h3>Introducción</h3>
+                La estenosis carotídea es una condición vascular que puede comprometer el flujo cerebral y, en consecuencia, afectar diversas funciones cognitivas. La revascularización carotídea se ha investigado como una estrategia para mejorar o estabilizar el deterioro cognitivo asociado.
+                <h3>Mecanismos de Deterioro Cognitivo</h3>
+                Los principales mecanismos implicados incluyen la hipoperfusión cerebral crónica y la microembolización asintomática, que afectan la integridad neuronal y la conectividad funcional cerebral.
+                <h3>Mejorías Cognitivas Post-Revascularización</h3>
+                La evidencia demuestra mejorías en la memoria, atención, funciones ejecutivas y otras áreas cognitivas. Estas mejoras se vinculan con la restauración hemodinámica y la recuperación de la conectividad neuronal.
+                <h3>Factores Predictivos de Mejoría</h3>
+                Los factores preoperatorios como edad joven, deterioro cognitivo previo significativo, grado severo de estenosis y compromiso hemodinámico son predictores relevantes para mayor beneficio.
+                <h3>Limitaciones y Perspectivas a Largo Plazo</h3>
+                Aunque las mejoras iniciales suelen ser importantes, el beneficio cognitivo sostenido a largo plazo es variable, predominando en muchos casos la estabilización del deterioro más que la recuperación activa.
+                <h3>Conclusiones</h3>
+                La revascularización carotídea debe considerarse en pacientes seleccionados con deterioro cognitivo y evidencias objetivas de hipoperfusión para lograr los máximos beneficios. La evaluación cognitiva con pruebas sensibles es fundamental en la selección y seguimiento.
+                <h3>Bibliografía</h3>
+                <ul>
+                    <li><a href="https://www.frontiersin.org/journals/neurology/articles/10.3389/fneur.2025.1452495/pdf" target="_blank">Impact of carotid artery revascularization on cognitive function (Frontiers Neurology, 2025)</a></li>
+                    <li><a href="https://pubmed.ncbi.nlm.nih.gov/33461024/" target="_blank">Carotid Revascularization Improves Cognition in Patients With Impaired Cerebral Hemodynamics (PubMed, 2021)</a></li>
+                    <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5174991/" target="_blank">Neurocognitive Improvement in Patients Undergoing Carotid Endarterectomy or Stenting (PMC, 2016)</a></li>
+                    <li><a href="https://pubmed.ncbi.nlm.nih.gov/31487558/" target="_blank">Predictors of cognitive functioning after carotid revascularization (PubMed, 2019)</a></li>
+                    <li><a href="https://pubmed.ncbi.nlm.nih.gov/26211378/" target="_blank">Comparison of domain-specific cognitive function after carotid endarterectomy vs stenting (PubMed, 2015)</a></li>
+                    <li><a href="https://pubmed.ncbi.nlm.nih.gov/36905664/" target="_blank">Effects of carotid revascularization on cognitive function and brain connectivity (PubMed, 2023)</a></li>
+                    <li><a href="https://pubmed.ncbi.nlm.nih.gov/20055242/" target="_blank">Assessment of subtle cognitive impairment in stroke-free patients with carotid stenosis (PubMed, 2009)</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="moca" class="table-responsive" style="display:none;">
+            <h2>Parámetros y Cálculo Automático del Montreal Cognitive Assessment (MoCA)</h2>
+            <div class="text-moca" tabindex="0">
+                <div class="moca-content">
+                    <form id="mocaForm" oninput="calcMoCA()">
+                        <div class="form-group">
+                            <label for="visuospatial">Visuoespacial / Ejecución (0-5):</label>
+                            <input type="number" id="visuospatial" min="0" max="5" value="0" />
+                        </div><div class="moca-note" style="font-size:0.9em;opacity:.9;margin-top:6px">Nota: MoCA es una prueba de cribado. <strong>&lt;26</strong> sugiere posible deterioro. Las “bandas de severidad” son <em>orientativas</em> y deben interpretarse con normas locales por edad y escolaridad.</div>
+                        <div class="form-group">
+                            <label for="naming">Denominación (0-3):</label>
+                            <input type="number" id="naming" min="0" max="3" value="0" />
+                        </div>
+                        <div class="form-group">
+                            <label for="attention">Atención (0-6):</label>
+                            <input type="number" id="attention" min="0" max="6" value="0" />
+                        </div>
+                        <div class="form-group">
+                            <label for="language">Lenguaje (0-3):</label>
+                            <input type="number" id="language" min="0" max="3" value="0" />
+                        </div>
+                        <div class="form-group">
+                            <label for="abstraction">Abstracción (0-2):</label>
+                            <input type="number" id="abstraction" min="0" max="2" value="0" />
+                        </div>
+                        <div class="form-group">
+                            <label for="delayedRecall">Memoria diferida (0-5):</label>
+                            <input type="number" id="delayedRecall" min="0" max="5" value="0" />
+                        </div>
+                        <div class="form-group">
+                            <label for="orientation">Orientación (0-6):</label>
+                            <input type="number" id="orientation" min="0" max="6" value="0" />
+                        </div>
+                        <div class="form-group">
+                            <label for="education">Ajuste por baja escolaridad (≤12 años)<br><small>(Añade 1 punto si ≤ 12 años de escolaridad escolaridad)</small></label>
+                            <select id="education">
+                                <option value="0" selected>No</option>
+                                <option value="1">Sí</option>
+                            </select>
+                        </div>
+                    </form>
+                    <div class="moca-explanation">
+                        <h3>Interpretación del Puntaje MoCA</h3>
+                        <p>El Montreal Cognitive Assessment (MoCA) es una prueba rápida y validada para la detección del deterioro cognitivo leve. La puntuación máxima posible es 30 puntos.</p>
+                        <ul>
+                            <li><strong>26 o más:</strong> Función cognitiva considerada normal.</li>
+                            <li><strong>18 a 25:</strong> Indica deterioro cognitivo leve a moderado.</li>
+                            <li><strong>Menos de 18:</strong> Sugiere deterioro cognitivo severo.</li>
+                        </ul>
+                        <h4>Dominios Evaluados</h4>
+                        <ul>
+                            <li><strong>Visuoespacial / Ejecución:</strong> Evalúa habilidades visuoespaciales y secuencias motoras complejas.</li>
+                            <li><strong>Denominación:</strong> Capacidad para nombrar objetos o dibujos.</li>
+                            <li><strong>Atención:</strong> Incluye concentración, secuencias numéricas y repetición de dígitos.</li>
+                            <li><strong>Lenguaje:</strong> Fluidez verbal y repetición de frases.</li>
+                            <li><strong>Abstracción:</strong> Identificación de similitudes entre objetos o conceptos.</li>
+                            <li><strong>Memoria diferida:</strong> Recuerdo diferido de palabras o eventos tras un intervalo de tiempo.</li>
+                            <li><strong>Orientación:</strong> Evaluación del conocimiento temporal y espacial.</li>
+                        </ul>
+                        <h4>Bibliografía</h4>
+                        <ul>
+                            <li><a href="https://www.concordia.ca/content/dam/artsci/research/caplab/docs/Julayanontetal2013MoCAreview.pdf" target="_blank">Julayanont, P., et al. (2013). The Montreal Cognitive Assessment (MoCA) - Concordia University</a></li>
+                            <li><a href="https://pubmed.ncbi.nlm.nih.gov/20055242/" target="_blank">Nasreddine, Z. S., et al. (2005). The Montreal Cognitive Assessment, MoCA: a brief screening tool for mild cognitive impairment. Journal of the American Geriatrics Society.</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="result-box" id="mocaScore">Puntaje total MoCA: 0 / 30</div>
+            </div>
+        </div>
+
+        <div class="bibliografia">
+            <h3>Bibliografía APA 7</h3>
+            <div class="apa-ref"><strong>Frontiers Neurology. (2025).</strong> Impact of carotid artery revascularization on cognitive function. <a href="https://www.frontiersin.org/journals/neurology/articles/10.3389/fneur.2025.1452495/pdf" target="_blank">https://www.frontiersin.org/journals/neurology/articles/10.3389/fneur.2025.1452495/pdf</a></div>
+            <div class="apa-ref"><strong>PubMed. (2021).</strong> Carotid Revascularization Improves Cognition in Patients With Impaired Cerebral Hemodynamics. <a href="https://pubmed.ncbi.nlm.nih.gov/33461024/" target="_blank">https://pubmed.ncbi.nlm.nih.gov/33461024/</a></div>
+            <div class="apa-ref"><strong>PMC. (2016).</strong> Neurocognitive Improvement in Patients Undergoing Carotid Endarterectomy or Stenting. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5174991/" target="_blank">https://pmc.ncbi.nlm.nih.gov/articles/PMC5174991/</a></div>
+            <div class="apa-ref"><strong>PubMed. (2019).</strong> Predictors of cognitive functioning after carotid revascularization. <a href="https://pubmed.ncbi.nlm.nih.gov/31487558/" target="_blank">https://pubmed.ncbi.nlm.nih.gov/31487558/</a></div>
+            <div class="apa-ref"><strong>PubMed. (2015).</strong> Comparison of domain-specific cognitive function after carotid endarterectomy vs stenting. <a href="https://pubmed.ncbi.nlm.nih.gov/26211378/" target="_blank">https://pubmed.ncbi.nlm.nih.gov/26211378/</a></div>
+            <div class="apa-ref"><strong>PubMed. (2023).</strong> Effects of carotid revascularization on cognitive function and brain connectivity. <a href="https://pubmed.ncbi.nlm.nih.gov/36905664/" target="_blank">https://pubmed.ncbi.nlm.nih.gov/36905664/</a></div>
+            <div class="apa-ref"><strong>PubMed. (2009).</strong> Assessment of subtle cognitive impairment in stroke-free patients with carotid stenosis. <a href="https://pubmed.ncbi.nlm.nih.gov/20055242/" target="_blank">https://pubmed.ncbi.nlm.nih.gov/20055242/</a></div>
+            <div class="apa-ref"><strong>Concordia University. (2013).</strong> The Montreal Cognitive Assessment (MoCA). <a href="https://www.concordia.ca/content/dam/artsci/research/caplab/docs/Julayanontetal2013MoCAreview.pdf" target="_blank">https://www.concordia.ca/content/dam/artsci/research/caplab/docs/Julayanontetal2013MoCAreview.pdf</a></div>
+            <div class="apa-ref"><strong>Nasreddine, Z. S., et al. (2005).</strong> The Montreal Cognitive Assessment, MoCA: a brief screening tool for mild cognitive impairment. <a href="https://pubmed.ncbi.nlm.nih.gov/20055242/" target="_blank">https://pubmed.ncbi.nlm.nih.gov/20055242/</a></div>
+        </div>
+
+        <button onclick="scrollToTop()" class="floating-btn" title="Volver arriba">↑</button>
+    </div>
+
+    <script>
+        function showPanel(panelId) {
+            ['tabla1','tabla2','report','moca'].forEach(id=>{
+                document.getElementById(id).style.display = id === panelId ? '' : 'none';
+            });
+            document.querySelectorAll('.nav-btn').forEach((btn)=>{
+                btn.classList.remove('active');
+            });
+            const btns = document.querySelectorAll('.nav-btn');
+            switch(panelId) {
+                case 'tabla1': btns[0].classList.add('active'); break;
+                case 'tabla2': btns[1].classList.add('active'); break;
+                case 'report': btns[2].classList.add('active'); break;
+                case 'moca': btns[3].classList.add('active'); break;
+            }
+        }
+        function scrollToTop() {
+            window.scrollTo({top:0, behavior: 'smooth'});
+        }
+        function calcMoCA() {
+            const vs = Number(document.getElementById('visuospatial').value) || 0;
+            const nm = Number(document.getElementById('naming').value) || 0;
+            const at = Number(document.getElementById('attention').value) || 0;
+            const lg = Number(document.getElementById('language').value) || 0;
+            const ab = Number(document.getElementById('abstraction').value) || 0;
+            const dr = Number(document.getElementById('delayedRecall').value) || 0;
+            const or = Number(document.getElementById('orientation').value) || 0;
+            const ed = Number(document.getElementById('education').value) || 0;
+            let total = vs + nm + at + lg + ab + dr + or + ed;
+            if(total > 30) total = 30;
+            document.getElementById('mocaScore').textContent = `Puntaje total MoCA: ${total} / 30`;
+        }
+        window.onload = function() {
+            calcMoCA();
+        }
+    </script>
+<p class="evidence-balance" style="margin-top:8px"><strong>Equilibrio de evidencia:</strong> los beneficios cognitivos tras CEA/CAS no son universales. Puede existir empeoramiento transitorio por microembolización perioperatoria; la selección basada en hemodinámica (p. ej., CVR/hipoperfusión) ayuda a identificar a quienes más probablemente mejoren.</p>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  const target = document.querySelector('#moca-category') || document.querySelector('[data-moca-category]');
+  // Create or show the print button near the target if found, else add a floating button hidden.
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.textContent = 'Imprimir categoría MoCA (B/N)';
+  btn.id = 'btnPrintMoCA';
+  btn.style = 'margin-top:8px;display:' + (target ? 'inline-block' : 'none') + ';';
+  btn.className = (typeof bootstrap !== 'undefined') ? 'btn btn-outline-secondary btn-sm' : '';
+  btn.addEventListener('click', function(){
+    var el = document.querySelector('#moca-category') || document.querySelector('[data-moca-category]');
+    if(!el){ alert('No se encontró la categoría MoCA en esta página.'); return; }
+    var w = window.open('', '_blank');
+    w.document.write('<!doctype html><html><head><meta charset="utf-8"><title>MoCA - Categoría</title>' +
+      '<style>@page{size:auto;margin:12mm} body{filter:grayscale(100%);font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif}' +
+      '.box{border:1px solid #000;padding:12px}</style></head><body><div class="box">' +
+      el.outerHTML + '</div></body></html>');
+    w.document.close();
+    w.focus();
+    w.print();
+    w.close();
+  });
+  if(target){
+    // insert button after the target
+    target.insertAdjacentElement('afterend', btn);
+  } else {
+    // fallback: append hidden to body
+    document.body.appendChild(btn);
+  }
+});
+</script>
+
+</body>
+</html>

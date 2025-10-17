@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guías Clínicas Completas ESVS 2023 | Arterias Carótida y Vertebral</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .recommendation-card {
+            border-left-width: 4px;
+            transition: all 0.3s ease-in-out;
+        }
+        .recommendation-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .rec-class-i { border-color: #10b981; background-color: #f0fdf4; }
+        .rec-class-iia { border-color: #f59e0b; background-color: #fffbeb; }
+        .rec-class-iib { border-color: #f97316; background-color: #fff7ed; }
+        .rec-class-iii { border-color: #ef4444; background-color: #fef2f2; }
+
+        aside {
+            scrollbar-width: thin;
+            scrollbar-color: #94a3b8 #e2e8f0;
+        }
+        aside::-webkit-scrollbar {
+            width: 8px;
+        }
+        aside::-webkit-scrollbar-track {
+            background: #e2e8f0;
+        }
+        aside::-webkit-scrollbar-thumb {
+            background-color: #94a3b8;
+            border-radius: 10px;
+            border: 3px solid #e2e8f0;
+        }
+        aside a.active {
+            background-color: #e0f2fe;
+            color: #0c4a6e;
+            font-weight: 600;
+        }
+        .figure-placeholder {
+            border: 2px dashed #cbd5e1;
+            background-color: #f1f5f9;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 250px;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            color: #1e293b;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.25rem;
+        }
+        .content-section p, .content-section ul li {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+            color: #334155;
+        }
+        .content-section ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .content-section strong {
+            color: #0f172a;
+        }
+        .rec-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.25rem;
+        }
+        .rec-number {
+            font-semibold: text-gray-800;
+        }
+        .rec-badges {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+        }
+        .badge {
+            padding: 0.125rem 0.5rem;
+            border-radius: 9999px;
+            font-weight: 700;
+        }
+        .badge-class-i { color: #065f46; background-color: #d1fae5; }
+        .badge-class-iia { color: #92400e; background-color: #fef3c7; }
+        .badge-class-iib { color: #9a3412; background-color: #ffedd5; }
+        .badge-class-iii { color: #991b1b; background-color: #fee2e2; }
+        .badge-level { color: #374151; background-color: #e5e7eb; }
+                    
+        #carotid-imaging-table-3-container {
+            --surface: #ffffff;
+            --text: #0f172a;
+            --muted: #475569;
+            --border: #e5e7eb;
+            --stripe: #f9fafb;
+            --hover: #f3f4f6;
+            --head-bg: #f1f5f9;
+            --ok: 22,163,74;      /* verde */
+            --warn: 234,179,8;    /* amarillo */
+            --bad: 239,68,68;     /* rojo */
+
+            color: var(--text);
+            background: transparent;
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, "Noto Sans", sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+       
+        /* === Tabla carotídea: estilos adaptados al tema existente === */
+
+        /* Alinea la paleta con tus tarjetas (emerald/amber/red) */
+        #carotid-imaging-table-3-container{
+        --ok: 16,185,129;   /* #10b981 */
+        --warn: 245,158,11; /* #f59e0b */
+        --bad: 239,68,68;   /* #ef4444 */
+        }
+
+        /* Wrapper con scroll si hace falta */
+        #carotid-imaging-table-3-container { overflow-x: auto; padding: .25rem; }
+
+        /* Tabla base */
+        #carotid-imaging-table-3-container .carotid-imaging-data{
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: .75rem;
+        box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+        font-variant-numeric: tabular-nums lining-nums;
+        }
+
+        /* Cabecera */
+        #carotid-imaging-table-3-container .carotid-imaging-data thead th{
+        position: sticky; top: 0; z-index: 2;
+        background: var(--head-bg);
+        color: #0f172a;
+        text-align: center;
+        padding: .75rem 1rem;
+        font-weight: 700;
+        border-bottom: 1px solid var(--border);
+        white-space: nowrap;
+        }
+
+        /* Celdas */
+        #carotid-imaging-table-3-container .carotid-imaging-data th,
+        #carotid-imaging-table-3-container .carotid-imaging-data td{
+        padding: .75rem 1rem;
+        border-bottom: 1px solid var(--border);
+        vertical-align: middle;
+        }
+
+        /* Primera columna pegajosa */
+        #carotid-imaging-table-3-container .carotid-imaging-data td.metric-header{
+        position: sticky; left: 0; z-index: 1;
+        background: var(--surface);
+        text-align: left; font-weight: 600; min-width: 16ch;
+        }
+
+        /* Zebra + hover sutil (a juego con tu UI) */
+        #carotid-imaging-table-3-container .carotid-imaging-data tbody tr:nth-child(even){ background: var(--stripe); }
+        #carotid-imaging-table-3-container .carotid-imaging-data tbody tr:hover{ background: #f8fafc; }
+
+        /* Alineación de números y texto */
+        #carotid-imaging-table-3-container .carotid-imaging-data td{ text-align: center; white-space: nowrap; }
+        #carotid-imaging-table-3-container .carotid-imaging-data td.metric-header{ white-space: normal; }
+
+        /* Leyenda (mantén tu look & feel) */
+        #carotid-imaging-table-3-container .legend{
+        display:inline-block; width:.9em; height:.9em; border-radius:.25rem; vertical-align:-2px; margin-right:.25rem;
+        border: 1px solid rgba(0,0,0,.06);
+        }
+        #carotid-imaging-table-3-container .legend.green{  background: rgba(var(--ok), .35); }
+        #carotid-imaging-table-3-container .legend.yellow{ background: rgba(var(--warn), .35); }
+        #carotid-imaging-table-3-container .legend.red{    background: rgba(var(--bad), .30); }
+
+        /* Colorimetría por umbrales usando data-color-value (valor inferior del rango) */
+        /* Verde: 96–99 */
+        #carotid-imaging-table-3-container td.color-target[data-color-value="96"],
+        #carotid-imaging-table-3-container td.color-target[data-color-value="97"],
+        #carotid-imaging-table-3-container td.color-target[data-color-value="98"],
+        #carotid-imaging-table-3-container td.color-target[data-color-value="99"]{
+        background: rgba(var(--ok), .12);
+        color: rgb(var(--ok)); font-weight: 700;
+        }
+
+        /* Amarillo: 80–95 */
+        #carotid-imaging-table-3-container td.color-target[data-color-value^="8"],
+        #carotid-imaging-table-3-container td.color-target[data-color-value="90"],
+        #carotid-imaging-table-3-container td.color-target[data-color-value="91"],
+        #carotid-imaging-table-3-container td.color-target[data-color-value="92"],
+        #carotid-imaging-table-3-container td.color-target[data-color-value="93"],
+        #carotid-imaging-table-3-container td.color-target[data-color-value="94"],
+        #carotid-imaging-table-3-container td.color-target[data-color-value="95"]{
+        background: rgba(var(--warn), .14);
+        color: rgb(var(--warn)); font-weight: 700;
+        }
+
+        /* Rojo: <80 */
+        #carotid-imaging-table-3-container td.color-target[data-color-value^="7"],
+        #carotid-imaging-table-3-container td.color-target[data-color-value^="6"],
+        #carotid-imaging-table-3-container td.color-target[data-color-value^="5"],
+        #carotid-imaging-table-3-container td.color-target[data-color-value^="4"],
+        #carotid-imaging-table-3-container td.color-target[data-color-value^="3"],
+        #carotid-imaging-table-3-container td.color-target[data-color-value^="2"],
+        #carotid-imaging-table-3-container td.color-target[data-color-value^="1"],
+        #carotid-imaging-table-3-container td.color-target[data-color-value^="0"]{
+        background: rgba(var(--bad), .12);
+        color: rgb(var(--bad)); font-weight: 700;
+        }
+
+        /* Textos auxiliares (coherentes con tu tipografía/colores) */
+        #carotid-imaging-table-3-container h2{
+        margin:.25rem 0 1rem; font-size: clamp(1.1rem, 2.2vw, 1.4rem); font-weight: 700; color:#1e293b;
+        border-bottom: 1px solid #e2e8f0; padding-bottom:.25rem;
+        }
+        #carotid-imaging-table-3-container .source-info,
+        #carotid-imaging-table-3-container .citation-source,
+        #carotid-imaging-table-3-container .citation-note{
+        color:#334155; font-size:.95rem; margin:.25rem 0 .75rem;
+        }
+
+        /* Print & dark mode coherentes */
+        @media print{
+        #carotid-imaging-table-3-container .carotid-imaging-data{ box-shadow:none; }
+        #carotid-imaging-table-3-container .carotid-imaging-data thead th{ position: static; }
+        }
+        @media (prefers-color-scheme: dark){
+        #carotid-imaging-table-3-container{
+            --surface:#0b1220; --text:#e5e7eb; --muted:#94a3b8; --border:#1f2937; --stripe:#0f172a; --head-bg:#111827;
+        }
+        #carotid-imaging-table-3-container .carotid-imaging-data td.metric-header{ background: var(--surface); }
+        }
+
+
+    </style>
+</head>
+<body class="text-slate-800">
+    <!-- Chosen Palette: Clinical Blue & Neutrals -->
+    <!-- Application Structure Plan: Se ha diseñado una aplicación de una sola página (SPA) con una barra de navegación lateral fija (izquierda) y un área de contenido principal desplazable (derecha). Esta estructura es ideal para documentos largos y densos como las guías clínicas, ya que permite al usuario ver siempre su ubicación dentro del documento y saltar instantáneamente a cualquier sección sin perder el contexto. El resaltado activo en la navegación, gestionado por JavaScript, mejora aún más la usabilidad al indicar qué sección se está viendo actualmente. Este enfoque de "panel de control" es superior a un simple documento de desplazamiento vertical para la exploración y referencia de contenido técnico. -->
+    <!-- Visualization & Content Choices: La información del informe se presenta de la siguiente manera: 1. Texto: Párrafos estándar para el contenido general, extraídos de forma íntegra del PDF. 2. Recomendaciones: Se han diseñado "tarjetas de recomendación" interactivas para las 133 recomendaciones. Objetivo: Resaltar la información más crítica de forma individualizada y completa. Método: Tarjetas con un borde de color distintivo según la Clase de recomendación (Verde-I, Amarillo-IIa, Naranja-IIb, Rojo-III) para una rápida interpretación visual. Interacción: Efecto sutil al pasar el ratón para indicar que son elementos importantes. Justificación: Facilita la identificación y asimilación de las directrices clave. 3. Tablas: Se utilizan tablas HTML estándar estilizadas con Tailwind para presentar datos tabulares de forma clara y legible. 4. Figuras: Dado que las imágenes originales no estaban disponibles, se han creado marcadores de posición ("placeholders") estilizados que contienen la leyenda completa extraída del PDF. No se utiliza SVG ni Mermaid JS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <div class="flex">
+        <aside class="sticky top-0 h-screen w-80 flex-shrink-0 overflow-y-auto bg-slate-100 p-6 hidden lg:block">
+            <h1 class="text-xl font-bold text-sky-800 mb-6">Guías Completas ESVS 2023</h1>
+            <nav id="navigation-menu" class="space-y-1 text-sm">
+                <a href="#intro" class="block rounded-md px-4 py-2 text-slate-700 hover:bg-slate-200">Introducción</a>
+                <a href="#abreviaturas" class="block rounded-md px-4 py-2 text-slate-700 hover:bg-slate-200">Abreviaturas</a>
+                <a href="#clasificacion" class="block rounded-md px-4 py-2 text-slate-700 hover:bg-slate-200">Clasificación</a>
+                <a href="#seccion1" class="block rounded-md px-4 py-2 text-slate-700 hover:bg-slate-200">1. Diagnóstico por Imagen</a>
+                <a href="#seccion2" class="block rounded-md px-4 py-2 text-slate-700 hover:bg-slate-200">2. Estenosis Asintomática</a>
+                <a href="#seccion3" class="block rounded-md px-4 py-2 text-slate-700 hover:bg-slate-200">3. Estenosis Sintomática</a>
+                <a href="#seccion4" class="block rounded-md px-4 py-2 text-slate-700 hover:bg-slate-200">4. Tratamiento Médico Óptimo</a>
+                <a href="#seccion5" class="block rounded-md px-4 py-2 text-slate-700 hover:bg-slate-200">5. Endarterectomía Carotídea</a>
+                <a href="#seccion6" class="block rounded-md px-4 py-2 text-slate-700 hover:bg-slate-200">6. Stenting de Arteria Carótida</a>
+                <a href="#seccion7" class="block rounded-md px-4 py-2 text-slate-700 hover:bg-slate-200">7. Demografía y Resultados</a>
+                <a href="#seccion8" class="block rounded-md px-4 py-2 text-slate-700 hover:bg-slate-200">8. Lesiones No Ateroscleróticas</a>
+                <a href="#seccion9" class="block rounded-md px-4 py-2 text-slate-700 hover:bg-slate-200">9. Escenarios Clínicos Específicos</a>
+                <a href="#seccion10" class="block rounded-md px-4 py-2 text-slate-700 hover:bg-slate-200">10. Vigilancia Post-procedimiento</a>
+                <a href="#seccion11" class="block rounded-md px-4 py-2 text-slate-700 hover:bg-slate-200">11. Enfermedad de Arteria Vertebral</a>
+                <a href="#seccion12" class="block rounded-md px-4 py-2 text-slate-700 hover:bg-slate-200">12. Centros y Volumen</a>
+                <a href="#seccion13" class="block rounded-md px-4 py-2 text-slate-700 hover:bg-slate-200">13. Calidad de Vida</a>
+                <a href="#seccion14" class="block rounded-md px-4 py-2 text-slate-700 hover:bg-slate-200">14. Información para el Paciente</a>
+                <a href="#agradecimientos" class="block rounded-md px-4 py-2 text-slate-700 hover:bg-slate-200">Agradecimientos</a>
+            </nav>
+        </aside>
+
+        <main class="flex-grow p-6 md:p-10 space-y-12">
+
+            <section id="intro">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4">Guías de Práctica Clínica de la ESVS 2023 sobre el Manejo de la Enfermedad Aterosclerótica de las Arterias Carótida y Vertebral</h2>
+                    <p class="text-lg text-slate-600 mb-6">Versión íntegra, completa y didáctica de las pautas y recomendaciones de la Sociedad Europea de Cirugía Vascular para optimizar la toma de decisiones compartida en el tratamiento de la enfermedad carotídea y vertebral. Este documento contiene las 133 recomendaciones.</p>
+                </div>
+            </section>
+            
+            <section id="abreviaturas" class="space-y-6">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-2xl font-bold border-b pb-2 mb-4">Abreviaturas y Acrónimos</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4 text-sm">
+                        <p><strong>AAA:</strong> Aneurisma de Aorta Abdominal</p><p><strong>AIT:</strong> Ataque Isquémico Transitorio</p><p><strong>AC:</strong> Arteria Carótida</p><p><strong>ACA:</strong> Arteria Carótida Anterior</p><p><strong>ACC:</strong> Arteria Carótida Común</p><p><strong>ACE:</strong> Arteria Carótida Externa</p><p><strong>ACI:</strong> Arteria Carótida Interna</p><p><strong>ACAS:</strong> Ensayo de Asintomáticos con Aterosclerosis Carotídea</p><p><strong>ACST:</strong> Ensayo de Cirugía Carotídea Asintomática</p><p><strong>ADP:</strong> Adenosín Difosfato</p><p><strong>AESP:</strong> Actividad Eléctrica Sin Pulso</p><p><strong>AINE:</strong> Antiinflamatorio No Esteroideo</p><p><strong>ARM:</strong> Angiografía por Resonancia Magnética</p><p><strong>ATC:</strong> Angiografía por Tomografía Computarizada</p><p><strong>AV:</strong> Arteria Vertebral</p><p><strong>BAR:</strong> Receptor de Angiotensina-Bradicinina</p><p><strong>BRA:</strong> Bloqueante del Receptor de Angiotensina</p><p><strong>CABG:</strong> Bypass de Arteria Coronaria</p><p><strong>CAS:</strong> Stenting de Arteria Carótida</p><p><strong>CBF:</strong> Flujo Sanguíneo Cerebral</p><p><strong>CEA:</strong> Endarterectomía Carotídea</p><p><strong>CI:</strong> Intervalo de Confianza</p><p><strong>CRAFFT:</strong> Registro Colaborativo para la Revascularización Carotídea</p><p><strong>CREST:</strong> Ensayo de Revascularización Carotídea con Endarterectomía vs. Stenting</p><p><strong>CV:</strong> Cardiovascular</p><p><strong>CVD:</strong> Enfermedad Cerebrovascular</p><p><strong>CVI:</strong> Insuficiencia Cerebrovascular</p><p><strong>DAPT:</strong> Terapia Antiplaquetaria Dual</p><p><strong>DSA:</strong> Angiografía por Sustracción Digital</p><p><strong>DUS:</strong> Ecografía Dúplex</p><p><strong>DWI:</strong> Imagen Ponderada por Difusión</p><p><strong>ECST:</strong> Ensayo Europeo de Cirugía Carotídea</p><p><strong>EEG:</strong> Electroencefalograma</p><p><strong>EIMI:</strong> Espesor Íntima-Media</p><p><strong>EPD:</strong> Dispositivo de Protección Embólica</p><p><strong>ESVS:</strong> Sociedad Europea de Cirugía Vascular</p><p><strong>EVA-3S:</strong> Endarterectomía vs. Angioplastia en Pacientes con Estenosis Carotídea Sintomática Severa</p><p><strong>FDA:</strong> Administración de Alimentos y Medicamentos de EE. UU.</p><p><strong>FGe:</strong> Tasa de Filtración Glomerular Estimada</p><p><strong>GRADE:</strong> Graduación de Recomendaciones, Valoración, Desarrollo y Evaluaciones</p><p><strong>HR:</strong> Hazard Ratio</p><p><strong>IA:</strong> Intra-arterial</p><p><strong>ICAS:</strong> Estenosis Intracraneal</p><p><strong>ICH:</strong> Hemorragia Intracerebral</p><p><strong>IECA:</strong> Inhibidor de la Enzima Convertidora de Angiotensina</p><p><strong>IV:</strong> Intravenoso</p><p><strong>IVUS:</strong> Ultrasonido Intravascular</p><p><strong>MACE:</strong> Evento Adverso Cardiovascular Mayor</p><p><strong>MI:</strong> Infarto de Miocardio</p><p><strong>MM:</strong> Mortalidad</p><p><strong>MRA:</strong> Angiografía por Resonancia Magnética</p><p><strong>MRO:</strong> Tratamiento Médico Óptimo</p><p><strong>MRS:</strong> Escala de Rankin Modificada</p><p><strong>NASCET:</strong> Ensayo de Endarterectomía Carotídea Sintomática de Norteamérica</p><p><strong>NICE:</strong> Instituto Nacional para la Salud y la Excelencia Clínica</p><p><strong>NNT:</strong> Número Necesario a Tratar</p><p><strong>OCT:</strong> Tomografía de Coherencia Óptica</p><p><strong>OR:</strong> Odds Ratio</p><p><strong>PET:</strong> Tomografía por Emisión de Positrones</p><p><strong>QoL:</strong> Calidad de Vida</p><p><strong>RCT:</strong> Ensayo Controlado Aleatorizado</p><p><strong>RM:</strong> Resonancia Magnética</p><p><strong>RR:</strong> Riesgo Relativo</p><p><strong>SAPT:</strong> Terapia Antiplaquetaria Simple</p><p><strong>SPACE:</strong> Ensayo de Protección de Stent y Angioplastia vs. Carótida</p><p><strong>SPECT:</strong> Tomografía por Emisión de Fotón Único</p><p><strong>SVS:</strong> Sociedad de Cirugía Vascular</p><p><strong>TCD:</strong> Doppler Transcraneal</p><p><strong>TCAR:</strong> Revascularización Transcarotídea</p><p><strong>TC:</strong> Tomografía Computarizada</p><p><strong>TIA:</strong> Ataque Isquémico Transitorio</p><p><strong>TTP:</strong> Púrpura Trombocitopénica Trombótica</p><p><strong>USPIO:</strong> Partículas Ultrafinas de Óxido de Hierro</p><p><strong>VBI:</strong> Insuficiencia Vertebrobasilar</p><p><strong>VRA:</strong> Reconstrucción de Arteria Vertebral</p><p><strong>WFS:</strong> Flujo de Onda Lenta</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="clasificacion" class="space-y-6">
+                <div class="max-w-4xl mx-auto">
+                   <h2 class="text-2xl font-bold border-b pb-2 mb-4">Clasificación de las Recomendaciones y Niveles de Evidencia</h2>
+                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                       <div class="bg-white p-4 rounded-lg shadow">
+                           <h3 class="font-bold text-lg mb-2 !mt-0 !border-b-0">Clase de Recomendación</h3>
+                           <ul class="space-y-2 text-sm">
+                               <li class="flex items-start"><span class="flex-shrink-0 w-20 font-semibold">Clase I:</span><span class="text-slate-600">Se recomienda/está indicado (Verde).</span></li>
+                               <li class="flex items-start"><span class="flex-shrink-0 w-20 font-semibold">Clase IIa:</span><span class="text-slate-600">Debe considerarse (Amarillo).</span></li>
+                               <li class="flex items-start"><span class="flex-shrink-0 w-20 font-semibold">Clase IIb:</span><span class="text-slate-600">Puede considerarse (Naranja).</span></li>
+                               <li class="flex items-start"><span class="flex-shrink-0 w-20 font-semibold">Clase III:</span><span class="text-slate-600">No se recomienda (Rojo).</span></li>
+                           </ul>
+                       </div>
+                       <div class="bg-white p-4 rounded-lg shadow">
+                           <h3 class="font-bold text-lg mb-2 !mt-0 !border-b-0">Nivel de Evidencia</h3>
+                            <ul class="space-y-2 text-sm">
+                               <li class="flex items-start"><span class="flex-shrink-0 w-16 font-semibold">Nivel A:</span><span class="text-slate-600">Evidencia de múltiples ensayos clínicos aleatorizados o metaanálisis.</span></li>
+                               <li class="flex items-start"><span class="flex-shrink-0 w-16 font-semibold">Nivel B:</span><span class="text-slate-600">Evidencia de un único ensayo clínico aleatorizado o grandes estudios no aleatorizados.</span></li>
+                               <li class="flex items-start"><span class="flex-shrink-0 w-16 font-semibold">Nivel C:</span><span class="text-slate-600">Consenso de opinión de expertos y/o estudios pequeños, estudios retrospectivos, registros.</span></li>
+                           </ul>
+                       </div>
+                   </div>
+               </div>
+            </section>
+            
+            <section id="seccion1" class="space-y-6">
+                <div class="max-w-4xl mx-auto content-section">
+                    <h2 class="text-2xl font-bold border-b pb-2 mb-4">1. Diagnóstico por Imagen de la Enfermedad de la Arteria Carótida</h2>
+                    <h3>1.1. Graduación de la estenosis de la ACI</h3>
+                    <p>La ecografía dúplex (DUS) es la modalidad de imagen de primera línea para la evaluación de la enfermedad de la arteria carótida (AC) extracraneal. Sin embargo, en Europa se utilizan diferentes métodos para graduar la estenosis de la arteria carótida interna (ACI). El método del North American Symptomatic Carotid Endarterectomy Trial (NASCET) se basa en la angiografía por sustracción digital (DSA) y compara el diámetro luminal mínimo con el diámetro de la ACI distal no enferma. Por el contrario, el método del European Carotid Surgery Trial (ECST) compara el diámetro luminal mínimo con el diámetro estimado del bulbo carotídeo en el mismo lugar. En general, el método NASCET tiende a subestimar el grado de estenosis en comparación con el método ECST, especialmente para estenosis de grado moderado. Se ha demostrado que una estenosis del 70% según el NASCET es equivalente a una estenosis del 82% según el ECST. La mayoría de los ensayos aleatorizados controlados (RCTs) que comparan la endarterectomía carotídea (CEA) y el tratamiento médico (MM), así como los que comparan la CEA con el stenting de la arteria carótida (CAS), han utilizado el método NASCET para graduar el grado de estenosis. En consecuencia, esta guía recomienda el uso del método NASCET para la graduación de la estenosis, con la advertencia de que la mayoría de los centros europeos continúan basando la graduación de la estenosis en las velocidades del flujo sanguíneo de la DUS, que es más análogo al método ECST.</p>
+                    <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 1</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel B</span></div></div><p class="text-slate-700">Se recomienda que la graduación de la estenosis de la arteria carótida interna (ACI) se base en el método del Ensayo de Endarterectomía Carotídea Sintomática de Norteamérica (NASCET).</p></div>
+
+                    <h3>1.2. Diagnóstico por imagen en pacientes sintomáticos</h3>
+                    <p>Los pacientes que se presentan con un ataque isquémico transitorio (AIT) o un accidente cerebrovascular isquémico agudo en el territorio de la AC deben someterse a una DUS dentro de las 24 horas posteriores al ingreso para confirmar si tienen una estenosis de la ACI hemodinámicamente significativa que requiera una intervención urgente. Debido a la posibilidad de error en la estimación del grado de estenosis con DUS, se requiere una segunda modalidad de imagen para confirmar la gravedad de la estenosis y ayudar en la planificación de la intervención. En la mayoría de los centros, esto implicará una angiografía por tomografía computarizada (ATC) o una angiografía por resonancia magnética (ARM). Ambas han demostrado una buena correlación con la DSA. Sin embargo, en centros de excelencia, una segunda DUS realizada por un ecografista vascular clínico diferente también es una estrategia aceptable.</p>
+                    <div class="space-y-4">
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 2</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se recomienda que todos los pacientes que se presenten con un ataque isquémico transitorio (AIT) o un accidente cerebrovascular isquémico en el territorio carotídeo se sometan a una ecografía dúplex (DUS) de las arterias carótidas dentro de las 24 horas posteriores al ingreso.</p></div>
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 3</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se recomienda una segunda modalidad de imagen (angiografía por tomografía computarizada [ATC], angiografía por resonancia magnética [ARM] o DUS repetida por un segundo ecografista) antes de la intervención carotídea para confirmar el grado de estenosis y planificar la intervención.</p></div>
+                    </div>
+                    
+                    <h3>1.3. Imágenes del arco aórtico y del cerebro</h3>
+                    <p>La obtención de imágenes del arco aórtico es esencial en la planificación de una intervención carotídea, ya que puede identificar características anatómicas que pueden aumentar el riesgo de una intervención, como un arco bovino o un arco de tipo III. Esto es especialmente importante antes del CAS, pero también es importante antes de la CEA, ya que un origen anómalo de la arteria carótida común (ACC) puede influir en la elección del acceso quirúrgico, mientras que una enfermedad tándem del origen de la ACC puede requerir un procedimiento híbrido. La obtención de imágenes del cerebro también es importante en la evaluación preoperatoria. La presencia de lesiones isquémicas silentes en la imagen ponderada por difusión (DWI) de la resonancia magnética (RM) del cerebro en pacientes asintomáticos puede identificar a un subgrupo con mayor riesgo de accidente cerebrovascular futuro, que por lo tanto podría beneficiarse de la intervención carotídea. En pacientes sintomáticos, la TC del cerebro es importante para excluir una hemorragia intracerebral (HIC), que sería una contraindicación para la intervención carotídea urgente. El uso rutinario de imágenes del arco y del cerebro no siempre se realiza, pero proporciona información valiosa y debe considerarse.</p>
+                    <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 4</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se debe considerar la obtención rutinaria de imágenes del arco aórtico y del cerebro antes de la intervención carotídea.</p></div>
+                </div>
+          
+            </section>
+ 
+            <section id="seccion2" class="space-y-6">
+                <div class="max-w-4xl mx-auto content-section">
+                    <h2 class="text-2xl font-bold border-b pb-2 mb-4">2. Manejo de la Estenosis Carotídea Asintomática</h2>
+                    <h3>2.1. Estratificación del riesgo de ictus en pacientes asintomáticos</h3>
+                    <p>Uno de los principales desafíos en el manejo de pacientes con estenosis carotídea asintomática es la estratificación del riesgo de ictus. La tasa anual de ictus en pacientes con estenosis carotídea asintomática tratados con el mejor tratamiento médico (MM) ha disminuido de >2% en los RCTs históricos a <1% en los RCTs más recientes. Por lo tanto, es esencial identificar a los pacientes con el mayor riesgo de ictus, que son los que más probablemente se beneficien de la intervención carotídea. Los predictores clínicos del riesgo de ictus incluyen la edad, el sexo, las comorbilidades y el tabaquismo. Los predictores de imagen incluyen el grado de estenosis, la progresión de la estenosis, la presencia de microembolias espontáneas en el Doppler transcraneal (TCD), un gran núcleo lipídico necrótico en la RM de la placa y la captación de contraste en la ATC o la captación de 18F-fluorodesoxiglucosa (18F-FDG) en la tomografía por emisión de positrones (PET). El Asymptomatic Carotid Surgery Trial (ACST)-1 desarrolló un modelo de estratificación del riesgo para predecir el riesgo de ictus a cinco y 10 años en pacientes con estenosis carotídea asintomática, que desde entonces ha sido validado en ACST-2 (Figura 1). Un análisis de subgrupos de ACST-1 mostró que los pacientes con un riesgo de ictus a cinco años <10% no se beneficiaron de la CEA, mientras que aquellos con un riesgo de ictus a cinco años >10% tuvieron una reducción significativa en el riesgo de ictus con la CEA. Por lo tanto, un riesgo de ictus a cinco años >10% puede ser un umbral razonable para considerar la intervención en pacientes asintomáticos.</p>
+                     <div class="figure-placeholder p-4 rounded-lg my-6">
+                            <img src="fig1.png" alt="Pirámide de estratificación de riesgo de ACST-2" class="mx-auto rounded shadow-md mb-2" />
+                            <p class="font-semibold text-slate-600">Figura 1: Pirámide de estratificación de riesgo de ACST-2.</p>
+                            <figcaption class="text-sm text-slate-500 mt-1 max-w-2xl mx-auto">Representación de la pirámide de estratificación del riesgo para predecir el riesgo de ictus a 5 años en pacientes con estenosis carotídea asintomática, basada en los datos del Asymptomatic Carotid Surgery Trial (ACST)-1.</figcaption>
+                            </figure>
+                    </div>
+                    <h3>2.2. Indicaciones para la intervención</h3>
+                    <p>Los metaanálisis de RCTs que comparan la CEA con el MM en pacientes asintomáticos han demostrado una reducción en el riesgo de ictus a largo plazo con la CEA, pero esto se ve contrarrestado por el riesgo de ictus y muerte perioperatorio. Por lo tanto, el beneficio de la intervención solo supera el riesgo si el riesgo de ictus y muerte perioperatorio es bajo (<3%) y el paciente tiene una esperanza de vida de al menos 5 años. Los pacientes con un riesgo de ictus a cinco años >20% (según el modelo ACST-1) obtienen el mayor beneficio de la intervención. Los pacientes con un riesgo de ictus a cinco años del 10%-20% obtienen un beneficio modesto, y aquellos con un riesgo de ictus a cinco años <10% no obtienen ningún beneficio y podrían incluso resultar perjudicados por la intervención. Por lo tanto, la intervención debe considerarse para pacientes asintomáticos con una estenosis del 60%-99%, un riesgo de ictus a cinco años >10% y un riesgo de ictus/muerte perioperatorio <3%.</p>
+                    <div class="space-y-4">
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 5</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel B</span></div></div><p class="text-slate-700">Se debe considerar la intervención carotídea en pacientes asintomáticos con una estenosis del 60-99% si tienen un riesgo de ictus a 5 años >10% y un riesgo de ictus/muerte perioperatorio <3%.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 6</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar la obtención de imágenes de la placa carotídea (p. ej., RM, TC, PET) para mejorar la estratificación del riesgo de ictus en pacientes asintomáticos.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 7</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar la monitorización con Doppler transcraneal para detectar microembolias espontáneas para mejorar la estratificación del riesgo de ictus en pacientes asintomáticos.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 8</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel B</span></div></div><p class="text-slate-700">Se puede considerar la evaluación de la reserva cerebrovascular para mejorar la estratificación del riesgo de ictus en pacientes asintomáticos.</p></div>
+                        <div class="recommendation-card rec-class-iii p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 9</p><div class="rec-badges"><span class="badge badge-class-iii">Clase III</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">No se recomienda la intervención carotídea en pacientes asintomáticos con una esperanza de vida <5 años.</p></div>
+                        <div class="recommendation-card rec-class-iii p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 10</p><div class="rec-badges"><span class="badge badge-class-iii">Clase III</span><span class="badge badge-level">Nivel A</span></div></div><p class="text-slate-700">No se recomienda la intervención carotídea en pacientes asintomáticos con estenosis <60%.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 11</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel B</span></div></div><p class="text-slate-700">Se puede considerar la intervención carotídea en pacientes asintomáticos >80 años de edad si tienen características de placa de alto riesgo, una esperanza de vida >5 años y el riesgo de ictus/muerte perioperatorio es <3%.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 12</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel B</span></div></div><p class="text-slate-700">Se puede considerar la intervención carotídea en mujeres asintomáticas si tienen un riesgo de ictus particularmente alto y el riesgo perioperatorio es bajo.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 13</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar la vigilancia por DUS en pacientes asintomáticos con estenosis del 50-99% que no se someten a intervención.</p></div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="seccion3" class="space-y-6">
+                <div class="max-w-4xl mx-auto content-section">
+                    <h2 class="text-2xl font-bold border-b pb-2 mb-4">3. Manejo de la Estenosis Carotídea Sintomática</h2>
+                    <h3>3.1. Riesgo de ictus recurrente y momento de la intervención</h3>
+                    <p>Los pacientes que se presentan con un AIT o un ictus isquémico menor tienen un alto riesgo de ictus recurrente, especialmente en las primeras horas y días después del evento inicial. Los RCTs históricos demostraron que el mayor beneficio de la CEA se observaba en pacientes operados dentro de las 2 semanas posteriores al evento neurológico inicial. Los análisis post hoc de estos ensayos han demostrado que el beneficio es aún mayor en pacientes operados dentro de los 7 días. Los estudios observacionales han demostrado que la intervención dentro de las 48-72 horas es segura y efectiva. Por lo tanto, se recomienda la intervención carotídea urgente para pacientes con estenosis carotídea sintomática (Figura 2). Las contraindicaciones para la intervención urgente incluyen un ictus invalidante (puntuación de la escala de Rankin modificada [mRS] >2), HIC en la TC, oclusión de la ACI o un gran infarto cerebral en las imágenes cerebrales.</p>
+                    <div class="figure-placeholder p-4 rounded-lg my-6">
+                        <img src="fig2.png" alt="Pirámide de estratificación de riesgo de ACST-2" class="mx-auto rounded shadow-md mb-2" />
+                        <p class="font-semibold text-slate-600">Figura 2: Algoritmo de manejo para la estenosis carotídea sintomática.</p>
+                        <figcaption class="text-sm text-slate-500 mt-1 max-w-2xl mx-auto">Diagrama de flujo que muestra la vía de decisión para pacientes que presentan un AIT o un ictus isquémico menor, desde la evaluación inicial hasta la intervención urgente y el seguimiento.</figcaption>
+                    </div>
+                     <h3>3.2. Indicaciones para la intervención</h3>
+                     <p>El grado de estenosis es un predictor importante del riesgo de ictus y del beneficio de la intervención. Los metaanálisis de RCTs que comparan la CEA con el MM han demostrado un beneficio significativo de la CEA en pacientes con una estenosis del 70%-99%. El beneficio es modesto para aquellos con una estenosis del 50%-69% y se limita en gran medida a los hombres y a aquellos operados dentro de las 2 semanas. No hay beneficio de la intervención en pacientes con una estenosis <50%.</p>
+                     <div class="space-y-4 mt-6">
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 14</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel A</span></div></div><p class="text-slate-700">Se recomienda la revascularización carotídea para pacientes con una estenosis del 70-99% que presentan un AIT o un ictus no invalidante.</p></div>
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 15</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel B</span></div></div><p class="text-slate-700">Se recomienda la intervención carotídea urgente (idealmente en 48-72 horas, pero ciertamente dentro de los 7 días) para pacientes con AIT o ictus no invalidante y una estenosis del 70-99%, siempre que no haya contraindicaciones para la intervención.</p></div>
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 16</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel A</span></div></div><p class="text-slate-700">Se debe considerar la intervención carotídea para pacientes con una estenosis del 50-69% que presentan un AIT o un ictus no invalidante.</p></div>
+                        <div class="recommendation-card rec-class-iii p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 17</p><div class="rec-badges"><span class="badge badge-class-iii">Clase III</span><span class="badge badge-level">Nivel A</span></div></div><p class="text-slate-700">No se recomienda la intervención carotídea en pacientes con estenosis <50%.</p></div>
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 18</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel A</span></div></div><p class="text-slate-700">Se recomienda la terapia antiplaquetaria dual (DAPT) inmediata para pacientes con estenosis carotídea sintomática que esperan una intervención, y debe continuarse hasta el momento de la intervención.</p></div>
+                        <div class="recommendation-card rec-class-iii p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 19</p><div class="rec-badges"><span class="badge badge-class-iii">Clase III</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">No se recomienda la intervención carotídea en pacientes con un ictus invalidante (puntuación mRS >2).</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 20</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar retrasar la intervención carotídea >7 días en pacientes con un infarto cerebral grande en las imágenes cerebrales.</p></div>
+                        <div class="recommendation-card rec-class-iii p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 21</p><div class="rec-badges"><span class="badge badge-class-iii">Clase III</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">No se recomienda la intervención carotídea en pacientes con hemorragia intracerebral en las imágenes cerebrales.</p></div>
+                        <div class="recommendation-card rec-class-iii p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 22</p><div class="rec-badges"><span class="badge badge-class-iii">Clase III</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">No se recomienda la revascularización carotídea de emergencia en pacientes con oclusión de la ACI.</p></div>
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 23</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se recomienda que los pacientes con AIT o ictus menor y estenosis carotídea >50% sean derivados urgentemente a un servicio vascular para su evaluación.</p></div>
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 24</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel B</span></div></div><p class="text-slate-700">Se debe considerar la intervención carotídea en pacientes con estenosis >50% que se presentan con síntomas retinianos (amaurosis fugax).</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 25</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar la intervención carotídea en pacientes con ictus en crescendo y estenosis >50%.</p></div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="seccion4" class="space-y-6">
+                <div class="max-w-4xl mx-auto content-section">
+                    <h2 class="text-2xl font-bold border-b pb-2 mb-4">4. Tratamiento Médico Óptimo (TMO)</h2>
+                    <p>El tratamiento médico óptimo (TMO) o el mejor tratamiento médico (BMT) es la piedra angular del manejo para todos los pacientes con enfermedad aterosclerótica carotídea y vertebral. El TMO incluye la modificación del estilo de vida (p. ej., dejar de fumar, dieta, ejercicio) y el tratamiento farmacológico (terapia antiplaquetaria, terapia hipolipemiante y tratamiento antihipertensivo).</p>
+                     <h3>4.1. Terapia antiplaquetaria</h3>
+                     <p>La terapia antiplaquetaria reduce el riesgo de ictus en pacientes con enfermedad aterosclerótica. Se recomienda la terapia antiplaquetaria simple (SAPT) de por vida para todos los pacientes con enfermedad carotídea aterosclerótica. En pacientes sintomáticos, se recomienda la terapia antiplaquetaria dual (DAPT) (aspirina y clopidogrel) durante los primeros 21 a 30 días después del evento, ya que se ha demostrado que reduce el riesgo de ictus recurrente. En pacientes sometidos a CAS, se recomienda la DAPT durante al menos 30 días después del procedimiento para reducir el riesgo de trombosis del stent.</p>
+                    <div class="space-y-4">
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 26</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel A</span></div></div><p class="text-slate-700">Se recomienda la terapia antiplaquetaria de por vida para todos los pacientes con enfermedad aterosclerótica carotídea o vertebral.</p></div>
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 27</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel A</span></div></div><p class="text-slate-700">Se recomienda DAPT durante 21-30 días en pacientes con AIT o ictus menor.</p></div>
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 28</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel B</span></div></div><p class="text-slate-700">Se recomienda DAPT durante al menos 30 días después del CAS.</p></div>
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 29</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se debe considerar SAPT (aspirina) antes de la CEA.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 30</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel B</span></div></div><p class="text-slate-700">Se puede considerar DAPT antes de la CEA en pacientes de alto riesgo (p. ej., ictus en crescendo).</p></div>
+                    </div>
+                    <h3>4.2. Terapia hipolipemiante</h3>
+                    <p>La terapia con estatinas de alta intensidad (p. ej., atorvastatina 40-80 mg o rosuvastatina 20-40 mg) reduce el riesgo de eventos cardiovasculares en pacientes con enfermedad aterosclerótica. Se recomienda para todos los pacientes con enfermedad carotídea, a menos que esté contraindicado. El objetivo es un nivel de colesterol de lipoproteínas de baja densidad (LDL) <1.4 mmol/L (<55 mg/dL). Si no se alcanza el objetivo con la dosis máxima tolerada de estatina, se debe considerar la adición de ezetimiba o un inhibidor de la proproteína convertasa subtilisina/kexina tipo 9 (PCSK9).</p>
+                    <div class="space-y-4">
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 31</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel A</span></div></div><p class="text-slate-700">Se recomienda la terapia con estatinas de alta intensidad de por vida para todos los pacientes con enfermedad aterosclerótica carotídea y vertebral, a menos que esté contraindicado.</p></div>
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 32</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel B</span></div></div><p class="text-slate-700">Se debe considerar un objetivo de colesterol de lipoproteínas de baja densidad (LDL) <1.4 mmol/L (<55 mg/dL).</p></div>
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 33</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel B</span></div></div><p class="text-slate-700">Se debe considerar la adición de ezetimiba o un inhibidor de PCSK9 si no se alcanza el objetivo de LDL con la dosis máxima tolerada de estatina.</p></div>
+                    </div>
+                     <h3>4.3. Tratamiento antihipertensivo</h3>
+                     <p>La hipertensión es un factor de riesgo importante para el ictus. Se recomienda el tratamiento de la hipertensión para todos los pacientes con enfermedad carotídea, con un objetivo de presión arterial <140/90 mmHg. En pacientes con un ictus reciente, se debe evitar una reducción agresiva de la presión arterial, ya que puede empeorar la lesión isquémica.</p>
+                    <div class="space-y-4">
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 34</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel A</span></div></div><p class="text-slate-700">Se recomienda el manejo de la presión arterial, con un objetivo <140/90 mmHg, para todos los pacientes con enfermedad aterosclerótica carotídea y vertebral.</p></div>
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 35</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se debe considerar un objetivo de presión arterial <130/80 mmHg en pacientes seleccionados (p. ej., diabéticos).</p></div>
+                        <div class="recommendation-card rec-class-iii p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 36</p><div class="rec-badges"><span class="badge badge-class-iii">Clase III</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">No se recomienda la reducción agresiva de la presión arterial en el contexto de un ictus agudo.</p></div>
+                    </div>
+                    <h3>4.4. Modificación del estilo de vida</h3>
+                    <p>La modificación del estilo de vida es un componente crucial del TMO. Se debe aconsejar a los pacientes que dejen de fumar, sigan una dieta saludable (p. ej., mediterránea), hagan ejercicio regularmente y mantengan un peso saludable.</p>
+                     <div class="space-y-4">
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 37</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel A</span></div></div><p class="text-slate-700">Se recomienda dejar de fumar a todos los pacientes.</p></div>
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 38</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel B</span></div></div><p class="text-slate-700">Se recomienda el ejercicio regular y una dieta saludable a todos los pacientes.</p></div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="seccion5" class="space-y-6">
+                <div class="max-w-4xl mx-auto content-section">
+                    <h2 class="text-2xl font-bold border-b pb-2 mb-4">5. Endarterectomía Carotídea (CEA)</h2>
+                    <h3>5.1. Selección de pacientes y técnica</h3>
+                    <p>La CEA sigue siendo el tratamiento estándar de oro para la revascularización carotídea en la mayoría de los pacientes. La CEA se puede realizar mediante una técnica convencional (con o sin parche) o una técnica de eversión. El cierre con parche se asocia con un menor riesgo de ictus perioperatorio y reestenosis en comparación con el cierre primario. El material del parche (vena o sintético) no parece influir en los resultados. La CEA de eversión es una alternativa al cierre con parche y se asocia con tasas similares de ictus perioperatorio y reestenosis.</p>
+                    <div class="space-y-4">
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 39</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel A</span></div></div><p class="text-slate-700">Se recomienda la endarterectomía carotídea (CEA) como tratamiento de primera línea para pacientes de riesgo promedio que requieren intervención carotídea.</p></div>
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 40</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel A</span></div></div><p class="text-slate-700">Se recomienda la inserción rutinaria de un parche en la arteriotomía después de la CEA para reducir el riesgo de ictus perioperatorio y reestenosis.</p></div>
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 41</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel A</span></div></div><p class="text-slate-700">Se debe considerar la CEA de eversión como una alternativa al cierre con parche.</p></div>
+                        <div class="recommendation-card rec-class-iii p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 42</p><div class="rec-badges"><span class="badge badge-class-iii">Clase III</span><span class="badge badge-level">Nivel A</span></div></div><p class="text-slate-700">No se recomienda el cierre primario de la arteriotomía después de la CEA.</p></div>
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 43</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel A</span></div></div><p class="text-slate-700">Se recomienda la heparina intravenosa durante la CEA.</p></div>
+                    </div>
+                     <h3>5.2. Anestesia y monitorización</h3>
+                     <p>La CEA se puede realizar bajo anestesia general (AG) o anestesia locorregional (ALR). La ALR permite la monitorización neurológica continua del paciente despierto y se asocia con un menor riesgo de ictus perioperatorio y mortalidad en comparación con la AG. Sin embargo, la elección de la anestesia a menudo depende de la preferencia del cirujano y del paciente. Durante la CEA bajo AG, se requiere monitorización cerebral para detectar isquemia cerebral durante el pinzamiento carotídeo. Los métodos de monitorización incluyen electroencefalografía (EEG), TCD y presión del muñón. El shunting carotídeo se utiliza para mantener la perfusión cerebral durante el pinzamiento. El shunting selectivo (basado en los resultados de la monitorización) es preferible al shunting rutinario, ya que evita los riesgos asociados con la inserción del shunt (p. ej., disección, embolia aérea).</p>
+                    <div class="space-y-4">
+                         <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 44</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel B</span></div></div><p class="text-slate-700">Se debe considerar la CEA bajo anestesia local/regional, ya que se asocia con un menor riesgo de ictus perioperatorio y mortalidad en comparación con la anestesia general.</p></div>
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 45</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se recomienda la monitorización cerebral durante la CEA bajo anestesia general.</p></div>
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 46</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel B</span></div></div><p class="text-slate-700">Se recomienda el uso selectivo de un shunt carotídeo basado en la monitorización cerebral.</p></div>
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 47</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se recomienda el uso de un shunt carotídeo en pacientes sometidos a CEA bajo ALR que desarrollan un déficit neurológico durante el pinzamiento.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 48</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar el shunting carotídeo rutinario durante la CEA.</p></div>
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 49</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel B</span></div></div><p class="text-slate-700">Se recomienda un control estricto de la presión arterial en el período perioperatorio.</p></div>
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 50</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se debe considerar la reversión de la heparina con protamina al final del procedimiento.</p></div>
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 51</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se debe considerar la inserción de un drenaje en la herida después de la CEA.</p></div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="seccion6" class="space-y-6">
+                 <div class="max-w-4xl mx-auto content-section">
+                    <h2 class="text-2xl font-bold border-b pb-2 mb-4">6. Stenting de la Arteria Carótida (CAS)</h2>
+                     <h3>6.1. Selección de pacientes</h3>
+                     <p>El CAS es una alternativa a la CEA en pacientes seleccionados. Los metaanálisis de RCTs que comparan el CAS con la CEA han demostrado un mayor riesgo de ictus perioperatorio con el CAS, especialmente en pacientes mayores (>70-75 años). Por el contrario, el CAS se asocia con un menor riesgo de infarto de miocardio perioperatorio y parálisis de nervios craneales. El CAS es una opción razonable en pacientes más jóvenes (<70-75 años) y en aquellos con características anatómicas o médicas que aumentan el riesgo de la CEA (p. ej., cuello hostil, estenosis por radiación, reestenosis después de la CEA, parálisis del nervio laríngeo contralateral, traqueostomía). La revascularización transcarotídea (TCAR) es una técnica más nueva que implica el acceso directo a la ACC y la inversión del flujo durante la colocación del stent. Los datos de registro sugieren que la TCAR puede asociarse con un menor riesgo de ictus en comparación con el CAS transfemoral, pero se necesitan datos de RCTs.</p>
+                     <h3>6.2. Técnica</h3>
+                     <p>El uso de un dispositivo de protección cerebral (DPC) durante el CAS reduce el riesgo de ictus perioperatorio y se recomienda. No hay evidencia que sugiera que un tipo de DPC (filtro o proximal) sea superior a otro. Se prefiere la predilatación con balón sobre la colocación directa del stent. El tipo de stent (célula cerrada o abierta) no parece influir en los resultados. Se recomienda la DAPT antes y después del CAS para reducir el riesgo de eventos tromboembólicos.</p>
+                    <div class="space-y-4">
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 52</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel A</span></div></div><p class="text-slate-700">Se debe considerar el stenting de la arteria carótida (CAS) como una alternativa a la CEA en pacientes sintomáticos <70-75 años y con un riesgo perioperatorio bajo a promedio.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 53</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel B</span></div></div><p class="text-slate-700">Se puede considerar el CAS en pacientes asintomáticos <75 años con un alto riesgo de ictus que no son buenos candidatos para la CEA.</p></div>
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 54</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel B</span></div></div><p class="text-slate-700">Se recomienda el uso rutinario de un dispositivo de protección cerebral durante el CAS.</p></div>
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 55</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel B</span></div></div><p class="text-slate-700">Se recomienda DAPT durante al menos 24-72 horas antes del CAS y que se continúe durante al menos 30 días después.</p></div>
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 56</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se debe considerar la predilatación con balón antes de la colocación del stent.</p></div>
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 57</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se recomienda la heparina intravenosa durante el CAS.</p></div>
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 58</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se debe considerar el uso de atropina para prevenir/tratar la bradicardia durante el CAS.</p></div>
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 59</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se recomienda un control estricto de la presión arterial durante y después del CAS.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 60</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar la TCAR como una alternativa al CAS transfemoral.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 61</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar el uso de stents liberadores de fármacos en pacientes seleccionados.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 62</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar la obtención de imágenes intravasculares (IVUS, OCT) para optimizar la colocación del stent.</p></div>
+                        <div class="recommendation-card rec-class-iii p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 63</p><div class="rec-badges"><span class="badge badge-class-iii">Clase III</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">No se recomienda la postdilatación rutinaria con balón a alta presión.</p></div>
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 64</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se recomienda que el CAS sea realizado por operadores experimentados en centros de alto volumen.</p></div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="seccion7" class="space-y-6">
+                <div class="max-w-4xl mx-auto content-section">
+                    <h2 class="text-2xl font-bold border-b pb-2 mb-4">7. Demografía de los Pacientes y Resultados</h2>
+                    <h3>7.1. Edad</h3>
+                    <p>La edad es un predictor importante de los resultados después de la intervención carotídea. Los pacientes mayores (>70-75 años) tienen un mayor riesgo de ictus perioperatorio con el CAS en comparación con la CEA. Por lo tanto, se prefiere la CEA en este grupo de edad. Por el contrario, los pacientes más jóvenes (<70-75 años) tienen resultados similares con el CAS y la CEA. El beneficio de la intervención en pacientes asintomáticos es mayor en pacientes más jóvenes. En octogenarios y nonagenarios asintomáticos, la intervención solo debe considerarse si tienen una esperanza de vida de al menos 5 años, características de placa de alto riesgo, y el riesgo de ictus/muerte perioperatorio es <3%.</p>
+                    <div class="space-y-4">
+                         <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 65</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel B</span></div></div><p class="text-slate-700">Se debe considerar la CEA como el tratamiento de elección en pacientes sintomáticos >70-75 años.</p></div>
+                         <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 66</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel B</span></div></div><p class="text-slate-700">Se puede considerar la intervención carotídea en octogenarios y nonagenarios asintomáticos si tienen una esperanza de vida de al menos 5 años y características de placa de alto riesgo, y si el riesgo de ictus/muerte perioperatorio es <3%.</p></div>
+                    </div>
+                     <h3>7.2. Sexo</h3>
+                     <p>Los hombres parecen beneficiarse más de la intervención carotídea que las mujeres, especialmente en el contexto de una estenosis sintomática del 50%-69%. Sin embargo, en pacientes con estenosis sintomática del 70%-99%, tanto hombres como mujeres se benefician de la intervención. En pacientes asintomáticos, el beneficio de la intervención es menos claro en las mujeres.</p>
+                     <div class="space-y-4">
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 67</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel B</span></div></div><p class="text-slate-700">Se recomienda la intervención carotídea en mujeres con estenosis sintomática del 70% al 99% si el riesgo de complicaciones perioperatorias es bajo.</p></div>
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 68</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel B</span></div></div><p class="text-slate-700">Se debe considerar la intervención carotídea en mujeres con estenosis sintomática del 50% al 69% si el riesgo de complicaciones perioperatorias es bajo.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 69</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel B</span></div></div><p class="text-slate-700">Se puede considerar la intervención carotídea en mujeres con estenosis asintomática si tienen un alto riesgo de ictus y el riesgo de complicaciones perioperatorias es bajo.</p></div>
+                     </div>
+                     <h3>7.3. Comorbilidades</h3>
+                     <p>Las comorbilidades como la enfermedad de las arterias coronarias, la insuficiencia cardíaca y la enfermedad renal crónica aumentan el riesgo de la intervención carotídea. En pacientes con enfermedad de las arterias coronarias que requieren un bypass de arteria coronaria (CABG) y tienen una estenosis carotídea asintomática, la CEA por etapas (CEA primero, seguida de CABG) o la CEA sincrónica (CEA y CABG durante la misma anestesia) son opciones razonables. La intervención carotídea profiláctica antes del CABG no se recomienda de forma rutinaria.</p>
+                     <div class="space-y-4">
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 70</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se debe considerar un enfoque multidisciplinario (cirujano vascular, cardiólogo, anestesista) para pacientes con enfermedad carotídea y coronaria concomitante.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 71</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar la revascularización carotídea por etapas o sincrónica en pacientes con estenosis carotídea asintomática severa que se someten a CABG.</p></div>
+                        <div class="recommendation-card rec-class-iii p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 72</p><div class="rec-badges"><span class="badge badge-class-iii">Clase III</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">No se recomienda la revascularización carotídea profiláctica rutinaria antes del CABG en pacientes con estenosis carotídea asintomática unilateral.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 73</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar un enfoque por etapas (primero la intervención carotídea) en pacientes con estenosis carotídea sintomática que requieren CABG.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 74</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar la intervención carotídea en pacientes con insuficiencia renal crónica, reconociendo el mayor riesgo perioperatorio.</p></div>
+                     </div>
+                     <h3>7.4. Anatomía de alto riesgo</h3>
+                     <p>Ciertas características anatómicas pueden aumentar el riesgo de complicaciones durante la CEA o el CAS. Estas incluyen una bifurcación carotídea alta, un cuello corto y grueso, o un arco aórtico severamente aterosclerótico o tortuoso. En pacientes con anatomía de alto riesgo para la CEA, se puede considerar el CAS. Por el contrario, en pacientes con anatomía de alto riesgo para el CAS, se prefiere la CEA.</p>
+                     <div class="space-y-4">
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 75</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se debe considerar el CAS en pacientes con anatomía de alto riesgo para la CEA (p. ej., cuello hostil, estenosis por radiación, reestenosis después de la CEA).</p></div>
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 76</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se debe considerar la CEA en pacientes con anatomía de alto riesgo para el CAS (p. ej., arco aórtico severamente aterosclerótico o tortuoso).</p></div>
+                     </div>
+                     <h3>7.5. Oclusión de la ACI contralateral</h3>
+                     <p>La oclusión de la ACI contralateral aumenta el riesgo de ictus perioperatorio durante la intervención carotídea. En estos pacientes, es crucial mantener una perfusión cerebral adecuada durante el procedimiento. Durante la CEA, se recomienda la monitorización cerebral y el uso liberal de un shunt. El CAS puede ser una alternativa razonable a la CEA en este subgrupo, aunque los datos son limitados.</p>
+                     <div class="space-y-4">
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 77</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se recomienda una monitorización cerebral cuidadosa y el uso de un shunt carotídeo (si es necesario) durante la CEA en pacientes con oclusión de la ACI contralateral.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 78</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar el CAS como una alternativa a la CEA en pacientes con oclusión de la ACI contralateral.</p></div>
+                     </div>
+                     <h3>7.6. Estenosis carotídea bilateral</h3>
+                     <p>En pacientes con estenosis carotídea bilateral severa, la estrategia óptima (intervención por etapas vs. sincrónica) no está clara. La intervención por etapas (generalmente tratando primero el lado sintomático o más severamente estenosado) es el enfoque más común. La intervención sincrónica se asocia con un mayor riesgo de complicaciones perioperatorias y debe reservarse para pacientes muy seleccionados.</p>
+                     <div class="space-y-4">
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 79</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se debe considerar la intervención por etapas en pacientes con estenosis carotídea bilateral severa que requieren revascularización.</p></div>
+                        <div class="recommendation-card rec-class-iii p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 80</p><div class="rec-badges"><span class="badge badge-class-iii">Clase III</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">No se recomienda la intervención sincrónica bilateral de forma rutinaria.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 81</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar la intervención sincrónica en pacientes seleccionados de bajo riesgo.</p></div>
+                     </div>
+                </div>
+            </section>
+            
+            <section id="seccion8" class="space-y-6">
+                <div class="max-w-4xl mx-auto content-section">
+                     <h2 class="text-2xl font-bold border-b pb-2 mb-4">8. Manejo de Lesiones Carotídeas No Ateroscleróticas</h2>
+                     <h3>8.1. Disección de la arteria carótida</h3>
+                     <p>La disección espontánea de la arteria carótida es una causa importante de ictus en adultos jóvenes. El tratamiento inicial es generalmente médico, con terapia antitrombótica (anticoagulación o antiplaquetaria) para prevenir el tromboembolismo. La intervención (endovascular o quirúrgica) se reserva para pacientes con isquemia recurrente a pesar del TMO o aquellos con pseudoaneurismas grandes o en expansión.</p>
+                     <div class="space-y-4">
+                         <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 82</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se debe considerar la terapia antitrombótica durante 3-6 meses después de una disección de la arteria carótida.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 83</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar la intervención en pacientes con disección de la arteria carótida e isquemia recurrente a pesar del TMO.</p></div>
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 84</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se debe considerar el stenting como la modalidad de intervención de primera línea para la disección de la arteria carótida.</p></div>
+                     </div>
+                     <h3>8.2. Displasia fibromuscular</h3>
+                     <p>La displasia fibromuscular (DFM) es una enfermedad arterial no aterosclerótica y no inflamatoria que afecta predominantemente a mujeres de mediana edad. La DFM de la ACI suele ser asintomática, pero puede presentarse con AIT, ictus, síncope o cefalea. El tratamiento de la DFM sintomática de la ACI es la angioplastia con balón, con o sin stenting.</p>
+                     <div class="space-y-4">
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 85</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se debe considerar la angioplastia con balón para la DFM sintomática de la ACI.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 86</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar el stenting para la DFM que es refractaria a la angioplastia con balón o que se complica por disección.</p></div>
+                     </div>
+                     <h3>8.3. Aneurismas de la arteria carótida extracraneal</h3>
+                     <p>Los aneurismas de la arteria carótida extracraneal (AACE) son raros. Pueden ser verdaderos aneurismas (a menudo ateroscleróticos o infecciosos) o pseudoaneurismas (generalmente postraumáticos o iatrogénicos). El riesgo principal es el tromboembolismo que causa AIT o ictus. La intervención está indicada para AACE sintomáticos o AACE asintomáticos >2 cm de diámetro. Las opciones de tratamiento incluyen la reparación quirúrgica abierta (resección y reconstrucción) y la reparación endovascular (stent recubierto o coils).</p>
+                     <div class="space-y-4">
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 87</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se recomienda la intervención para AACE sintomáticos.</p></div>
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 88</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se debe considerar la intervención para AACE asintomáticos >2 cm de diámetro.</p></div>
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 89</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se debe considerar la reparación quirúrgica abierta como el tratamiento de primera línea para la mayoría de los AACE.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 90</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar la reparación endovascular para AACE en pacientes de alto riesgo quirúrgico o con anatomía desfavorable.</p></div>
+                     </div>
+                     <h3>8.4. Tumores del cuerpo carotídeo</h3>
+                     <p>Los tumores del cuerpo carotídeo (TCC) son paragangliomas raros que surgen de los quimiorreceptores en la bifurcación carotídea. La mayoría son benignos, pero pueden causar síntomas por efecto de masa o secreción de catecolaminas. La resección quirúrgica es el tratamiento de elección. La embolización preoperatoria puede reducir la pérdida de sangre intraoperatoria.</p>
+                     <div class="space-y-4">
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 91</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se recomienda la resección quirúrgica para TCC sintomáticos.</p></div>
+                         <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 92</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar la intervención para tumores del cuerpo carotídeo >2 cm de diámetro.</p></div>
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 93</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se debe considerar la embolización preoperatoria para TCC grandes (>4 cm) o de Shamblin tipo III.</p></div>
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 94</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se debe considerar el cribado genético en pacientes con TCC.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 95</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar la radioterapia para TCC en pacientes que no son candidatos a cirugía.</p></div>
+                     </div>
+                </div>
+            </section>
+
+            <section id="seccion9" class="space-y-6">
+                <div class="max-w-4xl mx-auto content-section">
+                    <h2 class="text-2xl font-bold border-b pb-2 mb-4">9. Manejo de Escenarios Clínicos Específicos</h2>
+                    <h3>9.1. Oclusión aguda de la arteria carótida</h3>
+                    <p>La oclusión aguda de la ACI es una emergencia neurológica que puede causar un ictus devastador. En pacientes con oclusión aguda de la ACI sintomática que se presentan precozmente, se puede considerar la revascularización de emergencia (quirúrgica o endovascular) en combinación con la trombectomía intracraneal si hay una oclusión tándem.</p>
+                     <div class="space-y-4">
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 96</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar la revascularización de emergencia de la ACI en pacientes con oclusión carotídea aguda sintomática que se presentan dentro de las 6 horas, si son candidatos para trombectomía.</p></div>
+                     </div>
+                     <h3>9.2. Estenosis carotídea y estenosis aórtica severa</h3>
+                     <p>En pacientes con estenosis carotídea asintomática severa y estenosis aórtica severa que requieren reemplazo valvular aórtico (quirúrgico o transcatéter), la estrategia óptima para el manejo de la estenosis carotídea no está clara. La revascularización carotídea profiláctica antes del procedimiento aórtico no ha demostrado reducir el riesgo de ictus perioperatorio. La decisión debe individualizarse en un equipo multidisciplinario.</p>
+                     <div class="space-y-4">
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 97</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar la revascularización carotídea antes del reemplazo valvular aórtico en pacientes seleccionados con estenosis carotídea asintomática bilateral severa o estenosis unilateral severa con circulación cerebral contralateral comprometida.</p></div>
+                        <div class="recommendation-card rec-class-iii p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 98</p><div class="rec-badges"><span class="badge badge-class-iii">Clase III</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">No se recomienda la revascularización carotídea profiláctica rutinaria antes del reemplazo valvular aórtico.</p></div>
+                     </div>
+                     <h3>9.3. Estenosis carotídea y fibrilación auricular</h3>
+                     <p>Los pacientes con estenosis carotídea y fibrilación auricular tienen un riesgo de ictus particularmente alto. Requieren anticoagulación para la fibrilación auricular y terapia antiplaquetaria para la enfermedad carotídea. La combinación de anticoagulantes y antiplaquetarios aumenta el riesgo de sangrado. La decisión sobre la terapia antitrombótica óptima debe individualizarse.</p>
+                     <div class="space-y-4">
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 99</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel A</span></div></div><p class="text-slate-700">Se recomienda la anticoagulación oral para pacientes con estenosis carotídea y fibrilación auricular.</p></div>
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 100</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se debe considerar añadir un único agente antiplaquetario a la anticoagulación oral a corto plazo después de la revascularización carotídea.</p></div>
+                        <div class="recommendation-card rec-class-iii p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 101</p><div class="rec-badges"><span class="badge badge-class-iii">Clase III</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">No se recomienda la terapia triple (anticoagulación más DAPT) a largo plazo.</p></div>
+                     </div>
+                     <h3>9.4. Estenosis intracraneal tándem</h3>
+                     <p>La presencia de estenosis intracraneal (ICAS) tándem aumenta el riesgo de ictus perioperatorio durante la revascularización carotídea extracraneal. El tratamiento de la ICAS es principalmente médico. En pacientes con estenosis extracraneal e intracraneal tándem sintomáticas, se debe tratar primero la lesión extracraneal.</p>
+                     <div class="space-y-4">
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 102</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se debe considerar la revascularización de la estenosis carotídea extracraneal en pacientes con lesiones tándem sintomáticas.</p></div>
+                        <div class="recommendation-card rec-class-iii p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 103</p><div class="rec-badges"><span class="badge badge-class-iii">Clase III</span><span class="badge badge-level">Nivel B</span></div></div><p class="text-slate-700">No se recomienda el stenting de la ICAS de forma rutinaria.</p></div>
+                     </div>
+                     <h3>9.5. Estenosis carotídea después de radioterapia cervical</h3>
+                     <p>La radioterapia cervical es un factor de riesgo para el desarrollo de estenosis carotídea. Estos pacientes tienen un mayor riesgo de complicaciones quirúrgicas debido al tejido irradiado. El CAS es una alternativa razonable a la CEA en este subgrupo.</p>
+                     <div class="space-y-4">
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 104</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se debe considerar el CAS como tratamiento de primera línea para la estenosis carotídea inducida por radiación.</p></div>
+                     </div>
+                     <h3>9.6. Estenosis carotídea en pacientes sometidos a cirugía no cardíaca mayor</h3>
+                     <p>No hay evidencia que apoye la revascularización carotídea profiláctica rutinaria antes de una cirugía no cardíaca mayor en pacientes con estenosis carotídea asintomática.</p>
+                     <div class="space-y-4">
+                        <div class="recommendation-card rec-class-iii p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 105</p><div class="rec-badges"><span class="badge badge-class-iii">Clase III</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">No se recomienda la revascularización carotídea profiláctica rutinaria antes de una cirugía no cardíaca mayor.</p></div>
+                     </div>
+                     <h3>9.7. Estenosis casi oclusiva</h3>
+                     <p>La estenosis casi oclusiva representa un desafío diagnóstico y terapéutico. La revascularización puede ser beneficiosa en pacientes sintomáticos, pero el riesgo de hiperperfusión debe ser considerado.</p>
+                     <div class="space-y-4">
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 106</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar la revascularización para la estenosis casi oclusiva sintomática.</p></div>
+                     </div>
+                     <h3>9.8. Trombo flotante libre</h3>
+                     <p>El trombo flotante libre en la arteria carótida es una condición de alto riesgo para embolización. La anticoagulación es el tratamiento inicial de elección, con revascularización diferida si es necesario.</p>
+                     <div class="space-y-4">
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 107</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se debe considerar la anticoagulación como tratamiento inicial para el trombo flotante libre carotídeo.</p></div>
+                     </div>
+                </div>
+            </section>
+            
+            <section id="seccion10" class="space-y-6">
+                <div class="max-w-4xl mx-auto content-section">
+                    <h2 class="text-2xl font-bold border-b pb-2 mb-4">10. Vigilancia Post-procedimiento</h2>
+                    <p>La vigilancia después de la intervención carotídea es importante para detectar y manejar la reestenosis. La ecografía dúplex es la modalidad de imagen de elección para la vigilancia. Se recomienda una DUS basal dentro de los 30 días posteriores al procedimiento, seguida de una vigilancia anual durante al menos 5 años.</p>
+                     <div class="space-y-4">
+                         <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 108</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se recomienda una ecografía dúplex dentro de los 30 días posteriores a la intervención carotídea para establecer una línea de base para la vigilancia futura.</p></div>
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 109</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se debe considerar la vigilancia anual por ecografía dúplex durante al menos 5 años después de la intervención.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 110</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar una vigilancia más frecuente en pacientes con reestenosis >50%.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 111</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar la reintervención para la reestenosis >70% en pacientes sintomáticos.</p></div>
+                        <div class="recommendation-card rec-class-iii p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 112</p><div class="rec-badges"><span class="badge badge-class-iii">Clase III</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">No se recomienda la reintervención rutinaria para la reestenosis asintomática.</p></div>
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 113</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se recomienda la optimización del TMO en todos los pacientes con reestenosis.</p></div>
+                     </div>
+                </div>
+            </section>
+            
+            <section id="seccion11" class="space-y-6">
+                <div class="max-w-4xl mx-auto content-section">
+                    <h2 class="text-2xl font-bold border-b pb-2 mb-4">11. Manejo de la Enfermedad de la Arteria Vertebral</h2>
+                    <p>La enfermedad aterosclerótica de la arteria vertebral (AV) es menos común que la enfermedad carotídea. La mayoría de los pacientes con estenosis de la AV son asintomáticos. Los pacientes sintomáticos pueden presentar síntomas de insuficiencia vertebrobasilar (IVB) (p. ej., vértigo, diplopía, ataxia). El tratamiento de primera línea para la estenosis de la AV sintomática es el TMO. La intervención (endovascular o quirúrgica) se reserva para pacientes con síntomas recurrentes o persistentes a pesar del TMO.</p>
+                    <div class="space-y-4">
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 114</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se recomienda el TMO como tratamiento de primera línea para la estenosis de la AV sintomática.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 115</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar la intervención para la estenosis de la arteria vertebral en pacientes con síntomas recurrentes o persistentes a pesar del TMO.</p></div>
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 116</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se debe considerar el stenting endovascular como la modalidad de intervención de primera línea para la estenosis ostial de la AV.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 117</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar la reconstrucción quirúrgica (transposición o bypass) para la estenosis de la AV que no es susceptible de tratamiento endovascular.</p></div>
+                        <div class="recommendation-card rec-class-iii p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 118</p><div class="rec-badges"><span class="badge badge-class-iii">Clase III</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">No se recomienda la intervención para la estenosis de la AV asintomática.</p></div>
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 119</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se recomienda DAPT durante al menos 30 días después del stenting de la AV.</p></div>
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 120</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se debe considerar una evaluación diagnóstica completa para excluir otras causas de síntomas de IVB antes de atribuirlos a la estenosis de la AV.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 121</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar el tratamiento del robo de la subclavia si causa síntomas de IVB o isquemia del miembro superior.</p></div>
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 122</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se debe considerar el stenting endovascular como tratamiento de primera línea para el robo de la subclavia.</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="seccion12" class="space-y-6">
+                <div class="max-w-4xl mx-auto content-section">
+                    <h2 class="text-2xl font-bold border-b pb-2 mb-4">12. Volumen de Centros y Operadores</h2>
+                    <p>La evidencia sugiere que los resultados de la intervención carotídea son mejores en centros de alto volumen y cuando son realizados por operadores de alto volumen. Se recomienda que las intervenciones carotídeas se realicen en centros que realizan >35-50 procedimientos al año y por operadores que realizan >10-12 procedimientos al año. Es esencial que los centros y los operadores auditen sus resultados para garantizar que cumplen con los estándares recomendados (riesgo de ictus/muerte <3% para pacientes asintomáticos y <6% para pacientes sintomáticos).</p>
+                     <div class="space-y-4">
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 123</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel B</span></div></div><p class="text-slate-700">Se debe considerar realizar intervenciones carotídeas en centros de alto volumen y por operadores de alto volumen.</p></div>
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 124</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se recomienda que todos los centros y operadores auditen prospectivamente sus resultados de intervención carotídea.</p></div>
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 125</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se recomienda que el riesgo de ictus/muerte a 30 días sea <3% para pacientes asintomáticos.</p></div>
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 126</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se recomienda que el riesgo de ictus/muerte a 30 días sea <6% para pacientes sintomáticos.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 127</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar la participación en registros nacionales o regionales para facilitar la auditoría y la mejora de la calidad.</p></div>
+                     </div>
+                </div>
+            </section>
+            
+            <section id="seccion13" class="space-y-6">
+                <div class="max-w-4xl mx-auto content-section">
+                    <h2 class="text-2xl font-bold border-b pb-2 mb-4">13. Impacto en la Calidad de Vida (QoL)</h2>
+                    <p>La prevención del ictus es el objetivo principal de la intervención carotídea, pero también es importante considerar el impacto del tratamiento en la calidad de vida (QoL) y la función cognitiva del paciente. Algunos estudios sugieren que la revascularización carotídea puede mejorar la función cognitiva en pacientes seleccionados, pero la evidencia no es concluyente. La evaluación de la QoL y la función cognitiva antes y después de la intervención puede proporcionar información valiosa sobre los resultados centrados en el paciente.</p>
+                     <div class="space-y-4">
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 128</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar la evaluación de la función cognitiva y la calidad de vida antes y después de la intervención carotídea.</p></div>
+                        <div class="recommendation-card rec-class-iia p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 129</p><div class="rec-badges"><span class="badge badge-class-iia">Clase IIa</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se debe considerar discutir el impacto potencial de la intervención en la QoL y la función cognitiva con los pacientes como parte del proceso de toma de decisiones compartida.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 130</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar la rehabilitación neurocognitiva para pacientes que experimentan un deterioro cognitivo después de la intervención.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 131</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar la parálisis de nervios craneales como un resultado importante en los estudios que comparan la CEA y el CAS.</p></div>
+                        <div class="recommendation-card rec-class-iib p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 132</p><div class="rec-badges"><span class="badge badge-class-iib">Clase IIb</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se puede considerar la evaluación del síndrome de hiperperfusión cerebral después de la revascularización carotídea.</p></div>
+                     </div>
+                </div>
+            </section>
+            
+            <section id="seccion14" class="space-y-6">
+                <div class="max-w-4xl mx-auto content-section">
+                    <h2 class="text-2xl font-bold border-b pb-2 mb-4">14. Información para el Paciente</h2>
+                    <p>La toma de decisiones compartida es un componente esencial del manejo de la enfermedad carotídea. Los médicos deben proporcionar a los pacientes información clara y comprensible sobre su condición, las opciones de tratamiento disponibles (incluido el TMO solo), y los riesgos y beneficios de cada opción. La información debe adaptarse a las necesidades y preferencias individuales del paciente. El objetivo es capacitar a los pacientes para que participen activamente en las decisiones sobre su atención médica.</p>
+                    <div class="space-y-4">
+                        <div class="recommendation-card rec-class-i p-4 rounded-lg shadow-sm"><div class="rec-header"><p class="rec-number font-semibold">Recomendación 133</p><div class="rec-badges"><span class="badge badge-class-i">Clase I</span><span class="badge badge-level">Nivel C</span></div></div><p class="text-slate-700">Se recomienda que los pacientes reciban información clara y basada en evidencia sobre su condición y las opciones de tratamiento para facilitar la toma de decisiones compartida.</p></div>
+                     </div>
+                </div>
+            </section>
+
+            <section id="agradecimientos" class="space-y-6">
+                <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-bold border-b pb-2 mb-4">Agradecimientos</h2>
+                    <p class="text-slate-600 mb-4">La Sociedad Europea de Cirugía Vascular (ESVS) agradece a <strong>Chris Macey</strong> (Irish Heart Foundation y Stroke Alliance for Europe) por la preparación de la Sección 14 (Información para el Paciente) y al <strong>Dr. Antonino Logiacco</strong> (Alma Mater Studiorum, Universidad de Bolonia) por el diseño de las ilustraciones.</p>
+                    <p class="text-slate-600">El propósito de las guías es optimizar la "toma de decisiones compartida", lo que requiere que los médicos proporcionen la mayor cantidad de información basada en la evidencia posible sobre todas las opciones de tratamiento disponibles, discutiendo riesgos, beneficios y posibles consecuencias de una manera que el paciente pueda entender y que tenga en cuenta sus preferencias.</p>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('main section');
+            const navLinks = document.querySelectorAll('#navigation-menu a');
+
+            if (navLinks.length > 0) {
+                 navLinks[0].classList.add('active');
+            }
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -70% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
+

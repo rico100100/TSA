@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Función Ejecutiva y Velocidad de Procesamiento</title>
+  <style>
+    :root {
+      --rojo-sangre: #a31c1c;
+      --rojo-claro: #e35858;
+      --fondo: #fff5f5;
+      --fondo-caja: #ffffffcc;
+      --gris: #2b2b2b;
+      --borde-radio: 18px;
+      --sombra: 0 6px 32px 0 #a31c1c1a;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      background: var(--fondo);
+      color: var(--gris);
+      font-size: 1.04rem;
+    }
+    main {
+      max-width: 680px;
+      margin: 36px auto 60px auto;
+      background: var(--fondo-caja);
+      border-radius: var(--borde-radio);
+      box-shadow: var(--sombra);
+      padding: 32px 7vw 36px 7vw;
+    }
+    h1, h2 {
+      color: var(--rojo-sangre);
+      margin-top: 18px;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    h1 {
+      font-size: 2.1rem;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    h2 {
+      font-size: 1.4rem;
+      border-left: 4px solid var(--rojo-claro);
+      padding-left: 10px;
+      margin-top: 38px;
+    }
+    p {
+      margin: 12px 0 17px 0;
+      line-height: 1.58;
+    }
+    ul {
+      margin: 12px 0 12px 18px;
+      padding: 0 0 0 12px;
+    }
+    li {
+      margin-bottom: 9px;
+    }
+    .box {
+      background: #fff9fa;
+      border-radius: 14px;
+      border-left: 4px solid var(--rojo-sangre);
+      padding: 14px 18px 14px 18px;
+      margin: 22px 0 26px 0;
+      box-shadow: 0 2px 16px 0 #a31c1c12;
+    }
+    @media (max-width: 500px) {
+      main { padding: 15px 2vw 18px 2vw; }
+      h1 { font-size: 1.15rem;}
+      h2 { font-size: 1.01rem;}
+    }
+    footer {
+      max-width: 760px;
+      margin: 34px auto 0 auto;
+      font-size: 0.99rem;
+      background: var(--fondo-caja);
+      border-radius: 11px;
+      box-shadow: 0 3px 8px 0 #a31c1c11;
+      padding: 14px 8vw 17px 8vw;
+      color: #555;
+    }
+    a {
+      color: var(--rojo-sangre);
+      text-decoration: underline dotted;
+    }
+    /* Botón flotante de menú ficticio para mobile */
+    #menu-movil {
+      display: none;
+      background: var(--rojo-claro);
+      color: #fff;
+      border-radius: 15px;
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      box-shadow: var(--sombra);
+      padding: 12px 23px;
+      font-size: 1.18rem;
+      border: none;
+      z-index: 999;
+      cursor: pointer;
+      transition: background 0.18s;
+    }
+    #menu-movil:hover {
+      background: var(--rojo-sangre);
+    }
+    @media (max-width: 660px) {
+      #menu-movil { display: block; }
+    }
+  </style>
+  <script>
+    // Ejemplo: Animación didáctica para destacar información clave
+    document.addEventListener('DOMContentLoaded', function() {
+      const boxElems = document.querySelectorAll('.box');
+      boxElems.forEach((el, idx) => {
+        setTimeout(() => { el.style.boxShadow = '0 8px 34px 0 #a31c1c33'; }, 600*(idx+1));
+      });
+    });
+
+    // Ejemplo: Menú flotante responsive (ficticio)
+    function mostrarAlertaMenu() {
+      alert('Esta es una demo de menú móvil.\n\nFunción ejecutiva y velocidad de procesamiento en neuropsicología.');
+    }
+  </script>
+</head>
+<body>
+  <main>
+    <h1>Función Ejecutiva y Velocidad de Procesamiento</h1>
+
+    <h2>Función Ejecutiva</h2>
+    <p>
+      Las funciones ejecutivas son un conjunto de capacidades cognitivas esenciales para planificar, organizar, supervisar y dirigir la conducta y el pensamiento[1]. Permiten adaptar nuestras acciones a situaciones nuevas, logrando un control flexible y deliberado sobre la conducta diaria, el aprendizaje y la resolución de problemas complejos.
+    </p>
+    <div class="box">
+      <strong>Ejemplos y componentes principales:</strong>
+      <ul>
+        <li>Planificación y establecimiento de metas.</li>
+        <li>Flexibilidad cognitiva y adaptación ante cambios.</li>
+        <li>Inhibición de respuestas automáticas.</li>
+        <li>Memoria de trabajo para la manipulación temporal de información.</li>
+        <li>Toma de decisiones, monitorización y auto-regulación emocional.</li>
+      </ul>
+    </div>
+    <p>
+      Las funciones ejecutivas dependen, principalmente, de la corteza prefrontal y áreas asociadas. Los déficits en esta función pueden derivar en <b>desorganización, dificultades para planificar, rigidez cognitiva o alteraciones en la regulación emocional</b>. Este cuadro se conoce como "síndrome disejecutivo" y aparece en lesiones prefrontales, TDAH, demencias, esquizofrenia o trastornos del espectro autista[1].
+    </p>
+
+    <h2>Velocidad de Procesamiento</h2>
+    <p>
+      La velocidad de procesamiento se define como el tiempo que tarda una persona en percibir, procesar y responder a la información que recibe[2]. No implica menor inteligencia si es lenta, pero puede dificultar actividades cotidianas, el aprendizaje, la concentración, la planificación y el rendimiento académico o profesional.
+    </p>
+    <div class="box">
+      <strong>Ejemplos de tareas relacionadas:</strong>
+      <ul>
+        <li>Reconocer patrones visuales, realizar cálculos rápidos.</li>
+        <li>Responder con agilidad a instrucciones verbales o escritas.</li>
+        <li>Tomar decisiones simples bajo presión.</li>
+        <li>Llevar a cabo tareas rutinarias de forma automática.</li>
+      </ul>
+    </div>
+    <p>
+      Una velocidad de procesamiento baja puede detectarse cuando una persona tarda mucho en completar tareas simples, se le dificulta seguir instrucciones en poco tiempo, o necesita más tiempo para responder en exámenes[2]. Suele coexistir en TDAH, dislexia, discalculia y en trastornos neurológicos.
+    </p>
+
+    <h2>Evaluación y Mejoría</h2>
+    <p>
+      Ambas capacidades pueden evaluarse mediante tests neuropsicológicos estandarizados. <b>Las funciones ejecutivas</b> se exploran mediante pruebas como el Test de Stroop, Wisconsin Card Sorting Test, o la Torre de Londres. <b>La velocidad de procesamiento</b> se mide con test de dígitos, pruebas visuales secuenciales y tests computarizados[1][2].
+    </p>
+    <p>
+      Tanto la función ejecutiva como la velocidad de procesamiento son susceptibles de mejora a través de entrenamiento cognitivo personalizado y ejercicios supervisados, apoyados en la plasticidad cerebral.
+    </p>
+  </main>
+  <button id="menu-movil" onclick="mostrarAlertaMenu()">☰ Menú</button>
+  <footer>
+    <strong>Referencias (APA 7):</strong>
+    <br>
+    [1] CogniFit. (2025). <i>Funciones ejecutivas: guía completa</i>. Recuperado de https://www.cognifit.com/ni/funciones-ejecutivas <br>
+    [2] CogniFit. (2025). <i>Rapidez o velocidad de procesamiento cognitivo (VP)</i>. Recuperado de https://www.cognifit.com/es/velocidad-de-procesado
+  </footer>
+</body>
+</html>
