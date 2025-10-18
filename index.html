@@ -1,426 +1,217 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>TSA · Índice de archivos</title>
-  <meta name="description" content="Índice profesional del repositorio TSA con listado de todos los archivos, búsqueda, filtros y diseño responsive.">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TSA · Índice de herramientas</title>
+  <meta name="description" content="Índice de calculadoras, guías y herramientas TSA">
   <style>
     :root{
-      --bg-0:#0e0a0a;        /* fondo muy oscuro */
-      --bg-1:#140d0e;
-      --bg-2:#1c1011;
-      --card:#1f1214;        /* tarjetas */
-      --ink:#f6eaea;         /* texto principal */
-      --muted:#d7b9b9;       /* texto secundario */
-      --accent:#b3001b;      /* rojo sangre principal */
-      --accent-2:#7a0012;    /* rojo profundo */
-      --accent-3:#ff4d4d;    /* acento claro */
-      --ring: rgba(255,77,77,.35);
-      --shadow: 0 12px 28px rgba(0,0,0,.48), 0 2px 6px rgba(179,0,27,.25);
-      --radius: 18px;
-      --radius-sm: 12px;
-      --gap: 14px;
-      --gap-lg: 22px;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      --bg:#0b0f14;
+      --panel:#121821;
+      --panel-2:#0f141b;
+      --text:#e6edf3;
+      --muted:#9fb0c0;
+      --accent:#42a5f5;
+      --accent-2:#66bb6a;
+      --radius:18px;
+      --shadow:0 6px 28px rgba(0,0,0,.35);
+      --border:1px solid rgba(255,255,255,.06);
+      --focus:0 0 0 3px rgba(66,165,245,.35);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0;
-      color:var(--ink);
-      font-family:var(--sans);
-      background:
-        radial-gradient(1200px 700px at 10% -10%, rgba(179,0,27,.25), transparent 65%),
-        radial-gradient(1000px 600px at 100% 0%, rgba(122,0,18,.25), transparent 60%),
-        linear-gradient(180deg,var(--bg-0),var(--bg-2));
-      background-attachment: fixed;
+      margin:0;background:linear-gradient(180deg,#0b0f14 0%,#0f141b 100%);
+      color:var(--text);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
     }
-
-    /* Header */
+    .wrap{max-width:1200px;margin:0 auto;padding:28px}
     header{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter:saturate(1.2) blur(6px);
-      background:linear-gradient(180deg, rgba(20,13,14,.85), rgba(20,13,14,.65));
-      border-bottom:1px solid rgba(255,77,77,.15);
+      display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:18px
     }
-    .wrap{max-width:1200px; margin-inline:auto; padding: clamp(14px, 2vw, 20px);}
-    .title{
-      display:flex; align-items:center; gap:14px; flex-wrap:wrap;
-    }
-    .badge{
-      font:600 12px/1 var(--sans);
-      letter-spacing:.06em; text-transform:uppercase;
-      color:#fff; background:linear-gradient(180deg,var(--accent),var(--accent-2));
-      padding:8px 10px; border-radius:999px;
-      box-shadow: var(--shadow);
-    }
-    h1{
-      margin:0; font-size: clamp(22px, 3.5vw, 34px);
-      letter-spacing:.3px;
-      text-shadow: 0 1px 0 rgba(0,0,0,.4);
-    }
-    .sub{
-      margin:.35rem 0 0 0; color:var(--muted); font-size: clamp(13px,1.8vw,15px);
-    }
-
-    /* Controls */
+    h1{font-size:clamp(22px,3.2vw,32px);margin:0}
+    .sub{color:var(--muted);font-size:14px}
     .controls{
-      display:grid; grid-template-columns: 1fr; gap: var(--gap);
-      margin-top:12px;
+      display:flex;gap:12px;align-items:center;flex-wrap:wrap
     }
     .search{
-      display:flex; gap:10px; align-items:center;
-      background:var(--card); border:1px solid rgba(255,77,77,.18);
-      border-radius:999px; padding:10px 14px;
-      box-shadow: var(--shadow);
+      display:flex;align-items:center;gap:10px;background:var(--panel);border:var(--border);
+      padding:10px 12px;border-radius:12px;box-shadow:var(--shadow);min-width:260px
     }
     .search input{
-      flex:1; background:transparent; border:0; outline:0; color:var(--ink);
-      font-size:16px; padding:6px;
+      all:unset;color:var(--text);width:240px
     }
-    .filters{
-      display:flex; flex-wrap:wrap; gap:10px;
+    .toggle{
+      display:flex;align-items:center;gap:10px;background:var(--panel);border:var(--border);
+      padding:10px 12px;border-radius:12px;box-shadow:var(--shadow)
     }
-    .chip{
-      background:linear-gradient(180deg,#251316,#1b0f10);
-      border:1px solid rgba(255,77,77,.18);
-      color:var(--muted); padding:8px 12px; border-radius:999px;
-      cursor:pointer; user-select:none; transition:transform .12s ease, box-shadow .2s ease, border-color .2s ease;
-    }
-    .chip[data-active="true"]{
-      color:#fff; border-color: var(--accent-3);
-      box-shadow: 0 0 0 3px var(--ring), var(--shadow);
-    }
-
-    /* Stats */
-    .stats{
-      display:flex; gap:14px; flex-wrap:wrap; align-items:center; color:var(--muted);
-      font: 500 13px/1.6 var(--sans);
-    }
-
-    /* Grid */
-    main{ padding: clamp(16px, 2vw, 26px) 0 64px }
     .grid{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: var(--gap-lg);
+      display:grid;grid-template-columns:repeat(1,minmax(0,1fr));gap:14px;margin-top:14px
     }
-
-    /* Card */
+    @media (min-width:640px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media (min-width:980px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
     .card{
-      position:relative; overflow:hidden;
-      border-radius: var(--radius);
-      background: linear-gradient(180deg,#241115,#1a0f10);
-      border:1px solid rgba(255,77,77,.16);
-      box-shadow: var(--shadow);
-      transform: translateY(6px); opacity:0;
-      animation: fadeUp .55s cubic-bezier(.22,.61,.36,1) forwards;
+      background:linear-gradient(180deg,var(--panel) 0%,var(--panel-2) 100%);
+      border:var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);
+      display:flex;flex-direction:column;gap:10px;transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease
     }
-    .card:hover{ transform: translateY(-2px) scale(1.002); transition: transform .25s ease }
-    .card .bar{
-      height:6px; background:linear-gradient(90deg, var(--accent), var(--accent-2));
+    .card:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.45);border-color:rgba(255,255,255,.12)}
+    .badge{
+      align-self:flex-start;font-size:12px;color:#0b1218;background:#d0e7ff;border-radius:999px;
+      padding:4px 10px;color:#0b2239
     }
-    .card .pad{ padding: 16px; display:grid; gap:10px }
-    .kind{
-      display:inline-flex; gap:8px; align-items:center; color:#fff;
-      background:linear-gradient(180deg,#3a161b,#2a0f12);
-      border:1px solid rgba(255,77,77,.25);
-      border-radius:999px; padding:6px 10px; width:max-content; font:600 12px/1 var(--sans);
-      letter-spacing:.04em;
+    .title{font-weight:600;font-size:16px}
+    .desc{color:var(--muted);font-size:13px;min-height:36px}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto}
+    .btn{
+      appearance:none;border:none;cursor:pointer;text-decoration:none;
+      padding:10px 12px;border-radius:12px;font-weight:600;
+      background:var(--accent);color:#001320;box-shadow:var(--shadow)
     }
-    .name{
-      font: 700 16px/1.35 var(--sans);
-      color:#fff; word-break: break-word;
-    }
-    .path{ font: 12px/1.5 var(--mono); color: var(--muted) }
-    .desc{ font: 13px/1.6 var(--sans); color: #f2dede }
-    .meta{ font: 12px/1.4 var(--mono); color: #e0c4c4; opacity:.9 }
-
-    /* Icons (minimal SVG) */
-    .icon{ width:16px; height:16px; display:inline-block; }
-    .icon svg{ width:100%; height:100%; fill: currentColor }
-
-    /* Empty / Loader */
-    .empty, .loader{ color:var(--muted); text-align:center; padding: 32px 12px }
-    .spinner{
-      width:28px; height:28px; border-radius:50%;
-      border:3px solid rgba(255,77,77,.2);
-      border-top-color: var(--accent-3);
-      margin: 0 auto 10px; animation: spin 1s linear infinite;
-    }
-
-    /* Footer */
-    footer{
-      color:var(--muted);
-      border-top:1px solid rgba(255,77,77,.15);
-      background:linear-gradient(180deg, rgba(26,15,16,.85), rgba(26,15,16,.6));
-    }
-
-    @keyframes fadeUp{
-      to{ transform: translateY(0); opacity:1 }
-    }
-    @keyframes spin{
-      to{ transform: rotate(360deg) }
-    }
-
-    /* Responsive tweaks */
-    @media (min-width: 860px){
-      .controls{ grid-template-columns: 1fr auto }
-    }
+    .btn.secondary{background:transparent;color:var(--text);border:1px dashed rgba(255,255,255,.18)}
+    .hide{display:none !important}
+    .footer{margin-top:22px;color:var(--muted);font-size:12px}
+    .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;background:#0a1118;border:1px solid rgba(255,255,255,.12);padding:2px 6px;border-radius:6px}
+    a{color:inherit}
+    /* Focus states */
+    .search:focus-within,.toggle:focus-within,.btn:focus{outline:none;box-shadow:var(--focus)}
   </style>
 </head>
 <body>
-  <header>
-    <div class="wrap">
-      <div class="title">
-        <span class="badge" aria-hidden="true">TSA</span>
-        <h1>Índice del Repositorio</h1>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>TSA · Índice</h1>
+        <div class="sub">Calculadoras, guías y utilidades. Escribe para filtrar o usa <span class="kbd">Ctrl</span>+<span class="kbd">K</span>.</div>
       </div>
-      <p class="sub">Listado completo de carpetas y archivos, con búsqueda, filtros por tipo, y detalles rápidos.</p>
-      <div class="controls" role="region" aria-label="Controles de búsqueda y filtros">
-        <label class="search" aria-label="Buscar por nombre o ruta">
-          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79L20 21.5 21.5 20zM4 9.5C4 6.46 6.46 4 9.5 4S15 6.46 15 9.5 12.54 15 9.5 15 4 12.54 4 9.5"/></svg>
-          <input id="q" type="search" placeholder="Buscar… (ej.: pdf, html, carotida, NIHSS, vasculitis)" autocomplete="off">
+      <div class="controls" role="region" aria-label="Controles">
+        <label class="search" aria-label="Buscar módulos">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21 20.3 16.7 16a8 8 0 1 0-1.7 1.7L20.3 22 21 20.3zM10.5 17a6.5 6.5 0 1 1 0-13 6.5 6.5 0 0 1 0 13z"/></svg>
+          <input id="q" type="search" placeholder="Buscar (carótida, vasculitis, NIHSS…)" autocomplete="off" />
         </label>
-        <div class="filters" role="group" aria-label="Filtros por tipo">
-          <button class="chip" data-filter="dir" data-active="true">Directorios</button>
-          <button class="chip" data-filter="html" data-active="true">HTML</button>
-          <button class="chip" data-filter="css" data-active="true">CSS</button>
-          <button class="chip" data-filter="js" data-active="true">JS</button>
-          <button class="chip" data-filter="pdf" data-active="true">PDF</button>
-          <button class="chip" data-filter="otros" data-active="true">Otros</button>
-        </div>
-        <div class="stats" id="stats" aria-live="polite"></div>
+        <label class="toggle">
+          <input id="newtab" type="checkbox" />
+          <span>Abrir en pestaña nueva</span>
+        </label>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <main>
-    <div class="wrap">
-      <div id="loader" class="loader">
-        <div class="spinner" aria-hidden="true"></div>
-        Cargando árbol de archivos…
-      </div>
-      <div id="grid" class="grid" hidden></div>
-      <div id="empty" class="empty" hidden>No hay resultados para el filtro/búsqueda actual.</div>
-    </div>
-  </main>
+    <!-- Listado generado por JS -->
+    <section id="grid" class="grid" aria-live="polite"></section>
 
-  <footer>
-    <div class="wrap" style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">
-      <div>Generado dinámicamente desde la API pública de GitHub · <span style="color:#fff">rama <code style="color:#ffb3b3">main</code></span></div>
-      <div>Diseño: tema rojo sangre con sombras y animaciones suaves</div>
-    </div>
-  </footer>
+    <p class="footer">
+      Consejo: también puedes pulsar <span class="kbd">Enter</span> en una tarjeta para abrirla.
+    </p>
 
-  <template id="card-tpl">
-    <article class="card" data-type="">
-      <div class="bar" aria-hidden="true"></div>
-      <div class="pad">
-        <div class="kind"><span class="icon" aria-hidden="true"></span><span class="kind-text"></span></div>
-        <div class="name"></div>
-        <div class="path"></div>
-        <div class="desc"></div>
-        <div class="meta"></div>
-        <div class="links" style="display:flex;gap:10px;flex-wrap:wrap">
-          <a class="btn-view" target="_blank" rel="noopener">Ver</a>
-          <a class="btn-raw" target="_blank" rel="noopener" hidden>Raw</a>
-        </div>
-      </div>
-    </article>
-  </template>
-
-  <style>
-    /* Botones "Ver" / "Raw" */
-    .links a{
-      text-decoration:none; font:600 13px/1 var(--sans);
-      padding:10px 12px; border-radius:999px;
-      background: linear-gradient(180deg, #3f0f16, #2a0d11);
-      border:1px solid rgba(255,77,77,.25);
-      color:#fff; transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
-    }
-    .links a:hover{ transform: translateY(-1px); box-shadow: 0 0 0 3px var(--ring), var(--shadow); border-color: var(--accent-3) }
-  </style>
+    <noscript>
+      <p>JavaScript está desactivado. Enlazamos los módulos básicos:</p>
+      <ul>
+        <li><a href="ESVS2023-carotida/index.html">ESVS2023-carotida</a></li>
+        <li><a href="Funcion_cognitiva_revasc_carotidea/index.html">Funcion_cognitiva_revasc_carotidea</a></li>
+        <li><a href="Score_de_Fragilidad/index.html">Score_de_Fragilidad</a></li>
+        <li><a href="acst-carotid-calculator/index.html">acst-carotid-calculator</a></li>
+        <li><a href="actividades-profesiones-riesgo-sd-TOS/index.html">actividades-profesiones-riesgo-sd-TOS</a></li>
+        <li><a href="calc-riesgo-vasc/index.html">calc-riesgo-vasc</a></li>
+        <li><a href="calculadora-clinica-Ictus-NIHSS/index.html">calculadora-clinica-Ictus-NIHSS</a></li>
+        <li><a href="calculo-carotida-estenosis/index.html">calculo-carotida-estenosis</a></li>
+        <li><a href="cap-func-MET-eq-metabolicos/index.html">cap-func-MET-eq-metabolicos</a></li>
+        <li><a href="endovac-infeccion-carotida/index.html">endovac-infeccion-carotida</a></li>
+        <li><a href="eval-riesgo-estenosis-asint-carotida/index.html">eval-riesgo-estenosis-asint-carotida</a></li>
+        <li><a href="funcion-ejecutiva-velocidad-pensamiento/index.html">funcion-ejecutiva-velocidad-pensamiento</a></li>
+        <li><a href="vasculitis-enf-vasc/index.html">vasculitis-enf-vasc</a></li>
+        <li><a href="vasculitis-resumen/index.html">vasculitis-resumen</a></li>
+      </ul>
+    </noscript>
+  </div>
 
   <script>
-    // === Configura aquí tu repo ===
-    const OWNER = "rico100100";
-    const REPO  = "TSA";
-    const BRANCH = "main"; // si cambia, ajusta aquí
+    // === Configuración de módulos (carpetas -> index.html) ===
+    const modules = [
+      {folder:"ESVS2023-carotida", title:"ESVS 2023 – Carótida", tag:"carótida", desc:"Recomendaciones y cálculo relacionado."},
+      {folder:"Funcion_cognitiva_revasc_carotidea", title:"Función cognitiva – Revascularización carotídea", tag:"carótida", desc:"Material de función cognitiva y revascularización."},
+      {folder:"Score_de_Fragilidad", title:"Score de Fragilidad", tag:"score", desc:"Valoración de fragilidad clínica."},
+      {folder:"acst-carotid-calculator", title:"ACST – Calculadora Carotídea", tag:"carótida", desc:"Herramienta basada en ACST."},
+      {folder:"actividades-profesiones-riesgo-sd-TOS", title:"Riesgo por actividad/profesión (Sd. TOS)", tag:"tos", desc:"Listado de actividades/profesiones de riesgo."},
+      {folder:"calc-riesgo-vasc", title:"Calculadora de Riesgo Vascular", tag:"riesgo", desc:"Estimación de riesgo vascular."},
+      {folder:"calculadora-clinica-Ictus-NIHSS", title:"Ictus – NIHSS", tag:"ictus", desc:"Calculadora clínica NIHSS."},
+      {folder:"calculo-carotida-estenosis", title:"Cálculo de Estenosis Carotídea", tag:"carótida", desc:"Herramienta para medir estenosis."},
+      {folder:"cap-func-MET-eq-metabolicos", title:"Capacidad funcional (METs)", tag:"mets", desc:"Equivalentes metabólicos y capacidad funcional."},
+      {folder:"endovac-infeccion-carotida", title:"EndoVAC – Infección carotídea", tag:"carótida", desc:"Material sobre manejo con EndoVAC."},
+      {folder:"eval-riesgo-estenosis-asint-carotida", title:"Riesgo en estenosis carotídea asintomática", tag:"carótida", desc:"Evaluación y estratificación de riesgo."},
+      {folder:"funcion-ejecutiva-velocidad-pensamiento", title:"Función ejecutiva y velocidad de pensamiento", tag:"cognición", desc:"Recursos sobre función ejecutiva."},
+      {folder:"vasculitis-enf-vasc", title:"Vasculitis – Enfermedad vascular", tag:"vasculitis", desc:"Resumen y criterios de vasculitis."},
+      {folder:"vasculitis-resumen", title:"Vasculitis – Resumen", tag:"vasculitis", desc:"Apuntes/hoja de ruta rápida."},
+    ];
 
-    const API = `https://api.github.com/repos/${OWNER}/${REPO}/git/trees/${BRANCH}?recursive=1`;
-    const GH_BLOB = (p)=> `https://github.com/${OWNER}/${REPO}/blob/${BRANCH}/${p}`;
-    const GH_TREE = (p)=> `https://github.com/${OWNER}/${REPO}/tree/${BRANCH}/${p}`;
-    const GH_RAW  = (p)=> `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${p}`;
+    // === Utilidades ===
+    const el = sel => document.querySelector(sel);
+    const grid = el("#grid");
+    const q = el("#q");
+    const newtab = el("#newtab");
 
-    const grid = document.getElementById('grid');
-    const tpl = document.getElementById('card-tpl');
-    const q = document.getElementById('q');
-    const loader = document.getElementById('loader');
-    const empty = document.getElementById('empty');
-    const statsEl = document.getElementById('stats');
+    // Render de tarjetas
+    function render(items){
+      grid.innerHTML = "";
+      if(!items.length){
+        grid.innerHTML = `<div class="card"><div class="title">Sin resultados</div><div class="desc">Prueba con otro término (p. ej., "carótida" o "NIHSS").</div></div>`;
+        return;
+      }
+      for(const m of items){
+        const href = `${m.folder.replace(/\/+$/,"")}/index.html`;
+        const card = document.createElement("article");
+        card.className = "card";
+        card.tabIndex = 0;
+        card.setAttribute("role","button");
+        card.setAttribute("aria-label", `Abrir ${m.title}`);
 
-    const filters = new Set(['dir','html','css','js','pdf','otros']);
-    document.querySelectorAll('.chip').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        const f = btn.dataset.filter;
-        const active = btn.getAttribute('data-active') === 'true';
-        if(active){ btn.setAttribute('data-active','false'); filters.delete(f); }
-        else { btn.setAttribute('data-active','true'); filters.add(f); }
-        applyFilters();
-      })
+        card.innerHTML = `
+          <span class="badge">${m.tag || "módulo"}</span>
+          <div class="title">${m.title || m.folder}</div>
+          <div class="desc">${m.desc || ""}</div>
+          <div class="actions">
+            <a class="btn" href="${href}" ${newtab.checked ? 'target="_blank" rel="noopener"' : ""}>Abrir</a>
+            <a class="btn secondary" href="${href}" ${newtab.checked ? 'target="_blank" rel="noopener"' : ""} aria-label="Abrir índice de carpeta">
+              ${m.folder}/index.html
+            </a>
+          </div>
+        `;
+
+        // Click/Enter abre
+        card.addEventListener("click", e=>{
+          if(e.target.closest("a")) return;
+          newtab.checked ? window.open(href, "_blank","noopener") : (window.location.href = href);
+        });
+        card.addEventListener("keydown", e=>{
+          if(e.key === "Enter"){
+            newtab.checked ? window.open(href, "_blank","noopener") : (window.location.href = href);
+          }
+        });
+
+        grid.appendChild(card);
+      }
+    }
+
+    // Filtro
+    function filter(){
+      const term = (q.value || "").trim().toLowerCase();
+      const out = !term ? modules : modules.filter(m=>{
+        const hay = [m.title,m.folder,m.tag,m.desc].join(" ").toLowerCase();
+        return hay.includes(term);
+      });
+      render(out);
+    }
+
+    // Atajos y eventos
+    q.addEventListener("input", filter);
+    newtab.addEventListener("change", ()=>render(modules));
+    document.addEventListener("keydown", e=>{
+      if((e.ctrlKey || e.metaKey) && e.key.toLowerCase()==="k"){
+        e.preventDefault(); q.focus(); q.select();
+      }
     });
 
-    q.addEventListener('input', ()=> applyFilters());
-
-    let NODES = []; // {type, path, name, kind, size, ext, href, raw, desc}
-
-    // Carga el árbol de GitHub
-    fetch(API, {headers:{'Accept':'application/vnd.github+json'}})
-      .then(r=>{
-        if(!r.ok) throw new Error('GitHub API error: ' + r.status);
-        return r.json();
-      })
-      .then(data=>{
-        const tree = data.tree || [];
-        NODES = tree.map(entry => mapEntry(entry)).filter(Boolean);
-        render(NODES);
-      })
-      .catch(err=>{
-        loader.innerHTML = `<div class="spinner" aria-hidden="true"></div>Error cargando el árbol: ${err.message}`;
-      });
-
-    function mapEntry(en){
-      const isDir = en.type === 'tree';
-      const path = en.path;
-      const name = path.split('/').pop();
-      const ext = isDir ? '' : (name.includes('.') ? name.split('.').pop().toLowerCase() : '');
-      const kind = detectKind(isDir, ext);
-      const href = isDir ? GH_TREE(path) : GH_BLOB(path);
-      const raw  = isDir ? '' : GH_RAW(path);
-      const size = en.size || null;
-      const desc = simpleDesc({isDir, ext, name, path});
-      return { type: isDir ? 'dir':'file', path, name, ext, kind, href, raw, size, desc };
-    }
-
-    function detectKind(isDir, ext){
-      if(isDir) return 'dir';
-      if(['html','htm'].includes(ext)) return 'html';
-      if(ext === 'css') return 'css';
-      if(['js','mjs','cjs'].includes(ext)) return 'js';
-      if(ext === 'pdf') return 'pdf';
-      return 'otros';
-    }
-
-    function simpleDesc({isDir, ext, name, path}){
-      const friendly = name.replace(/[-_]/g,' ').replace(/\.[^.]+$/,'')
-        .replace(/\b([a-záéíóúñ])([a-záéíóúñ]*)/gi,(m,a,b)=>a.toUpperCase()+b.toLowerCase());
-      if(isDir) return `Carpeta: ${friendly}. Contiene elementos del proyecto relacionados con «${friendly}».`;
-      if(ext === 'html') return `Página HTML: ${friendly}.`;
-      if(ext === 'css')  return `Hoja de estilos CSS vinculada a páginas del proyecto.`;
-      if(ext === 'js')   return `Script JavaScript para funcionalidades de la interfaz.`;
-      if(ext === 'pdf')  return `Documento PDF: ${friendly}.`;
-      return `Archivo «${friendly}».`;
-    }
-
-    function iconFor(kind){
-      const svg = {
-        dir:  '<svg viewBox="0 0 24 24"><path d="M10 4H4a2 2 0 0 0-2 2v2h20V8a2 2 0 0 0-2-2h-8l-2-2Zm12 6H2v8a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-8Z"/></svg>',
-        html: '<svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" opacity=".15"/><path d="M8 7 4 12l4 5M16 7l4 5-4 5"/></svg>',
-        css:  '<svg viewBox="0 0 24 24"><path d="M4 3h16l-2 16-6 2-6-2L4 3Zm5 5h6l-.3 3H9.6l.2 2.1 3.9 1.1 2.1-.6.2 2.5L12 18l-4.5-1.5-.5-5.5L7 6h2Z"/></svg>',
-        js:   '<svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" opacity=".15"/><path d="M8 17c0 1.7 1 2.8 3.1 2.8 1.3 0 2.3-.5 2.8-1.6l-1.8-.9c-.2.4-.5.6-1 .6-.6 0-1-.4-1-1.2V11H8v6Zm12-2.6c0-2-1.2-3-3.6-3-1.3 0-2.3.3-3 .9l1 1.6c.5-.3 1.1-.5 1.8-.5 1 .1 1.5.5 1.5 1.1 0 .5-.4.9-1.1 1.1l-.8.2c-1.7.5-2.6 1.4-2.6 2.7 0 1.7 1.3 2.7 3.4 2.7 1.5 0 2.6-.5 3.4-1.4l-1.2-1.5c-.5.5-1.1.7-1.8.7-.8 0-1.3-.3-1.3-.9 0-.5.4-.8 1.2-1.1l.8-.2c1.6-.4 2.3-1.3 2.3-2.9Z"/></svg>',
-        pdf:  '<svg viewBox="0 0 24 24"><path d="M6 2h8l6 6v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"/><path fill="#fff" d="M8 14h2.5a2 2 0 1 0 0-4H8v4Zm2-3a1 1 0 1 1 0 2H9v-2h1Zm3 3h1v-4h-1v4Zm2-3h2v-1h-3v4h1v-1h2v-1h-2v-1Z"/></svg>',
-        otros:'<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z"/><path d="M14 2v6h6"/></svg>'
-      };
-      return svg[kind] || svg.otros;
-    }
-
-    function render(list){
-      loader.hidden = true;
-      grid.hidden = false;
-      grid.innerHTML = '';
-
-      // Orden: carpetas primero por ruta; luego archivos por ruta
-      list.sort((a,b)=>{
-        if(a.type !== b.type) return a.type === 'dir' ? -1 : 1;
-        return a.path.localeCompare(b.path);
-      });
-
-      const frag = document.createDocumentFragment();
-      list.forEach((node, i)=>{
-        const card = tpl.content.firstElementChild.cloneNode(true);
-        card.dataset.type = node.kind;
-        // ícono y etiqueta
-        card.querySelector('.icon').innerHTML = iconFor(node.kind);
-        card.querySelector('.kind-text').textContent = node.type === 'dir' ? 'Directorio' : node.kind.toUpperCase();
-        // textos
-        card.querySelector('.name').textContent = node.name;
-        card.querySelector('.path').textContent = node.path;
-        card.querySelector('.desc').textContent = node.desc;
-        card.querySelector('.meta').textContent = node.type === 'dir'
-          ? 'Carpeta'
-          : (node.size ? `Tamaño aprox.: ${humanSize(node.size)}` : 'Archivo');
-
-        // enlaces
-        const aView = card.querySelector('.btn-view');
-        aView.href = node.type === 'dir' ? GH_TREE(node.path) : GH_BLOB(node.path);
-        aView.textContent = node.type === 'dir' ? 'Abrir en GitHub' : 'Ver en GitHub';
-
-        const aRaw = card.querySelector('.btn-raw');
-        if(node.type === 'file' && node.kind !== 'pdf'){
-          aRaw.hidden = false; aRaw.href = node.raw; aRaw.textContent = 'Raw';
-        }
-
-        // retardo de animación sutil
-        card.style.animationDelay = (i * 12) + 'ms';
-        frag.appendChild(card);
-      });
-      grid.appendChild(frag);
-      updateStats();
-      applyFilters();
-    }
-
-    function humanSize(bytes){
-      const u = ['B','KB','MB','GB']; let i=0; let n=bytes||0;
-      while(n>=1024 && i<u.length-1){ n/=1024; i++; }
-      return `${n.toFixed(n<10 && i>0 ? 1 : 0)} ${u[i]}`;
-    }
-
-    function applyFilters(){
-      const query = (q.value || '').trim().toLowerCase();
-      const active = new Set(filters);
-
-      let shown = 0, total = 0;
-      grid.querySelectorAll('.card').forEach(card=>{
-        total++;
-        const type = card.dataset.type || 'otros';
-        const inFilter = active.has(type) || (type==='dir' && active.has('dir'));
-        const text = (card.textContent || '').toLowerCase();
-        const match = !query || text.includes(query);
-        const visible = inFilter && match;
-        card.style.display = visible ? '' : 'none';
-        if(visible) shown++;
-      });
-
-      empty.hidden = shown !== 0;
-      updateStats(shown, total);
-    }
-
-    function updateStats(shown, total){
-      const all = NODES.length;
-      const dirs = NODES.filter(n=>n.type==='dir').length;
-      const files = all - dirs;
-      const types = ['html','css','js','pdf','otros'].map(t=>[t, NODES.filter(n=>n.kind===t).length]);
-      const visible = (shown ?? all);
-      const tot = (total ?? all);
-      statsEl.innerHTML = `
-        <strong>${visible}</strong>/<span>${tot}</span> visibles ·
-        <span>${dirs}</span> carpetas · <span>${files}</span> archivos ·
-        ${types.map(([k,v])=> `${k.toUpperCase()}: <span>${v}</span>`).join(' · ')}
-      `;
-    }
+    // Inicio
+    render(modules);
   </script>
 </body>
 </html>
