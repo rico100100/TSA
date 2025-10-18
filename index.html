@@ -159,7 +159,10 @@
         return;
       }
       for(const m of items){
-        const href = `${m.folder.replace(/\/+$/,"")}/index.html`;
+        const href = m.href ?? `${m.folder.replace(/\/+$/,"")}/index.html`;
+        const pathLabel = m.href ? m.href : `${m.folder}/index.html`;
+        const isPDF = /\.pdf$/i.test(href);
+        const target = (newtab.checked || isPDF) ? 'target="_blank" rel="noopener"' : "";
         const card = document.createElement("article");
         card.className = "card";
         card.tabIndex = 0;
@@ -171,9 +174,9 @@
           <div class="title">${m.title || m.folder}</div>
           <div class="desc">${m.desc || ""}</div>
           <div class="actions">
-            <a class="btn" href="${href}" ${newtab.checked ? 'target="_blank" rel="noopener"' : ""}>Abrir</a>
-            <a class="btn secondary" href="${href}" ${newtab.checked ? 'target="_blank" rel="noopener"' : ""} aria-label="Abrir índice de carpeta">
-              ${m.folder}/index.html
+            <a class="btn" href="${href}" ${target}>Abrir</a>
+            <a class="btn secondary" href="${href}" ${target} aria-label="Abrir ${pathLabel}">
+              ${pathLabel}
             </a>
           </div>
         `;
@@ -217,4 +220,5 @@
   </script>
 </body>
 </html>
+
 
